@@ -22,6 +22,10 @@ public class PlayerMovement : MonoBehaviour
     {
         TakeInput();
         Move();
+        if (Input.GetMouseButtonDown(0))
+            {
+                StartCoroutine(Attack());
+            }
     }
 
     private void Move()
@@ -75,12 +79,25 @@ public class PlayerMovement : MonoBehaviour
                 targetPos.x = 1;
             }
             transform.Translate(targetPos);
-        }
+        }       
     }
 
     private void SetAnimatorMovement(Vector2 direction)
     {
         animator.SetFloat("xDir", direction.x);
         animator.SetFloat("yDir", direction.y);
+    }
+
+    IEnumerator Attack()
+    {
+        animator.SetBool("isAttacking", true); // Start attacking
+
+        // Wait for a split second
+        yield return new WaitForSeconds(0.5f);
+
+        animator.SetBool("isAttacking", false); // Stop attacking
+
+        // Ensure isAttacking is set to false, since the coroutine will finish before setting it back
+        //isAttacking = false;
     }
 }
