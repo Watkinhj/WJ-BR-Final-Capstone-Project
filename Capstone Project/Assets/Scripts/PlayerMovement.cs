@@ -22,10 +22,12 @@ public class PlayerMovement : MonoBehaviour
     {
         TakeInput();
         Move();
+        /* PART OF THE OLD MELEE SYSTEM, DONT USE
         if (Input.GetMouseButtonDown(0))
             {
                 StartCoroutine(Attack());
             }
+        */
     }
 
     private void Move()
@@ -79,7 +81,17 @@ public class PlayerMovement : MonoBehaviour
                 targetPos.x = 1;
             }
             transform.Translate(targetPos);
-        }       
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            animator.SetBool("isAttacking", true); // Start attacking
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            animator.SetBool("isAttacking", false); // Stop attacking
+        }
     }
 
     private void SetAnimatorMovement(Vector2 direction)
@@ -88,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("yDir", direction.y);
     }
 
+    /* PART OF THE OLD MELEE SYSTEM, DONT USE
     IEnumerator Attack()
     {
         animator.SetBool("isAttacking", true); // Start attacking
@@ -100,4 +113,5 @@ public class PlayerMovement : MonoBehaviour
         // Ensure isAttacking is set to false, since the coroutine will finish before setting it back
         //isAttacking = false;
     }
+    */
 }

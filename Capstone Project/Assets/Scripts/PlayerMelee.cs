@@ -8,11 +8,9 @@ public class PlayerMelee : MonoBehaviour
     public float minDamage;
     public float maxDamage;
 
-    private void Update()
+    void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("Melee Attack!");
-        }
+        //controls for melee are stored in the player controller
+        meleeHitbox.GetComponent<MeleeHitbox>().damage = Random.Range(minDamage, maxDamage);
     }
 }
