@@ -33,8 +33,39 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
+    //Damaging the player
+    //Right now, the enemies only damage the player ONCE per collision.
+    //I need to find a way to get enemies to continue attacking them when the player is in range.
+    //Maybe make a hurtbox for the player that's a trigger?
+    //That could work...
+
+    /* WIP CODE
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "PlayerHurtbox")
+        {
+            Debug.Log("Entered PlayerHurtbox");
+            PlayerStats.playerStats.DealDamage(damage);
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "PlayerHurtbox")
+        {
+            Debug.Log("Exited PlayerHurtbox");
+            //PlayerStats.playerStats.StopDamage();
+        }
+    }
+    */
+
+    //Old code, just in case
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //deal damage
+            if (collision.gameObject.tag == "Player")
+            {
+                PlayerStats.playerStats.DealDamage(damage);
+            }
     }
+    
 }

@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - MeleeHitbox
+  - PlayerHurtbox
   layers:
   - Default
   - TransparentFX

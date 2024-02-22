@@ -10,11 +10,17 @@ public class Staple : MonoBehaviour
     {
         if (collision.name != "Player")
         {
-            if(collision.GetComponent<EnemyReceiveDamage>() != null)
+            if (collision.name != "PlayerHurtbox")
             {
-                collision.GetComponent<EnemyReceiveDamage>().DealDamage(damage);
+                if (collision.name != "Detection Zone")
+                {
+                    if (collision.GetComponent<EnemyReceiveDamage>() != null)
+                    {
+                        collision.GetComponent<EnemyReceiveDamage>().DealDamage(damage);
+                    }
+                    Destroy(gameObject);
+                }
             }
-            Destroy(gameObject);
         }
     }
 }
