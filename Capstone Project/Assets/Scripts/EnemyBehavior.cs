@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
 {
-
-    //As of now, there are two enemy types. Melee types and ranged types. We'll differentiate them via tags. 
-    //If an enemy is tagged as a melee type, it will rush down the player and melee attack them until they die. 
-    //If an enemy is a ranged type, it will approach the player, slow down to fire, then continue to approach. 
-    //if thats too complicated for now, then we'll have the enemy stop to shoot, then continue moving.
-
     public float damage = 1;
-
     public float moveSpeed = 1000;
-
     public DetectionZone detectionZone;
-
     public Rigidbody2D rb;
+
+    private Coroutine damageCoroutine; // Store the coroutine instance
 
     private void Start()
     {
@@ -33,19 +26,27 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    //Damaging the player
-    //Right now, the enemies only damage the player ONCE per collision.
-    //I need to find a way to get enemies to continue attacking them when the player is in range.
-    //Maybe make a hurtbox for the player that's a trigger?
-    //That could work...
+    private IEnumerator DamageCoroutine()
+    {
+        while (true)
+        {
+            // Deal damage to the player every second
+            PlayerStats.playerStats.DealDamage(damage);
+            yield return new WaitForSeconds(1f);
+        }
+    }
 
-    /* WIP CODE
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "PlayerHurtbox")
         {
             Debug.Log("Entered PlayerHurtbox");
-            PlayerStats.playerStats.DealDamage(damage);
+
+            // Start the coroutine if it is not running
+            if (damageCoroutine == null)
+            {
+                damageCoroutine = StartCoroutine(DamageCoroutine());
+            }
         }
     }
 
@@ -54,18 +55,13 @@ public class EnemyBehavior : MonoBehaviour
         if (collision.tag == "PlayerHurtbox")
         {
             Debug.Log("Exited PlayerHurtbox");
-            //PlayerStats.playerStats.StopDamage();
+
+            // Stop the coroutine if it is running
+            if (damageCoroutine != null)
+            {
+                StopCoroutine(damageCoroutine);
+                damageCoroutine = null;
+            }
         }
     }
-    */
-
-    //Old code, just in case
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-            if (collision.gameObject.tag == "Player")
-            {
-                PlayerStats.playerStats.DealDamage(damage);
-            }
-    }
-    
 }
