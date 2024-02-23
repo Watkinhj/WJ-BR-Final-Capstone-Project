@@ -12,10 +12,10 @@ public class PlayerStats : MonoBehaviour
     public TMP_Text healthText;
     public Slider healthSlider;
 
-
     public float health;
     public float maxHealth;
 
+    public List<ItemList> items = new List<ItemList>();
     private void Awake()
     {
         if (playerStats != null)
@@ -31,15 +31,41 @@ public class PlayerStats : MonoBehaviour
 
     private void Start()
     {
+        //Health Stuff
         health = maxHealth;
         //healthSlider.value = 1;
         SetHealthUI();
+
+        //Begins the item shenanigans
+        StartCoroutine(CallItemUpdate());
+
     }
 
-    //COMMENT OUT UPDATE BY DEFAULT, USE ONLY FOR TESTING PURPOSES
-    private void Update()
+    //COMMENT OUT SetHealthUI IN UPDATE BY DEFAULT, USE ONLY FOR TESTING PURPOSES. FIGURE OUT A WAY TO MAKE IT UPDATE ON ITEM USE LATER
+    void Update()
     {
         SetHealthUI();
+        CheckOverheal();
+
+    }
+    //Making sure that items actually WORK
+    IEnumerator CallItemUpdate()
+    {
+        foreach (ItemList i in items)
+        {
+            i.item.Update(this, i.stacks);
+        }
+        yield return new WaitForSeconds(1); //One second per item update. We may need to change this, maybe 0.1f?
+        StartCoroutine(CallItemUpdate());
+
+    }
+
+    public void CallItemOnHit(EnemyReceiveDamage enemy)
+    {
+        foreach (ItemList i in items)
+        {
+            i.item.OnHit(this, enemy, i.stacks);
+        }
     }
 
     public void DealDamage(float damage)
@@ -64,7 +90,7 @@ public class PlayerStats : MonoBehaviour
 
     private void CheckOverheal()
     {
-        if (health < maxHealth)
+        if (health > maxHealth)
         {
             health = maxHealth;
         }

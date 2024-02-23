@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MeleeHitbox : MonoBehaviour
 {
+    public PlayerStats player;
     public float damage;
     public float knockbackForce = 1;
     private void OnTriggerEnter2D(Collider2D collision)
@@ -15,6 +16,8 @@ public class MeleeHitbox : MonoBehaviour
                 Debug.Log("Dealing Melee Damage");
                 //Dealing Damage
                 collision.GetComponent<EnemyReceiveDamage>().DealDamage(damage);
+                EnemyReceiveDamage enemy = collision.GetComponent<EnemyReceiveDamage>();
+                player.CallItemOnHit(enemy);
 
                 Rigidbody2D enemyRigidbody = collision.GetComponent<Rigidbody2D>();
                 if (enemyRigidbody != null)
