@@ -7,33 +7,53 @@ public class PlayerMovement : MonoBehaviour
 {
     private Vector2 targetPos;
     public float speed;
+    public Rigidbody2D rb;
     private Vector2 direction;
     private Animator animator;
     public float dashRange;
     private enum Facing { UP, DOWN, LEFT, RIGHT};
-    private Facing FacingDir = Facing.DOWN;
+    //private Facing FacingDir = Facing.DOWN;
+    public static bool isDashing;
+    public static bool canDash = true;
+    public float dashSpeed = 10f;
+    public float dashDuration = 1f;
+    public static float dashCooldown = 1f;
+    public static float dashStartTime;
+
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+        canDash = true;
     }
 
     private void Update()
     {
+        if (isDashing)
+        {
+            return;
+        }
+
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+
+        rb.velocity = new Vector2(direction.x * speed, direction.y * speed);
+
+        direction = new Vector2(moveX, moveY).normalized;
+
         TakeInput();
-        Move();
-        /* PART OF THE OLD MELEE SYSTEM, DONT USE
-        if (Input.GetMouseButtonDown(0))
-            {
-                StartCoroutine(Attack());
-            }
+        SetAnimatorMovement(direction);
+        /*
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(Dash());
+        }
         */
     }
 
-    private void Move()
+    private void FixedUpdate()
     {
-        transform.Translate(direction * speed * Time.deltaTime);
-        SetAnimatorMovement(direction);
+        //put stuff in here to optimize for release
     }
 
     private void TakeInput()
@@ -43,44 +63,26 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             direction += Vector2.up;
-            FacingDir = Facing.UP;
+            //FacingDir = Facing.UP;
         }
         if (Input.GetKey(KeyCode.A))
         {
             direction += Vector2.left;
-            FacingDir = Facing.LEFT;
+            //FacingDir = Facing.LEFT;
         }
         if (Input.GetKey(KeyCode.S))
         {
             direction += Vector2.down;
-            FacingDir = Facing.DOWN;
+            //FacingDir = Facing.DOWN;
         }
         if (Input.GetKey(KeyCode.D))
         {
             direction += Vector2.right;
-            FacingDir = Facing.RIGHT;
+            //FacingDir = Facing.RIGHT;
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (!isDashing && Input.GetKeyDown(KeyCode.Space) && canDash)
         {
-            Vector2 currentPos = transform.position;
-            targetPos = Vector2.zero;
-            if(FacingDir == Facing.UP)
-            {
-                targetPos.y = 1;
-            }
-            else if (FacingDir == Facing.DOWN)
-            {
-                targetPos.y = -1;
-            }
-            else if(FacingDir == Facing.LEFT)
-            {
-                targetPos.x = -1;
-            }
-            else if(FacingDir == Facing.RIGHT)
-            {
-                targetPos.x = 1;
-            }
-            transform.Translate(targetPos);
+            StartCoroutine(Dash());
         }
 
         if (Input.GetMouseButton(0))
@@ -100,18 +102,16 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("yDir", direction.y);
     }
 
-    /* PART OF THE OLD MELEE SYSTEM, DONT USE
-    IEnumerator Attack()
+    IEnumerator Dash()
     {
-        animator.SetBool("isAttacking", true); // Start attacking
-
-        // Wait for a split second
-        yield return new WaitForSeconds(0.5f);
-
-        animator.SetBool("isAttacking", false); // Stop attacking
-
-        // Ensure isAttacking is set to false, since the coroutine will finish before setting it back
-        //isAttacking = false;
+        canDash = false;
+        isDashing = true;
+        dashStartTime = Time.time;
+        rb.velocity = new Vector2(direction.x * dashSpeed, direction.y * dashSpeed);
+        yield return new WaitForSeconds(dashDuration);
+        isDashing = false;
+        
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
-    */
 }

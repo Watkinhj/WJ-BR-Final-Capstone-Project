@@ -11,7 +11,7 @@ public class PlayerStats : MonoBehaviour
     public GameObject player;
     public TMP_Text healthText;
     public Slider healthSlider;
-
+    public Slider dashSlider; // Assign this in the Unity Editor
     public float health;
     public float maxHealth;
 
@@ -46,6 +46,7 @@ public class PlayerStats : MonoBehaviour
     {
         SetHealthUI();
         CheckOverheal();
+        SetDashUI();
 
     }
     //Making sure that items actually WORK
@@ -87,6 +88,25 @@ public class PlayerStats : MonoBehaviour
         healthSlider.value = CalculateHealthPercentage();
         healthText.text = Mathf.Ceil(health).ToString() + " / " + Mathf.Ceil(maxHealth).ToString();
     }
+
+
+    private void SetDashUI()
+    {
+        if (dashSlider != null)
+        {
+            // If the player is dashing, show cooldown on the slider, otherwise, set it to the maximum value
+            if (!PlayerMovement.canDash)
+            {
+                dashSlider.value = Mathf.Clamp01((Time.time - PlayerMovement.dashStartTime) / PlayerMovement.dashCooldown);
+
+            }
+            if (PlayerMovement.canDash)
+            {
+                dashSlider.value = 1;
+            }
+        }
+    }
+
 
     private void CheckOverheal()
     {

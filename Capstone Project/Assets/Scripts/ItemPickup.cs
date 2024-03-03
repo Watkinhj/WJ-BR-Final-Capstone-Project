@@ -7,6 +7,7 @@ public class ItemPickup : MonoBehaviour
 {
     public Item item;
     public Items itemDrop;
+    public PlayerStats gm;
 
     void Start()
     {
@@ -18,11 +19,11 @@ public class ItemPickup : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
-            PlayerStats player = other.GetComponent<PlayerStats>();
+            PlayerStats player = gm.GetComponent<PlayerStats>();
             AddItem(player);
             Destroy(this.gameObject);
         }

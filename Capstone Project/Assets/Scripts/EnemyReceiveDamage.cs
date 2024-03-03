@@ -19,8 +19,8 @@ public class EnemyReceiveDamage : MonoBehaviour
     public void DealDamage(float damage)
     {
         healthBar.SetActive(true);
-        healthBarSlider.value = CalculateHealthPercentage();
         health -= damage;
+        healthBarSlider.value = CalculateHealthPercentage();
         CheckDeath();
     }
 

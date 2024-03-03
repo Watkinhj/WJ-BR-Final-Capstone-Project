@@ -22,7 +22,7 @@ public class DetectionZone : MonoBehaviour
     {
         if (collider.gameObject.tag == tagTarget)
         {
-            detectedObjs.Remove(collider);
+            //detectedObjs.Remove(collider);
         }
     }
 }
