@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyBehavior : MonoBehaviour
 {
@@ -8,21 +9,37 @@ public class EnemyBehavior : MonoBehaviour
     public float moveSpeed = 1000;
     public DetectionZone detectionZone;
     public Rigidbody2D rb;
+    public float moveStopDuration = 1f;
+    bool inHitStun = false;
 
     private Coroutine damageCoroutine; // Store the coroutine instance
+
+    public NavMeshAgent navMeshAgent;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        navMeshAgent.updateRotation = false;
+        navMeshAgent.updateUpAxis = false;
     }
 
     private void FixedUpdate()
     {
         if (detectionZone.detectedObjs.Count > 0)
         {
-            Vector2 direction = (detectionZone.detectedObjs[0].transform.position - transform.position).normalized;
+            if (!inHitStun)
+            {
+                Transform playerTransform = detectionZone.detectedObjs[0].transform; // Assuming the first detected object is the player
 
-            rb.AddForce(direction * moveSpeed * Time.deltaTime);
+                Vector2 playerPosition = new Vector2(playerTransform.position.x, playerTransform.position.y);
+                navMeshAgent.SetDestination(playerPosition);
+
+                navMeshAgent.speed = moveSpeed;
+            }
+            else
+            {
+                return;
+            }
         }
     }
 
@@ -64,4 +81,26 @@ public class EnemyBehavior : MonoBehaviour
             }
         }
     }
+
+    public IEnumerator StopAndStartMovement()
+    {
+        Debug.Log("Starting stun");
+        // Store the current move speed
+        float currentMoveSpeed = moveSpeed;
+
+        //GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+        Debug.Log("Setting movespeed to zero");
+        inHitStun = true;
+        navMeshAgent.enabled = false;
+        moveSpeed = 0;
+
+        yield return new WaitForSeconds(moveStopDuration);
+
+        
+        moveSpeed = currentMoveSpeed;
+        navMeshAgent.enabled = true;
+        inHitStun = false;
+    }
+
 }

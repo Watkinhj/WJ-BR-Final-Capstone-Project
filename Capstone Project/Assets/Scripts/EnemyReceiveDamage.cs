@@ -11,14 +11,23 @@ public class EnemyReceiveDamage : MonoBehaviour
     public GameObject healthBar;
     public Slider healthBarSlider;
 
+    private EnemyBehavior enemyBehavior;
+
     private void Start()
     {
         health = maxHealth;
+        enemyBehavior = GetComponent<EnemyBehavior>();
     }
 
     public void DealDamage(float damage)
     {
         healthBar.SetActive(true);
+        /*
+        if (enemyBehavior != null)
+        {
+            StartCoroutine(enemyBehavior.StopAndStartMovement());
+        }
+        */
         health -= damage;
         healthBarSlider.value = CalculateHealthPercentage();
         CheckDeath();

@@ -25,6 +25,7 @@ public class MeleeHitbox : MonoBehaviour
                     Vector2 knockbackDirection = (collision.transform.position - transform.position).normalized;
                     enemyRigidbody.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
                 }
+                StartCoroutine(collision.GetComponent<EnemyBehavior>().StopAndStartMovement());
             }
         }
     }

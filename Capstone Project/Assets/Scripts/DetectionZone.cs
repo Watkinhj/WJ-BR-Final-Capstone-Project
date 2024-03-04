@@ -10,6 +10,18 @@ public class DetectionZone : MonoBehaviour
 
     public Collider2D col;
 
+    public Transform enemyParent;
+
+    void Update()
+    {
+        // Check if the parent object exists
+        if (enemyParent != null)
+        {
+            // Set the child object's position to match the parent object's position
+            transform.position = enemyParent.position;
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.tag == tagTarget)
