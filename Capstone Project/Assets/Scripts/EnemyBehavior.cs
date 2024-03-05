@@ -5,12 +5,14 @@ using UnityEngine.AI;
 
 public class EnemyBehavior : MonoBehaviour
 {
+    public bool isRangedEnemy;
     public float damage = 1;
     public float moveSpeed = 1000;
     public DetectionZone detectionZone;
     public Rigidbody2D rb;
     public float moveStopDuration = 1f;
     bool inHitStun = false;
+    bool isInRange;
 
     private Coroutine damageCoroutine; // Store the coroutine instance
 
@@ -27,7 +29,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (detectionZone.detectedObjs.Count > 0)
         {
-            if (!inHitStun)
+            if (!inHitStun) //If Enemy is not stunned, move towards them
             {
                 Transform playerTransform = detectionZone.detectedObjs[0].transform; // Assuming the first detected object is the player
 
@@ -35,6 +37,19 @@ public class EnemyBehavior : MonoBehaviour
                 navMeshAgent.SetDestination(playerPosition);
 
                 navMeshAgent.speed = moveSpeed;
+
+                if (isRangedEnemy) //if it's a ranged enemy, activate the firing projectile coroutine from RangedEnemyBehavior
+                {
+                    RangedEnemyBehavior rangedEnemyBehavior = GetComponent<RangedEnemyBehavior>();
+                    if (rangedEnemyBehavior != null)
+                    {
+                        StartCoroutine(rangedEnemyBehavior.ShootCooldown());
+                    }
+                    else
+                    {
+                        Debug.LogError("RangedEnemyBehavior component not found on this GameObject!");
+                    }
+                }
             }
             else
             {
@@ -47,22 +62,29 @@ public class EnemyBehavior : MonoBehaviour
     {
         while (true)
         {
-            // Deal damage to the player every second
-            PlayerStats.playerStats.DealDamage(damage);
+            if (isInRange)
+            {
+                PlayerStats.playerStats.DealDamage(damage);
+            }
             yield return new WaitForSeconds(1f);
         }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "PlayerHurtbox")
+        if (!isRangedEnemy) //check and see if the enemy is a ranged enemy
         {
-            Debug.Log("Entered PlayerHurtbox");
-
-            // Start the coroutine if it is not running
-            if (damageCoroutine == null)
+            if (collision.tag == "PlayerHurtbox")
             {
-                damageCoroutine = StartCoroutine(DamageCoroutine());
+                //Debug.Log("Entered PlayerHurtbox")
+
+                isInRange = true;
+                // Start the coroutine if it is not running
+                if (damageCoroutine == null)
+                {
+                    damageCoroutine = StartCoroutine(DamageCoroutine());
+
+                }
             }
         }
     }
@@ -71,13 +93,14 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (collision.tag == "PlayerHurtbox")
         {
-            Debug.Log("Exited PlayerHurtbox");
 
-            // Stop the coroutine if it is running
+            isInRange = false;
+
             if (damageCoroutine != null)
             {
-                StopCoroutine(damageCoroutine);
-                damageCoroutine = null;
+                isInRange = false;
+                //StopCoroutine(damageCoroutine);
+                //damageCoroutine = null;
             }
         }
     }
@@ -99,7 +122,10 @@ public class EnemyBehavior : MonoBehaviour
 
         
         moveSpeed = currentMoveSpeed;
-        navMeshAgent.enabled = true;
+        if (!EnemyReceiveDamage.isDead)
+        {
+            navMeshAgent.enabled = true;
+        }
         inHitStun = false;
     }
 

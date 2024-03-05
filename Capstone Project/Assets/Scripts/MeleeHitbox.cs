@@ -13,7 +13,7 @@ public class MeleeHitbox : MonoBehaviour
         {
             if (collision.GetComponent<EnemyReceiveDamage>() != null)
             {
-                Debug.Log("Dealing Melee Damage");
+                //Debug.Log("Dealing Melee Damage");
                 //Dealing Damage
                 collision.GetComponent<EnemyReceiveDamage>().DealDamage(damage);
                 EnemyReceiveDamage enemy = collision.GetComponent<EnemyReceiveDamage>();
