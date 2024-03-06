@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.TextCore.Text;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -14,8 +15,10 @@ public class PlayerStats : MonoBehaviour
     public Slider dashSlider; // Assign this in the Unity Editor
     public float health;
     public float maxHealth;
-
+    public int credits;
+    public TMP_Text currencyValue;
     public List<ItemList> items = new List<ItemList>();
+
     private void Awake()
     {
         if (playerStats != null)
@@ -47,6 +50,7 @@ public class PlayerStats : MonoBehaviour
         SetHealthUI();
         CheckOverheal();
         SetDashUI();
+        //AddCurrency();
 
     }
     //Making sure that items actually WORK
@@ -128,5 +132,14 @@ public class PlayerStats : MonoBehaviour
     float CalculateHealthPercentage()
     {
         return health / maxHealth;
+    }
+
+    public void AddCurrency(CurrencyPickup currency)
+    {
+        if (currency.currentObject == CurrencyPickup.PickupObject.COIN)
+        {
+            credits += currency.pickupQuantity;
+            currencyValue.text = "Credits: " + credits.ToString();
+        }
     }
 }

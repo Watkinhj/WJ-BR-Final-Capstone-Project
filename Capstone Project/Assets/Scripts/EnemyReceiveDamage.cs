@@ -15,6 +15,8 @@ public class EnemyReceiveDamage : MonoBehaviour
 
     public static bool isDead;
 
+    public GameObject lootDrop;
+
     private void Start()
     {
         health = maxHealth;
@@ -51,6 +53,7 @@ public class EnemyReceiveDamage : MonoBehaviour
         {
             isDead = true;
             Destroy(gameObject);
+            Instantiate(lootDrop, transform.position, Quaternion.identity);
         }
     }
 
