@@ -17,6 +17,7 @@ public class PlayerStats : MonoBehaviour
     public float maxHealth;
     public int credits;
     public TMP_Text currencyValue;
+    public TMP_Text ammoText;
     public List<ItemList> items = new List<ItemList>();
 
     private void Awake()
@@ -50,6 +51,7 @@ public class PlayerStats : MonoBehaviour
         SetHealthUI();
         CheckOverheal();
         SetDashUI();
+        SetAmmoUI();
         //AddCurrency();
 
     }
@@ -141,5 +143,11 @@ public class PlayerStats : MonoBehaviour
             credits += currency.pickupQuantity;
             currencyValue.text = "Credits: " + credits.ToString();
         }
+    }
+
+    private void SetAmmoUI()
+    {
+        ammoText.text = "Ammo: " + PlayerProjectile.currentAmmo + "/" + PlayerProjectile.maxAmmo;
+
     }
 }
