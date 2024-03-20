@@ -8,6 +8,9 @@ TagManager:
   - PlayerHurtbox
   - DetectionZone
   - Enemy
+  - Spawner
+  - Walkable
+  - ItemBox
   layers:
   - Default
   - TransparentFX

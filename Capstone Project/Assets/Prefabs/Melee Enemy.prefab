@@ -282,6 +282,7 @@ MonoBehaviour:
   maxHealth: 100
   healthBar: {fileID: 4186665272992880675}
   healthBarSlider: {fileID: 6208071306734653521}
+  lootDrop: {fileID: 6987884735487663896, guid: 0f8604155f011144980347573d4df5cb, type: 3}
 --- !u!50 &8182515765665517167
 Rigidbody2D:
   serializedVersion: 4

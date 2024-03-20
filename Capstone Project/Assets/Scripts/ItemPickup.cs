@@ -11,6 +11,11 @@ public class ItemPickup : MonoBehaviour
 
     void Start()
     {
+        gm = FindObjectOfType<PlayerStats>();
+        if (gm == null)
+        {
+            Debug.LogError("PlayerStats not found in the scene. Make sure there is a GameObject with PlayerStats attached.");
+        }
         item = AssignItem(itemDrop);
     }
 
