@@ -18,11 +18,14 @@ public class EnemyProjectile : MonoBehaviour
                     {
                         if (collision.name != "MeleeHitbox")
                         {
-                            if (collision.tag == "Player")
+                            if (collision.tag != "Walkable")
                             {
-                                PlayerStats.playerStats.DealDamage(damage);
+                                if (collision.tag == "Player")
+                                {
+                                    PlayerStats.playerStats.DealDamage(damage);
+                                }
+                                Destroy(gameObject);
                             }
-                            Destroy(gameObject);
                         }
                     }
                 }
