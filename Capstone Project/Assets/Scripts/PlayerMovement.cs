@@ -59,30 +59,42 @@ public class PlayerMovement : MonoBehaviour
     private void TakeInput()
     {
         direction = Vector2.zero;
+        bool isMoving = false;
 
         if (Input.GetKey(KeyCode.W))
         {
+            animator.SetBool("isIdle", false);
             direction += Vector2.up;
-            //FacingDir = Facing.UP;
+            isMoving = true;
         }
         if (Input.GetKey(KeyCode.A))
         {
+            animator.SetBool("isIdle", false);
             direction += Vector2.left;
-            //FacingDir = Facing.LEFT;
+            isMoving = true;
         }
         if (Input.GetKey(KeyCode.S))
         {
+            animator.SetBool("isIdle", false);
             direction += Vector2.down;
-            //FacingDir = Facing.DOWN;
+            isMoving = true;
         }
         if (Input.GetKey(KeyCode.D))
         {
+            animator.SetBool("isIdle", false);
             direction += Vector2.right;
-            //FacingDir = Facing.RIGHT;
+            isMoving = true;
         }
+
+        if (!isMoving && !Input.GetMouseButton(0))
+        {
+            animator.SetBool("isIdle", true);
+        }
+
         if (!isDashing && Input.GetKeyDown(KeyCode.Space) && canDash)
         {
             StartCoroutine(Dash());
+            animator.SetBool("isIdle", false);
         }
 
         if (Input.GetMouseButton(0))

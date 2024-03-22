@@ -48,9 +48,13 @@ public class ItemBox : MonoBehaviour
         // Check if the player is inside the trigger area and pressed the "E" key
         if (playerInsideTrigger && Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("Player pressed 'E' inside the trigger area.");
-            SpawnRandomItem();
-            Destroy(gameObject);
+            if (PlayerStats.playerStats.credits >= ItemBoxCost)
+            {
+                Debug.Log("Player pressed 'E' inside the trigger area.");
+                SpawnRandomItem();
+                PlayerStats.playerStats.credits -= ItemBoxCost;
+                Destroy(gameObject);
+            }
         }
     }
 

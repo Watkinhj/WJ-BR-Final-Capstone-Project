@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -121,7 +121,343 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: guy-idle-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f0514ee99ddbbd46acd42e3e28dfa1a
+      internalID: -1967228429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guy-idle-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 1
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cabbd6d8285aad64892c27a4eda46716
+      internalID: -420600200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guy-idle-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 1
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ca46a3b65199c441a5e7873afbc4f22
+      internalID: -1768433508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guy-idle-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 1
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26b148a0753b5364e8321ca7fc973c24
+      internalID: -1171492012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guy-idle-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 1
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca93a74a1ccefea4fad17cc7daa8af8c
+      internalID: -61985453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guy-idle-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 1
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5200fcf2e32763d4b8c5c1073d30867c
+      internalID: -865798357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guy-idle-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 1
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 309b8fac01591f94d812c1456a7896fd
+      internalID: 558202152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guy-idle-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 1
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64b60a28442ce31488365e7555c67242
+      internalID: 412245527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guy-idle-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 1
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ac0fe53fe8c94c4c8aa8b9c6e1d0830
+      internalID: -1162645587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guy-idle-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 1
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97dd1b4b413317a42b802d791a647815
+      internalID: -296491870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guy-idle-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 1
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f85488a6f55aec34fa973461e3b6b275
+      internalID: 81557465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guy-idle-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 1
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df0fc646d2d9abd48bceef35b8c5ab99
+      internalID: 766933543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guy-idle-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 1
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 398667b55c02c2c419aa43603dc79cd5
+      internalID: 747363084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guy-idle-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 1
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7076048d3a60a04b96472b49531424e
+      internalID: -677572809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guy-idle-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 1
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36112ff029392364d837dbe22fc1e17b
+      internalID: -718198370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guy-idle-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 1
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4e41464de5781144b0a145bd0bb92ab
+      internalID: -647041267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +468,23 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      guy-idle-Sheet_0: -1967228429
+      guy-idle-Sheet_1: -420600200
+      guy-idle-Sheet_10: 81557465
+      guy-idle-Sheet_11: 766933543
+      guy-idle-Sheet_12: 747363084
+      guy-idle-Sheet_13: -677572809
+      guy-idle-Sheet_14: -718198370
+      guy-idle-Sheet_15: -647041267
+      guy-idle-Sheet_2: -1768433508
+      guy-idle-Sheet_3: -1171492012
+      guy-idle-Sheet_4: -61985453
+      guy-idle-Sheet_5: -865798357
+      guy-idle-Sheet_6: 558202152
+      guy-idle-Sheet_7: 412245527
+      guy-idle-Sheet_8: -1162645587
+      guy-idle-Sheet_9: -296491870
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

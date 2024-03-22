@@ -18,6 +18,7 @@ public class PlayerStats : MonoBehaviour
     public int credits;
     public TMP_Text currencyValue;
     public TMP_Text ammoText;
+    public float damage = 20; 
     public List<ItemList> items = new List<ItemList>();
 
     private void Awake()
@@ -43,6 +44,8 @@ public class PlayerStats : MonoBehaviour
         //Begins the item shenanigans
         StartCoroutine(CallItemUpdate());
 
+        CallItemStatsUpdate();
+
     }
 
     //COMMENT OUT SetHealthUI IN UPDATE BY DEFAULT, USE ONLY FOR TESTING PURPOSES. FIGURE OUT A WAY TO MAKE IT UPDATE ON ITEM USE LATER
@@ -53,6 +56,7 @@ public class PlayerStats : MonoBehaviour
         SetDashUI();
         SetAmmoUI();
         //AddCurrency();
+        //CallItemStatsUpdate();
 
     }
     //Making sure that items actually WORK
@@ -72,6 +76,22 @@ public class PlayerStats : MonoBehaviour
         foreach (ItemList i in items)
         {
             i.item.OnHit(this, enemy, i.stacks);
+        }
+    }
+
+    public void CallItemStatsUpdate()
+    {
+        foreach (ItemList i in items)
+        {
+            i.item.UpdateStats(this, i.stacks);
+        }
+    }
+
+    public void CallRangedStatsUpdate(PlayerProjectile ranged)
+    {
+        foreach (ItemList i in items)
+        {
+            i.item.UpdateRanged(ranged, i.stacks);
         }
     }
 

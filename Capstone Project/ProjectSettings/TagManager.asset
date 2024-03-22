@@ -46,6 +46,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: PopupSprites
+    uniqueID: 434236523
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

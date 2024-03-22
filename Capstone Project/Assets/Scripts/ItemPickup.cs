@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Search;
 using UnityEngine;
+using static MicrowaveSoup;
 
 public class ItemPickup : MonoBehaviour
 {
     public Item item;
     public Items itemDrop;
     public PlayerStats gm;
+    public ItemUIPopup itemUI;
+    public string itemDescription;
 
     void Start()
     {
         gm = FindObjectOfType<PlayerStats>();
+        itemUI = FindObjectOfType<ItemUIPopup>();
         if (gm == null)
         {
             Debug.LogError("PlayerStats not found in the scene. Make sure there is a GameObject with PlayerStats attached.");
@@ -29,6 +33,13 @@ public class ItemPickup : MonoBehaviour
         if (other.tag == "Player")
         {
             PlayerStats player = gm.GetComponent<PlayerStats>();
+            Sprite objectSprite = GetComponent<SpriteRenderer>().sprite;
+
+            itemUI.SetItemInfo(item);
+            itemUI.SetSprite(objectSprite);
+            itemUI.UpdateItemPopup();
+            itemUI.RunItemPopup();
+
             AddItem(player);
             Destroy(this.gameObject);
         }
@@ -51,12 +62,16 @@ public class ItemPickup : MonoBehaviour
     {
         switch (itemToAssign)
         {
-            case Items.HealingItem:
-                return new HealingItem();
-            case Items.FireDamage:
-                return new FireDamage();
+            case Items.GreenDrink:
+                return new GreenDrink();
+            case Items.MicrowaveSoup:
+                return new MicrowaveSoup();
+            case Items.SackLunch:
+                return new SackLunch();
+            case Items.PackOfStaples:
+                return new PackOfStaples();
             default:
-                return new HealingItem();
+                return new GreenDrink();
 
         }
     }
@@ -64,6 +79,8 @@ public class ItemPickup : MonoBehaviour
 
 public enum Items
 {
-    HealingItem,
-    FireDamage
+    GreenDrink,
+    MicrowaveSoup,
+    SackLunch,
+    PackOfStaples,
 }
