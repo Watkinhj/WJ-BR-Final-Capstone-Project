@@ -1,13 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ItemBox : MonoBehaviour
 {
     public List<GameObject> Items = new List<GameObject>();
     public Canvas ItemBoxPopup;
-
+    public TMP_Text ItemBoxText;
+    public int ItemBoxCost;
     private bool playerInsideTrigger = false;
+
+    void Start()
+    {
+        ItemBoxText.text = "$" + ItemBoxCost.ToString();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {

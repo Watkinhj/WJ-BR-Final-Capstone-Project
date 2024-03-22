@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -18,6 +19,9 @@ public class BossAI : MonoBehaviour
     private bool isMeleeAttacking = false; // Flag to track if boss is performing melee attack
     private Vector2 chargeDirection; // Direction to charge
 
+    //PLACEHOLDER - REMOVE THIS LATER
+    public TMP_Text BossTelegraphs;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -32,6 +36,7 @@ public class BossAI : MonoBehaviour
     {
         while (true)
         {
+            BossTelegraphs.text = "Idle State".ToString();
             yield return new WaitForSeconds(5f); // Wait for 5 seconds in idle state
 
             // Decide which attack to perform
@@ -39,9 +44,11 @@ public class BossAI : MonoBehaviour
             if (attackChoice == 0)
             {
                 // Charge attack
+                BossTelegraphs.text = "Preparing Charge...".ToString();
                 Debug.Log("Boss decides to do a charge.");
                 StopMovement();
                 yield return new WaitForSeconds(1f);
+                BossTelegraphs.text = "Charging!".ToString();
                 StartChargeAttack();
                 yield return new WaitForSeconds(3f);
                 StopChargeAttack();
@@ -49,9 +56,11 @@ public class BossAI : MonoBehaviour
             else if (attackChoice == 1)
             {
                 // Ground slam attack
+                BossTelegraphs.text = "Preparing Slam...".ToString();
                 Debug.Log("Boss decides to do a ground slam.");
                 StartGroundSlamAttack();
                 yield return new WaitForSeconds(3f); // Wait for telegraphing duration
+                BossTelegraphs.text = "Slamming!".ToString();
                 if (isGroundSlamming) // Check if ground slam attack is still ongoing
                 {
                     PerformGroundSlamAttack(); // Perform ground slam attack if player is inside AOE
@@ -63,6 +72,7 @@ public class BossAI : MonoBehaviour
                 // Melee attack
                 Debug.Log("Boss decides to do a melee attack.");
                 StartMeleeAttack();
+                BossTelegraphs.text = "Melee Attack!".ToString();
                 yield return new WaitForSeconds(3f); // Wait between each dash
                 /*
                 if (isMeleeAttacking) // Check if melee attack is still ongoing
@@ -161,6 +171,7 @@ public class BossAI : MonoBehaviour
         {
             if (other.CompareTag("PlayerHurtbox"))
             {
+                BossTelegraphs.text = "Stunned!".ToString();
                 PlayerStats.playerStats.DealDamage(damage);
                 StopChargeAttack(); // Stop the charge attack if collided with player
 
@@ -176,6 +187,7 @@ public class BossAI : MonoBehaviour
             Collider2D collider = collision.collider;
             if (collider.CompareTag("Wall"))
             {
+                BossTelegraphs.text = "Stunned!".ToString();
                 Debug.Log("Hit a wall.");
                 StopChargeAttack(); // Stop the charge attack if collided with a wall
 
@@ -228,9 +240,9 @@ public class BossAI : MonoBehaviour
             // Set the Rigidbody's velocity to move towards the player
             rb.velocity = direction * moveSpeed * 5; // Dash towards the player
             PerformMeleeAttack();
-            yield return new WaitForSeconds(0.5f); // Adjust delay between each dash
+            yield return new WaitForSeconds(0.35f); // Adjust delay between each dash
             rb.velocity = Vector2.zero; // Reset velocity after each dash
-            yield return new WaitForSeconds(0.5f); // Wait before performing the next dash
+            yield return new WaitForSeconds(0.35f); // Wait before performing the next dash
         }
 
         // Reset melee attack after all dashes are performed

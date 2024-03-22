@@ -53,7 +53,10 @@ public class EnemyReceiveDamage : MonoBehaviour
         {
             isDead = true;
             Destroy(gameObject);
-            Instantiate(lootDrop, transform.position, Quaternion.identity);
+            if (lootDrop != null) //If they can drop currency
+            {
+                Instantiate(lootDrop, transform.position, Quaternion.identity);
+            }
         }
     }
 
