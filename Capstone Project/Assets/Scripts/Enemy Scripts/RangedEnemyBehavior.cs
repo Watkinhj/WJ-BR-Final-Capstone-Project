@@ -24,7 +24,7 @@ public class RangedEnemyBehavior : MonoBehaviour
             if (canShoot && player != null)
             {
                 Shoot();
-                Debug.Log("Shooting player");
+                //Debug.Log("Shooting player");
                 canShoot = false; // Prevent shooting during cooldown
                 yield return new WaitForSeconds(cooldown);
                 canShoot = true; // Allow shooting again after cooldown

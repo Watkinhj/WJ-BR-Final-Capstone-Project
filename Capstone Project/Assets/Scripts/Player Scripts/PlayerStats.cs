@@ -9,6 +9,7 @@ public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats playerStats;
 
+    public float moveSpeed = 5;
     public GameObject player;
     public TMP_Text healthText;
     public Slider healthSlider;
@@ -20,6 +21,10 @@ public class PlayerStats : MonoBehaviour
     public TMP_Text ammoText;
     public float damage = 20; 
     public List<ItemList> items = new List<ItemList>();
+
+    //ranged attack stats
+    public int maxAmmo = 20;
+    public float rangedCooldown = 0.5f;
 
     private void Awake()
     {
@@ -42,9 +47,7 @@ public class PlayerStats : MonoBehaviour
         SetHealthUI();
 
         //Begins the item shenanigans
-        StartCoroutine(CallItemUpdate());
-
-        CallItemStatsUpdate();
+        StartCoroutine(CallTimedItemUpdate());
 
     }
 
@@ -60,14 +63,14 @@ public class PlayerStats : MonoBehaviour
 
     }
     //Making sure that items actually WORK
-    IEnumerator CallItemUpdate()
+    IEnumerator CallTimedItemUpdate()
     {
         foreach (ItemList i in items)
         {
             i.item.Update(this, i.stacks);
         }
         yield return new WaitForSeconds(1); //One second per item update. We may need to change this, maybe 0.1f?
-        StartCoroutine(CallItemUpdate());
+        StartCoroutine(CallTimedItemUpdate());
 
     }
 
@@ -75,15 +78,16 @@ public class PlayerStats : MonoBehaviour
     {
         foreach (ItemList i in items)
         {
+            
             i.item.OnHit(this, enemy, i.stacks);
         }
     }
 
-    public void CallItemStatsUpdate()
+    public void CallItemOnPickup()
     {
         foreach (ItemList i in items)
         {
-            i.item.UpdateStats(this, i.stacks);
+            i.item.OnPickup(this, i.stacks);
         }
     }
 
@@ -91,7 +95,7 @@ public class PlayerStats : MonoBehaviour
     {
         foreach (ItemList i in items)
         {
-            i.item.UpdateRanged(ranged, i.stacks);
+            //i.item.UpdateRanged(ranged, i.stacks);
         }
     }
 
@@ -167,7 +171,7 @@ public class PlayerStats : MonoBehaviour
 
     private void SetAmmoUI()
     {
-        ammoText.text = "Ammo: " + PlayerProjectile.currentAmmo + "/" + PlayerProjectile.maxAmmo;
+        ammoText.text = "Ammo: " + PlayerProjectile.currentAmmo + "/" + maxAmmo;
 
     }
 }

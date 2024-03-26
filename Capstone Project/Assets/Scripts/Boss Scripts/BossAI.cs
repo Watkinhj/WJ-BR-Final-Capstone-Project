@@ -16,7 +16,7 @@ public class BossAI : MonoBehaviour
     private Coroutine damageCoroutine; // Store the coroutine instance
     private bool isCharging = false; // Flag to track if boss is charging
     private bool isGroundSlamming = false; // Flag to track if boss is performing ground slam
-    private bool isMeleeAttacking = false; // Flag to track if boss is performing melee attack
+    //private bool isMeleeAttacking = false; // Flag to track if boss is performing melee attack
     private Vector2 chargeDirection; // Direction to charge
 
     //PLACEHOLDER - REMOVE THIS LATER
@@ -224,7 +224,7 @@ public class BossAI : MonoBehaviour
     private void StartMeleeAttack()
     {
         StopMovement();
-        isMeleeAttacking = true;
+        //isMeleeAttacking = true;
         StartCoroutine(MeleeAttackCoroutine()); // Start coroutine for the melee attack
     }
 
@@ -263,7 +263,7 @@ public class BossAI : MonoBehaviour
     private void StopMeleeAttack()
     {
         ResumeMovement();
-        isMeleeAttacking = false;
+        //isMeleeAttacking = false;
     }
 }
 

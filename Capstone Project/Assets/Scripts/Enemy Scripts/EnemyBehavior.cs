@@ -107,13 +107,13 @@ public class EnemyBehavior : MonoBehaviour
 
     public IEnumerator StopAndStartMovement()
     {
-        Debug.Log("Starting stun");
+        //Debug.Log("Starting stun");
         // Store the current move speed
         float currentMoveSpeed = moveSpeed;
 
         //GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
-        Debug.Log("Setting movespeed to zero");
+        //Debug.Log("Setting movespeed to zero");
         inHitStun = true;
         navMeshAgent.enabled = false;
         moveSpeed = 0;

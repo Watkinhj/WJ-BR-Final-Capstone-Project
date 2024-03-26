@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public PlayerStats gm;
     private Vector2 targetPos;
     public float speed;
     public Rigidbody2D rb;
@@ -19,16 +20,21 @@ public class PlayerMovement : MonoBehaviour
     public float dashDuration = 1f;
     public static float dashCooldown = 1f;
     public static float dashStartTime;
+    
 
 
     private void Start()
     {
+        gm = FindObjectOfType<PlayerStats>();
         animator = GetComponent<Animator>();
         canDash = true;
+        speed = gm.moveSpeed;
     }
 
     private void Update()
     {
+        speed = gm.moveSpeed;
+
         if (isDashing)
         {
             return;

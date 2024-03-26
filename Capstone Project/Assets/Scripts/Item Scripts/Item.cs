@@ -14,17 +14,12 @@ public abstract class Item
 
     }
 
-    public virtual void UpdateStats(PlayerStats player, int stacks)
+    public virtual void OnPickup(PlayerStats player, int stacks)
     {
 
     }
 
     public virtual void OnHit(PlayerStats player, EnemyReceiveDamage enemy, int stacks)
-    {
-
-    }
-
-    public virtual void UpdateRanged(PlayerProjectile player, int stacks)
     {
 
     }
@@ -67,6 +62,7 @@ public class MicrowaveSoup : Item
     {
         if (Random.value <= burnChance) // Check if the burn chance is activated
         {
+            Debug.Log("burn proc!");
             player.StartCoroutine(BurnEnemy(enemy, player, stacks));
         }
     }
@@ -74,7 +70,7 @@ public class MicrowaveSoup : Item
     // Coroutine for the burn effect
     private IEnumerator BurnEnemy(EnemyReceiveDamage enemy, PlayerStats player, int stacks)
     {
-        float damageOverTime = player.damage * 0.6f; // 60% of player's damage
+        float damageOverTime = player.damage * 0.6f; // 60% of player's melee damage
         int duration = 5 + (2 * stacks); // Duration of the burn effect in seconds
         int hits = duration; // Number of hits required
 
@@ -101,14 +97,18 @@ public class SackLunch : Item
         return "Increases maximum health.";
     }
 
-    public override void UpdateStats(PlayerStats player, int stacks)
+    public override void OnPickup(PlayerStats player, int stacks)
     {
-        player.maxHealth += 20 + (maxHealthIncreasePerStack * stacks);
+        //Makes it so that it adds 20 to player's health on pickup. Then, it should only add 20 more health when another of that same item is picked up.
+        int totalHealthIncrease = 20 + (maxHealthIncreasePerStack * (stacks - 1)); // Subtracting 1 because the first stack already adds 20 health
+
+        player.maxHealth += totalHealthIncrease;
     }
 }
 
 public class PackOfStaples : Item
 {
+    private const float speedIncreasePerStack = 0.075f;
     public override string GiveName()
     {
         return "Pack of Staples";
@@ -119,8 +119,31 @@ public class PackOfStaples : Item
         return "Increases firing speed.";
     }
 
-    public override void UpdateRanged(PlayerProjectile player, int stacks)
+    public override void OnPickup(PlayerStats player, int stacks)
     {
-        player.cooldown -= 0.075f + (0.075f + stacks);
+        float totalSpeedIncrease = 0.075f - (speedIncreasePerStack * (stacks - 1));
+
+        player.rangedCooldown -= totalSpeedIncrease;
+    }
+}
+
+public class ShinedShoes : Item
+{
+    private const float moveSpeedIncrease = 0.5f;
+    public override string GiveName()
+    {
+        return "Shined Shoes";
+    }
+
+    public override string GiveDescription()
+    {
+        return "Increases movement speed.";
+    }
+
+    public override void OnPickup(PlayerStats player, int stacks)
+    {
+        float totalSpeedIncrease = 0.5f + (moveSpeedIncrease * (stacks - 1));
+
+        player.moveSpeed += totalSpeedIncrease;
     }
 }

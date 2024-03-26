@@ -35,12 +35,19 @@ public class ItemPickup : MonoBehaviour
             PlayerStats player = gm.GetComponent<PlayerStats>();
             Sprite objectSprite = GetComponent<SpriteRenderer>().sprite;
 
+            //ui stuff
             itemUI.SetItemInfo(item);
             itemUI.SetSprite(objectSprite);
             itemUI.UpdateItemPopup();
             itemUI.RunItemPopup();
 
             AddItem(player);
+
+            if (player != null)
+            {
+                item.OnPickup(player, 1); // Assuming 1 stack for now
+            }
+
             Destroy(this.gameObject);
         }
     }
@@ -70,6 +77,8 @@ public class ItemPickup : MonoBehaviour
                 return new SackLunch();
             case Items.PackOfStaples:
                 return new PackOfStaples();
+            case Items.ShinedShoes:
+                return new ShinedShoes();
             default:
                 return new GreenDrink();
 
@@ -83,4 +92,5 @@ public enum Items
     MicrowaveSoup,
     SackLunch,
     PackOfStaples,
+    ShinedShoes,
 }

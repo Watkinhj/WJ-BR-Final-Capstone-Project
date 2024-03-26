@@ -8,8 +8,9 @@ public class PlayerProjectile : MonoBehaviour
     public float minDamage;
     public float maxDamage;
     public float projectileForce;
-    public float cooldown = 0.5f;
-    public static int maxAmmo = 20;
+    public PlayerStats gm;
+    // public float cooldown = 0.5f; COOLDOWN IS STORED IN PLAYERSTATS as rangedCooldown
+    //public int maxAmmo = 20; MAXAMMO IS STORED IN PLAYERSTATS
     public float refillTime = 3f;
 
     private bool canFire = true;
@@ -17,7 +18,9 @@ public class PlayerProjectile : MonoBehaviour
 
     void Start()
     {
-        currentAmmo = maxAmmo;
+        gm = FindObjectOfType<PlayerStats>();
+        PlayerStats player = gm.GetComponent<PlayerStats>();
+        currentAmmo = player.maxAmmo;
     }
 
     void Update()
@@ -26,10 +29,13 @@ public class PlayerProjectile : MonoBehaviour
         {
             StartCoroutine(FireProjectile());
         }
+        minDamage = gm.damage / 2;
+        maxDamage = (gm.damage * 1.5f) / 2;
     }
 
     IEnumerator FireProjectile()
     {
+        PlayerStats player = gm.GetComponent<PlayerStats>();
         GameObject staple = Instantiate(projectile, transform.position, Quaternion.identity);
         Rigidbody2D rb = staple.GetComponent<Rigidbody2D>();
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -40,7 +46,7 @@ public class PlayerProjectile : MonoBehaviour
         canFire = false;
         currentAmmo--;
 
-        yield return new WaitForSeconds(cooldown);
+        yield return new WaitForSeconds(player.rangedCooldown);
 
         canFire = true;
         RefillAmmoIfNeeded();
@@ -48,8 +54,9 @@ public class PlayerProjectile : MonoBehaviour
 
     IEnumerator RefillAmmo()
     {
+        PlayerStats player = gm.GetComponent<PlayerStats>();
         yield return new WaitForSeconds(refillTime);
-        currentAmmo = maxAmmo;
+        currentAmmo = player.maxAmmo;
     }
 
     void RefillAmmoIfNeeded()
