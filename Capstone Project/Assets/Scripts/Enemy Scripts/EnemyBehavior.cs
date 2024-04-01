@@ -27,33 +27,36 @@ public class EnemyBehavior : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (detectionZone.detectedObjs.Count > 0)
+        if (navMeshAgent != null)
         {
-            if (!inHitStun) //If Enemy is not stunned, move towards them
+            if (detectionZone.detectedObjs.Count > 0)
             {
-                Transform playerTransform = detectionZone.detectedObjs[0].transform; // Assuming the first detected object is the player
-
-                Vector2 playerPosition = new Vector2(playerTransform.position.x, playerTransform.position.y);
-                navMeshAgent.SetDestination(playerPosition);
-
-                navMeshAgent.speed = moveSpeed;
-
-                if (isRangedEnemy) //if it's a ranged enemy, activate the firing projectile coroutine from RangedEnemyBehavior
+                if (!inHitStun) //If Enemy is not stunned, move towards them
                 {
-                    RangedEnemyBehavior rangedEnemyBehavior = GetComponent<RangedEnemyBehavior>();
-                    if (rangedEnemyBehavior != null)
+                    Transform playerTransform = detectionZone.detectedObjs[0].transform; // Assuming the first detected object is the player
+
+                    Vector2 playerPosition = new Vector2(playerTransform.position.x, playerTransform.position.y);
+                    navMeshAgent.SetDestination(playerPosition);
+
+                    navMeshAgent.speed = moveSpeed;
+
+                    if (isRangedEnemy) //if it's a ranged enemy, activate the firing projectile coroutine from RangedEnemyBehavior
                     {
-                        StartCoroutine(rangedEnemyBehavior.ShootCooldown());
-                    }
-                    else
-                    {
-                        Debug.LogError("RangedEnemyBehavior component not found on this GameObject!");
+                        RangedEnemyBehavior rangedEnemyBehavior = GetComponent<RangedEnemyBehavior>();
+                        if (rangedEnemyBehavior != null)
+                        {
+                            StartCoroutine(rangedEnemyBehavior.ShootCooldown());
+                        }
+                        else
+                        {
+                            Debug.LogError("RangedEnemyBehavior component not found on this GameObject!");
+                        }
                     }
                 }
-            }
-            else
-            {
-                return;
+                else
+                {
+                    return;
+                }
             }
         }
     }

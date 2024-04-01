@@ -17,6 +17,9 @@ public class EnemyReceiveDamage : MonoBehaviour
 
     public GameObject lootDrop;
 
+    public bool isBurning;
+    public bool isBurnSpreadable;
+
     private void Start()
     {
         health = maxHealth;
@@ -26,7 +29,10 @@ public class EnemyReceiveDamage : MonoBehaviour
 
     public void DealDamage(float damage)
     {
-        healthBar.SetActive(true);
+        if (healthBar != null)
+        {
+            healthBar.SetActive(true);
+        }
         health -= damage;
         healthBarSlider.value = CalculateHealthPercentage();
         CheckDeath();

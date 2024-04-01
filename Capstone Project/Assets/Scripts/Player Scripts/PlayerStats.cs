@@ -22,9 +22,17 @@ public class PlayerStats : MonoBehaviour
     public float damage = 20; 
     public List<ItemList> items = new List<ItemList>();
 
+    //melee attack stats
+    public float meleeSpeed = 1;
+    public Animator animator;
+
     //ranged attack stats
     public int maxAmmo = 20;
     public float rangedCooldown = 0.5f;
+
+    //thing that makes the chili powder work
+    public float burnMultiplier = 1;
+    public bool isBurnSpreadable;
 
     private void Awake()
     {
@@ -41,6 +49,9 @@ public class PlayerStats : MonoBehaviour
 
     private void Start()
     {
+        //grabs the animator
+        animator = player.GetComponent<Animator>();
+
         //Health Stuff
         health = maxHealth;
         //healthSlider.value = 1;
@@ -48,7 +59,6 @@ public class PlayerStats : MonoBehaviour
 
         //Begins the item shenanigans
         StartCoroutine(CallTimedItemUpdate());
-
     }
 
     //COMMENT OUT SetHealthUI IN UPDATE BY DEFAULT, USE ONLY FOR TESTING PURPOSES. FIGURE OUT A WAY TO MAKE IT UPDATE ON ITEM USE LATER
@@ -58,6 +68,7 @@ public class PlayerStats : MonoBehaviour
         CheckOverheal();
         SetDashUI();
         SetAmmoUI();
+        SetMeleeSpeed();
         //AddCurrency();
         //CallItemStatsUpdate();
 
@@ -88,6 +99,7 @@ public class PlayerStats : MonoBehaviour
         foreach (ItemList i in items)
         {
             i.item.OnPickup(this, i.stacks);
+            SetMeleeSpeed(); //maybe this will work lmfao
         }
     }
 
@@ -173,5 +185,10 @@ public class PlayerStats : MonoBehaviour
     {
         ammoText.text = "Ammo: " + PlayerProjectile.currentAmmo + "/" + maxAmmo;
 
+    }
+
+    private void SetMeleeSpeed()
+    {
+        animator.SetFloat("attackSpeed", meleeSpeed);
     }
 }

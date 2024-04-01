@@ -79,6 +79,16 @@ public class ItemPickup : MonoBehaviour
                 return new PackOfStaples();
             case Items.ShinedShoes:
                 return new ShinedShoes();
+            case Items.ReadingGlasses:
+                return new ReadingGlasses();
+            case Items.PaperCutter:
+                return new PaperCutter();
+            case Items.BrandNewStapler:
+                return new BrandNewStapler();
+            case Items.CupOfCoffee:
+                return new CupOfCoffee();
+            case Items.MarksChiliPowder:
+                return new MarksChiliPowder();
             default:
                 return new GreenDrink();
 
@@ -93,4 +103,9 @@ public enum Items
     SackLunch,
     PackOfStaples,
     ShinedShoes,
+    ReadingGlasses,
+    PaperCutter,
+    BrandNewStapler,
+    CupOfCoffee,
+    MarksChiliPowder,
 }

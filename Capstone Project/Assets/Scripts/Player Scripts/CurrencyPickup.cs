@@ -10,7 +10,6 @@ public class CurrencyPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        print(other);
         if(other.name == "Player")
         {
             PlayerStats.playerStats.AddCurrency(this);
