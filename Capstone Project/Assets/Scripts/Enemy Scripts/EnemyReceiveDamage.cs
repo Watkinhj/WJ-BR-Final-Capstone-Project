@@ -18,7 +18,6 @@ public class EnemyReceiveDamage : MonoBehaviour
     public GameObject lootDrop;
 
     public bool isBurning;
-    public bool isBurnSpreadable;
 
     private void Start()
     {

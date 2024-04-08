@@ -10,12 +10,14 @@ public class ItemPickup : MonoBehaviour
     public Items itemDrop;
     public PlayerStats gm;
     public ItemUIPopup itemUI;
+    public EquippedItemsUI equippedItemsUI;
     public string itemDescription;
 
     void Start()
     {
         gm = FindObjectOfType<PlayerStats>();
         itemUI = FindObjectOfType<ItemUIPopup>();
+        equippedItemsUI = FindObjectOfType<EquippedItemsUI>();
         if (gm == null)
         {
             Debug.LogError("PlayerStats not found in the scene. Make sure there is a GameObject with PlayerStats attached.");
@@ -40,6 +42,7 @@ public class ItemPickup : MonoBehaviour
             itemUI.SetSprite(objectSprite);
             itemUI.UpdateItemPopup();
             itemUI.RunItemPopup();
+            //equippedItemsUI.AddEquippedItem(objectSprite);
 
             AddItem(player);
 
