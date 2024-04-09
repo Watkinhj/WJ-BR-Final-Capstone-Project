@@ -66,31 +66,76 @@ public class PlayerMovement : MonoBehaviour
     {
         direction = Vector2.zero;
         bool isMoving = false;
+        bool isRunningDiagonally = false;
 
         if (Input.GetKey(KeyCode.W))
         {
             animator.SetBool("isIdle", false);
             direction += Vector2.up;
             isMoving = true;
+
+            
+            if (Input.GetKey(KeyCode.A)) //Up and Left
+            {
+                isRunningDiagonally = true;
+            }
+
+            if (Input.GetKey(KeyCode.D)) //Up and Right
+            {
+                isRunningDiagonally = true;
+            }
         }
         if (Input.GetKey(KeyCode.A))
         {
             animator.SetBool("isIdle", false);
             direction += Vector2.left;
             isMoving = true;
+
+            if (Input.GetKey(KeyCode.W)) //Left and Up
+            {
+                isRunningDiagonally = true;
+            }
+
+            if (Input.GetKey(KeyCode.S)) //Left and Down
+            {
+                isRunningDiagonally = true;
+            }
         }
         if (Input.GetKey(KeyCode.S))
         {
             animator.SetBool("isIdle", false);
             direction += Vector2.down;
             isMoving = true;
+
+            if (Input.GetKey(KeyCode.A)) //Down and Left
+            {
+                isRunningDiagonally = true;
+            }
+
+            if (Input.GetKey(KeyCode.D)) //Down and Right
+            {
+                isRunningDiagonally = true;
+            }
         }
         if (Input.GetKey(KeyCode.D))
         {
             animator.SetBool("isIdle", false);
             direction += Vector2.right;
             isMoving = true;
+
+            if (Input.GetKey(KeyCode.W)) //Right and Up
+            {
+                isRunningDiagonally = true;
+            }
+
+            if (Input.GetKey(KeyCode.S)) //Right and Down
+            {
+                isRunningDiagonally = true;
+            }
         }
+
+        //diagonal movement
+        animator.SetBool("isRunningDiagonally", isRunningDiagonally);
 
         if (!isMoving && !Input.GetMouseButton(0))
         {
