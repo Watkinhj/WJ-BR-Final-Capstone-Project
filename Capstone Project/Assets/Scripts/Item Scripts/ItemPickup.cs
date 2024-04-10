@@ -10,14 +10,15 @@ public class ItemPickup : MonoBehaviour
     public Items itemDrop;
     public PlayerStats gm;
     public ItemUIPopup itemUI;
-    public EquippedItemsUI equippedItemsUI;
+    public Inventory inventoryUI;
     public string itemDescription;
+    public Sprite objectSprite;
 
     void Start()
     {
         gm = FindObjectOfType<PlayerStats>();
         itemUI = FindObjectOfType<ItemUIPopup>();
-        equippedItemsUI = FindObjectOfType<EquippedItemsUI>();
+        inventoryUI = FindObjectOfType<Inventory>();
         if (gm == null)
         {
             Debug.LogError("PlayerStats not found in the scene. Make sure there is a GameObject with PlayerStats attached.");
@@ -35,15 +36,14 @@ public class ItemPickup : MonoBehaviour
         if (other.tag == "Player")
         {
             PlayerStats player = gm.GetComponent<PlayerStats>();
-            Sprite objectSprite = GetComponent<SpriteRenderer>().sprite;
+            objectSprite = GetComponent<SpriteRenderer>().sprite;
 
             //ui stuff
             itemUI.SetItemInfo(item);
             itemUI.SetSprite(objectSprite);
             itemUI.UpdateItemPopup();
             itemUI.RunItemPopup();
-            //equippedItemsUI.AddEquippedItem(objectSprite);
-
+            
             AddItem(player);
 
             if (player != null)
@@ -62,10 +62,12 @@ public class ItemPickup : MonoBehaviour
             if(i.name == item.GiveName())
             {
                 i.stacks += 1;
+                inventoryUI.AddItem(objectSprite, 1);
                 return;
             }
         }
         player.items.Add(new ItemList(item, item.GiveName(), 1));
+        inventoryUI.AddItem(objectSprite, 1);
     }
 
     public Item AssignItem(Items itemToAssign)
