@@ -170,8 +170,16 @@ public class PlayerMovement : MonoBehaviour
         canDash = false;
         isDashing = true;
         dashStartTime = Time.time;
+
+        //can phase through decoration
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Decoration"), true);
+
         rb.velocity = new Vector2(direction.x * dashSpeed, direction.y * dashSpeed);
         yield return new WaitForSeconds(dashDuration);
+
+        //can't phase through decoration
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Decoration"), false);
+
         isDashing = false;
         
         yield return new WaitForSeconds(dashCooldown);

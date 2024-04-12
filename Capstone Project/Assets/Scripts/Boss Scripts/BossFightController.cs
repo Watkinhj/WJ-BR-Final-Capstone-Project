@@ -18,11 +18,6 @@ public class BossFightController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Player entered door trigger");
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
         if (other.CompareTag("Player"))
         {
             Debug.Log("Player Entered the boss room. Sealing door...");

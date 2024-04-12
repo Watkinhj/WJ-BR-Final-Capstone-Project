@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: $00
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 61a76349b3c0ac345a2276ac5fe5ec6e, type: 2}
+  m_sharedMaterial: {fileID: 3049910254046545983, guid: 61a76349b3c0ac345a2276ac5fe5ec6e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -162,7 +162,7 @@ RectTransform:
   m_GameObject: {fileID: 3428690707947317297}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0005031406, y: 0.0008087886, z: 0.0004570177}
+  m_LocalScale: {x: 0.0005031406, y: 0.00049875566, z: 0.0004570177}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6753045237531327295}
@@ -264,7 +264,7 @@ RectTransform:
   m_GameObject: {fileID: 3753663409779942335}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.001032401, y: 0.0016595642, z: 0.0009377608}
+  m_LocalScale: {x: 0.001032401, y: 0.0010787167, z: 0.0009377608}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5953630633503918680}
@@ -272,7 +272,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.158}
+  m_AnchoredPosition: {x: 0, y: 1.138}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &9029845679821454723
@@ -403,10 +403,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press E to Open Item Box
+  m_text: Press E to Buy An Item!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 61a76349b3c0ac345a2276ac5fe5ec6e, type: 2}
+  m_sharedMaterial: {fileID: 3049910254046545983, guid: 61a76349b3c0ac345a2276ac5fe5ec6e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -484,6 +484,7 @@ GameObject:
   - component: {fileID: 5510942004157683426}
   - component: {fileID: 3412504947450885218}
   - component: {fileID: 8761192503543543295}
+  - component: {fileID: -7514025431309492397}
   m_Layer: 0
   m_Name: ItemBox
   m_TagString: Untagged
@@ -501,7 +502,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9.932, y: 1.338, z: 0.01}
-  m_LocalScale: {x: 0.90833, y: 0.56506443, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 837236969305637591}
@@ -549,8 +550,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.3679244, g: 0.7558617, b: 1, a: 1}
+  m_Sprite: {fileID: 87710500, guid: d80411c8fdd00af43a0bf8d0e2528cbe, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -596,7 +597,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.6666667, y: 1.3541666}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -625,3 +626,24 @@ MonoBehaviour:
   ItemBoxPopup: {fileID: 9029845679821454723}
   ItemBoxText: {fileID: 6005769646817502651}
   ItemBoxCost: 30
+--- !u!95 &-7514025431309492397
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8405432175658521451}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c0210b592a3a5154da0067522875ef92, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

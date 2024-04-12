@@ -59,7 +59,7 @@ public class BossAI : MonoBehaviour
                 BossTelegraphs.text = "Preparing Slam...".ToString();
                 Debug.Log("Boss decides to do a ground slam.");
                 StartGroundSlamAttack();
-                yield return new WaitForSeconds(3f); // Wait for telegraphing duration
+                yield return new WaitForSeconds(1.3f); // Wait for telegraphing duration
                 BossTelegraphs.text = "Slamming!".ToString();
                 if (isGroundSlamming) // Check if ground slam attack is still ongoing
                 {
@@ -200,7 +200,7 @@ public class BossAI : MonoBehaviour
         isGroundSlamming = true;
         // Instantiate the ground slam circle prefab
         GameObject groundSlamCircle = Instantiate(groundSlamCirclePrefab, transform.position, Quaternion.identity);
-        Destroy(groundSlamCircle, 3f); // Destroy the circle after 3 seconds (telegraphing duration)
+        Destroy(groundSlamCircle, 1.3f); // Destroy the circle after 3 seconds (telegraphing duration)
     }
 
     private void PerformGroundSlamAttack()
