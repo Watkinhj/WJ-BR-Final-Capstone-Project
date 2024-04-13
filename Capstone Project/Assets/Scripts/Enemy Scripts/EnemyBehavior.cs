@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,6 +14,9 @@ public class EnemyBehavior : MonoBehaviour
     public float moveStopDuration = 1f;
     bool inHitStun = false;
     bool isInRange;
+    bool finishedAttack;
+
+    private Animator animator;
 
     private Coroutine damageCoroutine; // Store the coroutine instance
 
@@ -23,6 +27,7 @@ public class EnemyBehavior : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
+        animator = GetComponent<Animator>(); // Get the Animator component
     }
 
     private void FixedUpdate()
@@ -36,9 +41,15 @@ public class EnemyBehavior : MonoBehaviour
                     Transform playerTransform = detectionZone.detectedObjs[0].transform; // Assuming the first detected object is the player
 
                     Vector2 playerPosition = new Vector2(playerTransform.position.x, playerTransform.position.y);
-                    navMeshAgent.SetDestination(playerPosition);
+                    if (navMeshAgent != null)
+                    {
+                        navMeshAgent.SetDestination(playerPosition);
 
-                    navMeshAgent.speed = moveSpeed;
+                        navMeshAgent.speed = moveSpeed;
+                    }
+
+                    float horizontalMovement = navMeshAgent.velocity.x;
+                    animator.SetFloat("xDir", horizontalMovement);
 
                     if (isRangedEnemy) //if it's a ranged enemy, activate the firing projectile coroutine from RangedEnemyBehavior
                     {
@@ -67,9 +78,23 @@ public class EnemyBehavior : MonoBehaviour
         {
             if (isInRange)
             {
+                if (animator != null)
+                {
+                    Debug.Log("Running attack anim");
+                    animator.SetBool("isAttacking", true);
+                }
                 PlayerStats.playerStats.DealDamage(damage);
+                yield return new WaitForSeconds(0.25f);
+                if (animator != null)
+                {
+                    animator.SetBool("isAttacking", false);
+                }
             }
             yield return new WaitForSeconds(1f);
+            if (animator != null)
+            {
+                animator.SetBool("isAttacking", false);
+            }
         }
     }
 
@@ -102,15 +127,18 @@ public class EnemyBehavior : MonoBehaviour
             if (damageCoroutine != null)
             {
                 isInRange = false;
-                //StopCoroutine(damageCoroutine);
-                //damageCoroutine = null;
+
             }
         }
     }
 
     public IEnumerator StopAndStartMovement()
     {
-        //Debug.Log("Starting stun");
+        if (inHitStun) // Check if already in hit stun, return if true
+            yield break;
+        if (finishedAttack)
+            yield break;
+
         // Store the current move speed
         float currentMoveSpeed = moveSpeed;
 
@@ -118,18 +146,35 @@ public class EnemyBehavior : MonoBehaviour
 
         //Debug.Log("Setting movespeed to zero");
         inHitStun = true;
-        navMeshAgent.enabled = false;
+        if (animator != null)
+        {
+            animator.SetBool("inHitStun", true);
+        }
+        if (navMeshAgent != null)
+        {
+     
+            navMeshAgent.enabled = false;
+            //navMeshAgent.isStopped = true;
+        }
+        
         moveSpeed = 0;
 
         yield return new WaitForSeconds(moveStopDuration);
+        if (animator != null)
+        {
+            animator.SetBool("inHitStun", false);
+        }
 
-        
         moveSpeed = currentMoveSpeed;
         if (!EnemyReceiveDamage.isDead)
         {
-            navMeshAgent.enabled = true;
+            if (navMeshAgent != null)
+            {
+                navMeshAgent.enabled = true;
+                //navMeshAgent.isStopped = false;
+            }
         }
-        inHitStun = false;
+        inHitStun = false; 
     }
 
 }

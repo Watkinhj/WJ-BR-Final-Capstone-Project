@@ -8,6 +8,7 @@ public class RangedEnemyBehavior : MonoBehaviour
     public float damage;
     public float projectileForce;
     public float cooldown;
+    private Animator animator;
 
     private bool canShoot = true; // Track if the enemy can shoot
 
@@ -15,6 +16,7 @@ public class RangedEnemyBehavior : MonoBehaviour
     {
         //StartCoroutine(ShootCooldown());
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        animator = GetComponent<Animator>(); // Get the Animator component
     }
 
     public IEnumerator ShootCooldown()
@@ -24,8 +26,13 @@ public class RangedEnemyBehavior : MonoBehaviour
             if (canShoot && player != null)
             {
                 Shoot();
-                //Debug.Log("Shooting player");
+                animator.SetTrigger("isAttacking"); // Set isAttacking to true before starting the animation
                 canShoot = false; // Prevent shooting during cooldown
+
+                // Wait for a short duration to ensure the animation has completed
+                yield return new WaitForSeconds(0.1f); // animation time
+
+                animator.SetBool("isAttacking", false); // Set isAttacking to false immediately after animation completes
                 yield return new WaitForSeconds(cooldown);
                 canShoot = true; // Allow shooting again after cooldown
             }

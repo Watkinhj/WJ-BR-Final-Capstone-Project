@@ -590,8 +590,8 @@ Transform:
   m_GameObject: {fileID: 6716873416367197067}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.26, y: 0.03, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7142639758934100186}
@@ -640,7 +640,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1929861556, guid: 5065a293e0f6f434398e0b28086e7e32, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5c87e30e6ddf5164ebb65a4867489c30, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -659,9 +659,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6716873416367197067}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3fbf2826ee31e2b46be5d3b04ad53edc, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3335d863483d6224fbb12d2ce8d79c36, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -730,10 +730,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  maxHealth: 100
+  maxHealth: 200
   healthBar: {fileID: 278164749631339742}
   healthBarSlider: {fileID: 8603243075248238720}
   lootDrop: {fileID: 6987884735487663896, guid: 0f8604155f011144980347573d4df5cb, type: 3}
+  isBurning: 0
 --- !u!50 &8698891439226236796
 Rigidbody2D:
   serializedVersion: 4
