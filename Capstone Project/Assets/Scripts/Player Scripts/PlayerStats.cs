@@ -127,8 +127,11 @@ public class PlayerStats : MonoBehaviour
 
     private void SetHealthUI()
     {
-        healthSlider.value = CalculateHealthPercentage();
-        healthText.text = Mathf.Ceil(health).ToString() + " / " + Mathf.Ceil(maxHealth).ToString();
+        if(healthSlider != null)
+        {
+            healthSlider.value = CalculateHealthPercentage();
+            healthText.text = Mathf.Ceil(health).ToString() + " / " + Mathf.Ceil(maxHealth).ToString();
+        }
     }
 
 
@@ -183,8 +186,10 @@ public class PlayerStats : MonoBehaviour
 
     private void SetAmmoUI()
     {
-        ammoText.text = "Ammo: " + PlayerProjectile.currentAmmo + "/" + maxAmmo;
-
+        if (ammoText != null)
+        {
+            ammoText.text = "Ammo: " + PlayerProjectile.currentAmmo + "/" + maxAmmo;
+        }
     }
 
     private void SetMeleeSpeed()
