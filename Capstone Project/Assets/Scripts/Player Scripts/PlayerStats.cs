@@ -184,6 +184,11 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public void UpdateCurrency()
+    {
+        currencyValue.text = "Credits: " + credits.ToString();
+    }
+
     private void SetAmmoUI()
     {
         if (ammoText != null)

@@ -53,6 +53,7 @@ public class ItemBox : MonoBehaviour
                 Debug.Log("Player pressed 'E' inside the trigger area.");
                 SpawnRandomItem();
                 PlayerStats.playerStats.credits -= ItemBoxCost;
+                PlayerStats.playerStats.UpdateCurrency();
                 Destroy(gameObject);
             }
         }

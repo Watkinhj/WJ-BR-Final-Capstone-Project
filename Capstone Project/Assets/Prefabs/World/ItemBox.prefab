@@ -597,7 +597,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.6666667, y: 1.3541666}
+    oldSize: {x: 0.8, y: 1.625}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -623,9 +623,15 @@ MonoBehaviour:
   - {fileID: 6563487283713457639, guid: 900fc23330cb07b4ea9d3d2743e6756a, type: 3}
   - {fileID: 6563487283713457639, guid: c5aad3239c1711e4aa639ba95b300b70, type: 3}
   - {fileID: 6563487283713457639, guid: c8d833102ec9d89418beba3b3f8978d9, type: 3}
+  - {fileID: 7205785286684592644, guid: c7b4dcb41c32e7f408d718ddb700220a, type: 3}
+  - {fileID: 7205785286684592644, guid: bb87b186ddfd18a428cfbc838244a300, type: 3}
+  - {fileID: 7205785286684592644, guid: 03e7476a0e4f08545913ed7ec0814695, type: 3}
+  - {fileID: 7205785286684592644, guid: bec1619a6cfc75b42a62f628560ba0c6, type: 3}
+  - {fileID: 7205785286684592644, guid: 863592a03c066794798ec79759faf64e, type: 3}
+  - {fileID: 7205785286684592644, guid: cd14d8ef6bbfa5349921da60f249cb6c, type: 3}
   ItemBoxPopup: {fileID: 9029845679821454723}
   ItemBoxText: {fileID: 6005769646817502651}
-  ItemBoxCost: 30
+  ItemBoxCost: 20
 --- !u!95 &-7514025431309492397
 Animator:
   serializedVersion: 5

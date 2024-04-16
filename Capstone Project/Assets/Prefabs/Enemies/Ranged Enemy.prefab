@@ -730,7 +730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  maxHealth: 200
+  maxHealth: 150
   healthBar: {fileID: 278164749631339742}
   healthBarSlider: {fileID: 8603243075248238720}
   lootDrop: {fileID: 6987884735487663896, guid: 0f8604155f011144980347573d4df5cb, type: 3}
@@ -780,6 +780,7 @@ MonoBehaviour:
   detectionZone: {fileID: 5386136138676681713}
   rb: {fileID: 0}
   moveStopDuration: 1
+  inHitStun: 0
   navMeshAgent: {fileID: 7950770263228880360}
 --- !u!114 &1755441893251802785
 MonoBehaviour:

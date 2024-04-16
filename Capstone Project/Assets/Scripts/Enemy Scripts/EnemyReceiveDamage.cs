@@ -19,6 +19,18 @@ public class EnemyReceiveDamage : MonoBehaviour
 
     public bool isBurning;
 
+    private bool isDamaged = false;
+
+    public bool IsDamaged()
+    {
+        return isDamaged;
+    }
+
+    public void SetDamaged(bool value)
+    {
+        isDamaged = value;
+    }
+
     private void Start()
     {
         health = maxHealth;

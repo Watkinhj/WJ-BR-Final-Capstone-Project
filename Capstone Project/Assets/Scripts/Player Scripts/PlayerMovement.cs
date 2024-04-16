@@ -20,7 +20,8 @@ public class PlayerMovement : MonoBehaviour
     public float dashDuration = 1f;
     public static float dashCooldown = 1f;
     public static float dashStartTime;
-    
+    public MeleeHitbox meleeHitbox;
+
 
 
     private void Start()
@@ -157,6 +158,11 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("isAttacking", false); // Stop attacking
         }
+    }
+
+    public void EndAttack()
+    {
+        meleeHitbox.ResetDamagedEnemies();
     }
 
     private void SetAnimatorMovement(Vector2 direction)

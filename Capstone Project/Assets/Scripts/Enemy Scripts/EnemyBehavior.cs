@@ -12,7 +12,7 @@ public class EnemyBehavior : MonoBehaviour
     public DetectionZone detectionZone;
     public Rigidbody2D rb;
     public float moveStopDuration = 1f;
-    bool inHitStun = false;
+    public bool inHitStun = false;
     bool isInRange;
     bool finishedAttack;
 
@@ -34,39 +34,38 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (navMeshAgent != null)
         {
-            if (detectionZone.detectedObjs.Count > 0)
+            if (detectionZone != null)
             {
-                if (!inHitStun) //If Enemy is not stunned, move towards them
+                if (detectionZone.detectedObjs.Count > 0)
                 {
-                    Transform playerTransform = detectionZone.detectedObjs[0].transform; // Assuming the first detected object is the player
-
-                    Vector2 playerPosition = new Vector2(playerTransform.position.x, playerTransform.position.y);
-                    if (navMeshAgent != null)
+                    if (!inHitStun) //If Enemy is not stunned, move towards them
                     {
-                        navMeshAgent.SetDestination(playerPosition);
+                        Transform playerTransform = detectionZone.detectedObjs[0].transform; // Assuming the first detected object is the player
 
-                        navMeshAgent.speed = moveSpeed;
+                        Vector2 playerPosition = new Vector2(playerTransform.position.x, playerTransform.position.y);
+                        if (navMeshAgent != null)
+                        {
+                            navMeshAgent.SetDestination(playerPosition);
+
+                            navMeshAgent.speed = moveSpeed;
+                        }
+
+                        float horizontalMovement = navMeshAgent.velocity.x;
+                        animator.SetFloat("xDir", horizontalMovement);
+
+                        if (isRangedEnemy) //if it's a ranged enemy, activate the firing projectile coroutine from RangedEnemyBehavior
+                        {
+                            RangedEnemyBehavior rangedEnemyBehavior = GetComponent<RangedEnemyBehavior>();
+                            if (rangedEnemyBehavior != null)
+                            {
+                                StartCoroutine(rangedEnemyBehavior.ShootCooldown());
+                            }
+                        }
                     }
-
-                    float horizontalMovement = navMeshAgent.velocity.x;
-                    animator.SetFloat("xDir", horizontalMovement);
-
-                    if (isRangedEnemy) //if it's a ranged enemy, activate the firing projectile coroutine from RangedEnemyBehavior
+                    else
                     {
-                        RangedEnemyBehavior rangedEnemyBehavior = GetComponent<RangedEnemyBehavior>();
-                        if (rangedEnemyBehavior != null)
-                        {
-                            StartCoroutine(rangedEnemyBehavior.ShootCooldown());
-                        }
-                        else
-                        {
-                            Debug.LogError("RangedEnemyBehavior component not found on this GameObject!");
-                        }
+                        return;
                     }
-                }
-                else
-                {
-                    return;
                 }
             }
         }
@@ -96,6 +95,11 @@ public class EnemyBehavior : MonoBehaviour
                 animator.SetBool("isAttacking", false);
             }
         }
+    }
+
+    public bool IsInHitStun()
+    {
+        return inHitStun;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -139,12 +143,8 @@ public class EnemyBehavior : MonoBehaviour
         if (finishedAttack)
             yield break;
 
-        // Store the current move speed
         float currentMoveSpeed = moveSpeed;
 
-        //GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-
-        //Debug.Log("Setting movespeed to zero");
         inHitStun = true;
         if (animator != null)
         {

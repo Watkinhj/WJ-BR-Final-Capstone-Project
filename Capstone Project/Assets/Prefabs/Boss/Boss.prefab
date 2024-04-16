@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 6489458427788952438}
   - component: {fileID: 6572531069728111440}
   - component: {fileID: 5039660842546388526}
+  - component: {fileID: 1130298179225203016}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Enemy
@@ -242,7 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRangedEnemy: 0
-  damage: 10
+  damage: 20
   moveSpeed: 3
   rb: {fileID: 4797909616904029500}
   navMeshAgent: {fileID: 6489458427788952438}
@@ -344,12 +345,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7cd772b750f9e4b82e992eeec51178, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1000
-  maxHealth: 1000
+  health: 1500
+  maxHealth: 1500
   healthBar: {fileID: 7924541224305957333}
   healthBarSlider: {fileID: 2316857636892571870}
   lootDrop: {fileID: 0}
   isBurning: 0
+--- !u!114 &1130298179225203016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4690609361584939607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 629a77eaa3709924faf5424717969eae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isRangedEnemy: 0
+  damage: 2
+  moveSpeed: 1000
+  detectionZone: {fileID: 0}
+  rb: {fileID: 4797909616904029500}
+  moveStopDuration: 0.1
+  inHitStun: 0
+  navMeshAgent: {fileID: 6489458427788952438}
 --- !u!1 &5701876911520493087
 GameObject:
   m_ObjectHideFlags: 0

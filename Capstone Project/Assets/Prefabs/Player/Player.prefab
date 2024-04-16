@@ -131,6 +131,7 @@ MonoBehaviour:
   dashRange: 0
   dashSpeed: 20
   dashDuration: 0.1
+  meleeHitbox: {fileID: 7249301703659754054}
 --- !u!50 &323839148241164995
 Rigidbody2D:
   serializedVersion: 4

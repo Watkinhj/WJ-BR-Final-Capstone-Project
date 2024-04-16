@@ -37,7 +37,7 @@ public class BossAI : MonoBehaviour
         while (true)
         {
             BossTelegraphs.text = "Idle State".ToString();
-            yield return new WaitForSeconds(5f); // Wait for 5 seconds in idle state
+            yield return new WaitForSeconds(3f); // Wait for 5 seconds in idle state
 
             // Decide which attack to perform
             int attackChoice = Random.Range(0, 3); // Randomly choose between charge attack, ground slam, and melee attack
@@ -74,22 +74,6 @@ public class BossAI : MonoBehaviour
                 StartMeleeAttack();
                 BossTelegraphs.text = "Melee Attack!".ToString();
                 yield return new WaitForSeconds(3f); // Wait between each dash
-                /*
-                if (isMeleeAttacking) // Check if melee attack is still ongoing
-                {
-                    PerformMeleeAttack(); // Perform melee attack if player is within range
-                }
-                yield return new WaitForSeconds(1f); // Wait between each dash
-                if (isMeleeAttacking) // Check if melee attack is still ongoing
-                {
-                    PerformMeleeAttack(); // Perform melee attack if player is within range
-                }
-                yield return new WaitForSeconds(1f); // Wait between each dash
-                if (isMeleeAttacking) // Check if melee attack is still ongoing
-                {
-                    PerformMeleeAttack(); // Perform melee attack if player is within range
-                }
-                */
                 Debug.Log("Melee Attack Finished.");
                 StopMeleeAttack();
             }

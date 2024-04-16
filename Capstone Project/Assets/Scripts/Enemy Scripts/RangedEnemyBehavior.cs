@@ -23,7 +23,7 @@ public class RangedEnemyBehavior : MonoBehaviour
     {
         while (true)
         {
-            if (canShoot && player != null)
+            if (canShoot && player != null && !GetComponent<EnemyBehavior>().IsInHitStun())
             {
                 Shoot();
                 animator.SetTrigger("isAttacking"); // Set isAttacking to true before starting the animation
@@ -36,7 +36,10 @@ public class RangedEnemyBehavior : MonoBehaviour
                 yield return new WaitForSeconds(cooldown);
                 canShoot = true; // Allow shooting again after cooldown
             }
-            yield return null;
+            else
+            {
+                yield return null; // Pause the coroutine if in hit stun or player is null
+            }
         }
     }
 
