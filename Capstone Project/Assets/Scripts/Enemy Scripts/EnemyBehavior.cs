@@ -22,12 +22,20 @@ public class EnemyBehavior : MonoBehaviour
 
     public NavMeshAgent navMeshAgent;
 
+    private RangedEnemyBehavior rangedEnemyBehavior; // Reference to RangedEnemyBehavior script
+
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
         animator = GetComponent<Animator>(); // Get the Animator component
+
+        if (isRangedEnemy)
+        {
+            rangedEnemyBehavior = GetComponent<RangedEnemyBehavior>(); // Get RangedEnemyBehavior component
+        }
     }
 
     private void FixedUpdate()
@@ -55,7 +63,6 @@ public class EnemyBehavior : MonoBehaviour
 
                         if (isRangedEnemy) //if it's a ranged enemy, activate the firing projectile coroutine from RangedEnemyBehavior
                         {
-                            RangedEnemyBehavior rangedEnemyBehavior = GetComponent<RangedEnemyBehavior>();
                             if (rangedEnemyBehavior != null)
                             {
                                 StartCoroutine(rangedEnemyBehavior.ShootCooldown());
@@ -77,16 +84,19 @@ public class EnemyBehavior : MonoBehaviour
         {
             if (isInRange)
             {
-                if (animator != null)
+                if (!inHitStun)
                 {
-                    Debug.Log("Running attack anim");
-                    animator.SetBool("isAttacking", true);
-                }
-                PlayerStats.playerStats.DealDamage(damage);
-                yield return new WaitForSeconds(0.25f);
-                if (animator != null)
-                {
-                    animator.SetBool("isAttacking", false);
+                    if (animator != null)
+                    {
+                        Debug.Log("Running attack anim");
+                        animator.SetBool("isAttacking", true);
+                    }
+                    PlayerStats.playerStats.DealDamage(damage);
+                    yield return new WaitForSeconds(0.25f);
+                    if (animator != null)
+                    {
+                        animator.SetBool("isAttacking", false);
+                    }
                 }
             }
             yield return new WaitForSeconds(1f);
@@ -150,13 +160,12 @@ public class EnemyBehavior : MonoBehaviour
         {
             animator.SetBool("inHitStun", true);
         }
-        if (navMeshAgent != null)
+        if (navMeshAgent != null && navMeshAgent.isActiveAndEnabled && navMeshAgent.isOnNavMesh)
         {
-     
-            navMeshAgent.enabled = false;
-            //navMeshAgent.isStopped = true;
+            // Stop the NavMeshAgent if it's active and placed on the NavMesh
+            navMeshAgent.isStopped = true;
         }
-        
+
         moveSpeed = 0;
 
         yield return new WaitForSeconds(moveStopDuration);
@@ -168,13 +177,14 @@ public class EnemyBehavior : MonoBehaviour
         moveSpeed = currentMoveSpeed;
         if (!EnemyReceiveDamage.isDead)
         {
-            if (navMeshAgent != null)
+            if (navMeshAgent != null && navMeshAgent.isActiveAndEnabled && navMeshAgent.isOnNavMesh)
             {
-                navMeshAgent.enabled = true;
-                //navMeshAgent.isStopped = false;
+                // Resume NavMeshAgent movement if it's active and placed on the NavMesh
+                navMeshAgent.isStopped = false;
             }
         }
         inHitStun = false; 
     }
+
 
 }

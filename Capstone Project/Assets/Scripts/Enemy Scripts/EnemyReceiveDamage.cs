@@ -16,6 +16,7 @@ public class EnemyReceiveDamage : MonoBehaviour
     public static bool isDead;
 
     public GameObject lootDrop;
+    public GameObject healthDrop;
 
     public bool isBurning;
 
@@ -70,9 +71,14 @@ public class EnemyReceiveDamage : MonoBehaviour
         {
             isDead = true;
             Destroy(gameObject);
-            if (lootDrop != null) //If they can drop currency
+            if (lootDrop != null) //If they can drop stuff
             {
                 Instantiate(lootDrop, transform.position, Quaternion.identity);
+                float randomChance = Random.Range(0f, 1f);
+                if (randomChance <= 0.4f)
+                {
+                    Instantiate(healthDrop, transform.position, Quaternion.identity);
+                }
             }
         }
     }

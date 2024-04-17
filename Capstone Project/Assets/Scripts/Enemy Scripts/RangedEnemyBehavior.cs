@@ -23,8 +23,9 @@ public class RangedEnemyBehavior : MonoBehaviour
     {
         while (true)
         {
-            if (canShoot && player != null && !GetComponent<EnemyBehavior>().IsInHitStun())
+            if (canShoot && player != null)
             {
+                if (!GetComponent<EnemyBehavior>().IsInHitStun())
                 Shoot();
                 animator.SetTrigger("isAttacking"); // Set isAttacking to true before starting the animation
                 canShoot = false; // Prevent shooting during cooldown

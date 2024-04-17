@@ -9,6 +9,8 @@ public class EnemySpawner : MonoBehaviour
     public float spawnRate;
     public Tilemap walkableTilemap; // Assign your walkable tilemap here
     public int maxEnemies = 10; // Maximum number of enemies allowed on the map
+    public GameObject player; // Reference to the player GameObject
+    public float spawnRadius = 5f; // Radius within which enemies can spawn around the player
 
     private BoundsInt walkableBounds;
     private int currentEnemyCount = 0;
@@ -23,8 +25,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if (currentEnemyCount < maxEnemies)
         {
-            Vector3Int randomCell = GetRandomWalkableCell();
-            Vector3 spawnPos = walkableTilemap.CellToWorld(randomCell) + new Vector3(0.5f, 0.5f, 0f); // Center of the cell
+            Vector3 spawnPos = GetRandomSpawnPositionAroundPlayer();
 
             int randomEnemyIndex = Random.Range(0, Enemies.Count); // Randomly select an index from 0 to the count of enemies
             GameObject enemyPrefab = Enemies[randomEnemyIndex]; // Get the enemy GameObject corresponding to the random index
@@ -37,21 +38,60 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(SpawnEnemy());
     }
 
-    Vector3Int GetRandomWalkableCell()
+    Vector3 GetRandomSpawnPositionAroundPlayer()
     {
-        Vector3Int randomCell = new Vector3Int(Random.Range(walkableBounds.xMin, walkableBounds.xMax),
-                                                Random.Range(walkableBounds.yMin, walkableBounds.yMax),
-                                                0);
+        Vector2 randomDirection = Random.insideUnitCircle.normalized * spawnRadius;
+        Vector3 spawnPos = player.transform.position + new Vector3(randomDirection.x, randomDirection.y, 0);
+        Vector3Int cellPos = walkableTilemap.WorldToCell(spawnPos);
 
-        TileBase tile = walkableTilemap.GetTile(randomCell);
-        while (tile == null) // Keep trying until a walkable tile is found
+        if (walkableTilemap.GetTile(cellPos) == null) // If the cell is not walkable, find the nearest walkable cell
         {
-            randomCell = new Vector3Int(Random.Range(walkableBounds.xMin, walkableBounds.xMax),
-                                        Random.Range(walkableBounds.yMin, walkableBounds.yMax),
-                                        0);
-            tile = walkableTilemap.GetTile(randomCell);
+            cellPos = FindNearestWalkableCell(cellPos);
+            spawnPos = walkableTilemap.CellToWorld(cellPos) + new Vector3(0.5f, 0.5f, 0f); // Center of the cell
         }
 
-        return randomCell;
+        return spawnPos;
+    }
+
+    Vector3Int FindNearestWalkableCell(Vector3Int startCell)
+    {
+        Queue<Vector3Int> queue = new Queue<Vector3Int>();
+        HashSet<Vector3Int> visited = new HashSet<Vector3Int>();
+
+        queue.Enqueue(startCell);
+        visited.Add(startCell);
+
+        while (queue.Count > 0)
+        {
+            Vector3Int currentCell = queue.Dequeue();
+
+            if (walkableTilemap.GetTile(currentCell) != null)
+                return currentCell;
+
+            // Explore neighbors
+            foreach (Vector3Int neighbor in GetNeighbors(currentCell))
+            {
+                if (!visited.Contains(neighbor))
+                {
+                    queue.Enqueue(neighbor);
+                    visited.Add(neighbor);
+                }
+            }
+        }
+
+        // If no walkable cell is found, return the original startCell
+        return startCell;
+    }
+
+    List<Vector3Int> GetNeighbors(Vector3Int cell)
+    {
+        List<Vector3Int> neighbors = new List<Vector3Int>();
+
+        neighbors.Add(cell + new Vector3Int(1, 0, 0));
+        neighbors.Add(cell + new Vector3Int(-1, 0, 0));
+        neighbors.Add(cell + new Vector3Int(0, 1, 0));
+        neighbors.Add(cell + new Vector3Int(0, -1, 0));
+
+        return neighbors;
     }
 }
