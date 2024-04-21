@@ -5,8 +5,9 @@ using UnityEngine;
 public class MeleeHitbox : MonoBehaviour
 {
     public PlayerStats player;
+    public GameObject playerTransform;
     public float damage;
-    public float knockbackForce = 1;
+    //public float knockbackForce = 1;
 
     // List to keep track of enemies already damaged in the current attack
     private List<EnemyReceiveDamage> damagedEnemies = new List<EnemyReceiveDamage>();
@@ -28,8 +29,9 @@ public class MeleeHitbox : MonoBehaviour
                 Rigidbody2D enemyRigidbody = collision.GetComponent<Rigidbody2D>();
                 if (enemyRigidbody != null)
                 {
-                    Vector2 knockbackDirection = (collision.transform.position - transform.position).normalized;
-                    enemyRigidbody.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+                    
+                    Vector2 knockbackDirection = (collision.transform.position - playerTransform.transform.position).normalized;
+                    enemyRigidbody.AddForce(knockbackDirection * player.knockbackForce, ForceMode2D.Impulse);
                 }
 
                 BossAI bossBehavior = collision.GetComponent<BossAI>();

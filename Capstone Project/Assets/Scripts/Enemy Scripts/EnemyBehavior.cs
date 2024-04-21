@@ -88,7 +88,6 @@ public class EnemyBehavior : MonoBehaviour
                 {
                     if (animator != null)
                     {
-                        Debug.Log("Running attack anim");
                         animator.SetBool("isAttacking", true);
                     }
                     PlayerStats.playerStats.DealDamage(damage);

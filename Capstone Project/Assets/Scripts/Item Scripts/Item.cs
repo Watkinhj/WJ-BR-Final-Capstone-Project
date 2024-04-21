@@ -199,6 +199,23 @@ public class ReadingGlasses : Item
         {
             Debug.Log("crit proc! " + critChance);
             enemy.DealDamage(player.damage);
+
+            // Check if the player has SugaredSoda for additional healing
+            bool hasSugaredSoda = false;
+            int sugaredSodaStacks = 0;
+            foreach (ItemList item in player.items)
+            {
+                if (item.item.GetType() == typeof(SugaredSoda))
+                {
+                    hasSugaredSoda = true;
+                    sugaredSodaStacks += item.stacks;
+                }
+            }
+
+            if (hasSugaredSoda)
+            {
+                player.HealCharacter(6 + (1 * sugaredSodaStacks));
+            }
         }
     }
 }
@@ -300,6 +317,326 @@ public class MarksChiliPowder : Item
         player.burnMultiplier = player.burnMultiplier + (1 * stacks);
         player.isBurnSpreadable = true;
         Debug.Log (player.burnMultiplier);
+    }
+}
+
+public class DoubleSidedTape : Item
+{
+    private float slowChance;
+    private float originalSpeed;
+    public override string GiveName()
+    {
+        return "Double Sided Tape";
+    }
+
+    public override string GiveDescription()
+    {
+        return "Chance to temporarily slow enemies on hit.";
+    }
+
+    public override void OnHit(PlayerStats player, EnemyReceiveDamage enemy, int stacks)
+    {
+        slowChance = 0.05f + (0.1f * stacks);
+        EnemyBehavior enemyBehavior = enemy.GetComponent<EnemyBehavior>();
+        if (enemyBehavior != null)
+        {
+            // Only set originalSpeed if it hasn't been set yet
+            if (originalSpeed == 0)
+            {
+                originalSpeed = enemyBehavior.moveSpeed;
+            }
+
+            if (Random.value <= slowChance)
+            {
+                player.StartCoroutine(SlowEnemy(player, enemyBehavior, stacks));
+            }
+                
+        }
+        else
+        {
+            Debug.Log("enemyBehavior not found!");
+        }
+    }
+
+private IEnumerator SlowEnemy(PlayerStats player, EnemyBehavior enemy, int stacks)
+    {
+        enemy.moveSpeed /= 2;
+        Debug.Log("Setting enemy move speed to half");
+
+        //Wait 5 seconds
+        yield return new WaitForSeconds(5f);
+
+        // Return the enemy's speed to normal
+        Debug.Log("Setting enemy move speed to original");
+        enemy.moveSpeed = originalSpeed;
+    }
+}
+
+public class BubbleWrap : Item
+{
+    private float damageReductionPercentage = 0.05f;
+    public override string GiveName()
+    {
+        return "Bubble Wrap";
+    }
+
+    public override string GiveDescription()
+    {
+        return "Increases Damage Resistance by 5%.";
+    }
+
+    public override void OnPickup(PlayerStats player, int stacks)
+    {
+        damageReductionPercentage = 0.05f * stacks;
+        player.damageReductionPercentage += damageReductionPercentage;
+    }
+}
+
+public class FaultyHardDrive : Item
+{
+    private float shockChance;
+    private const float shockDamagePercentage = 0.6f;
+    public override string GiveName()
+    {
+        return "Faulty Hard Drive";
+    }
+
+    public override string GiveDescription()
+    {
+        return "Chance to do shock damage that chains to nearby enemies.";
+    }
+    public override void OnHit(PlayerStats player, EnemyReceiveDamage enemy, int stacks)
+    {
+        shockChance = (0.1f + (0.1f * stacks));
+        if (Random.value <= shockChance) // Check if the shock chance is activated
+        {
+            Debug.Log("shock proc!");
+            //shock the enemy for 60% of base damage
+            enemy.DealDamage(player.damage * shockDamagePercentage);
+            //Find nearby enemies to the enemy
+            Collider2D[] nearbyEnemies = Physics2D.OverlapCircleAll(enemy.transform.position, 5f); // Adjust radius as needed
+            foreach (Collider2D col in nearbyEnemies)
+            {
+                EnemyReceiveDamage nearbyEnemy = col.GetComponent<EnemyReceiveDamage>();
+                if (nearbyEnemy != null && nearbyEnemy != enemy) // Excludes the initial enemy
+                {
+                    nearbyEnemy.DealDamage(player.damage + (player.damage * shockDamagePercentage));
+                }
+            }
+        }
+    }
+}
+
+public class PerformanceBoosters : Item
+{
+    public override string GiveName()
+    {
+        return "Performance Boosters";
+    }
+
+    public override string GiveDescription()
+    {
+        return "Heals a small amount on hit.";
+    }
+
+    public override void OnHit(PlayerStats player, EnemyReceiveDamage enemy, int stacks)
+    {
+        player.HealCharacter(1 + (1 * stacks));
+    }
+}
+
+public class SugaredSoda : Item
+{
+    public override string GiveName()
+    {
+        return "Sugared Soda";
+    }
+
+    public override string GiveDescription()
+    {
+        return "Heal for every critical hit.";
+    }
+
+    //functionality is stored in the readingglasses item.
+}
+
+public class LightweightCoat : Item
+{
+    public override string GiveName()
+    {
+        return "Lightweight Coat";
+    }
+
+    public override string GiveDescription()
+    {
+        return "Gives a chance to dodge incoming damage.";
+    }
+
+    public override void OnPickup(PlayerStats player, int stacks)
+    {
+        player.UpdateLightweightCoatStatus();
+    }
+}
+
+public class SavingsJar : Item
+{
+    public override string GiveName()
+    {
+        return "Savings Jar";
+    }
+
+    public override string GiveDescription()
+    {
+        return "Increases your credit gain by 15%.";
+    }
+
+    //functionality is stored in the playerstats script. 
+}
+
+public class MakeshiftSlingshot : Item
+{
+    private float additionalProjectileChance;
+    public override string GiveName()
+    {
+        return "Makeshift Slingshot";
+    }
+
+    public override string GiveDescription()
+    {
+        return "Gives a chance to fire an additional projectile on hit.";
+    }
+
+    public override void OnHit(PlayerStats player, EnemyReceiveDamage enemy, int stacks)
+    {
+        additionalProjectileChance = 0.1f + (0.05f * stacks);
+        if (Random.value <= additionalProjectileChance)
+        {
+            // Find the player GameObject
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+            if (playerObject != null)
+            {
+                // Get the PlayerProjectile component from the player GameObject
+                PlayerProjectile playerProjectile = playerObject.GetComponent<PlayerProjectile>();
+                if (playerProjectile != null)
+                {
+                    // Call the FireAdditionalProjectile method
+                    playerProjectile.FireAdditionalProjectile(playerProjectile.minDamage, playerProjectile.maxDamage, playerProjectile.projectileForce);
+                }
+                else
+                {
+                    Debug.LogWarning("PlayerProjectile component not found on player GameObject.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Player GameObject not found.");
+            }
+        }
+    }
+}
+
+public class BigRedBinder : Item
+{
+    public override string GiveName()
+    {
+        return "Big Red Binder";
+    }
+
+    public override string GiveDescription()
+    {
+        return "Chance to reflect incoming damage.";
+    }
+}
+
+public class LuckyPen : Item
+{
+    public override string GiveName()
+    {
+        return "Lucky Pen";
+    }
+
+    public override string GiveDescription()
+    {
+        return "You feel very lucky.";
+    }
+}
+
+public class TimeCard : Item
+{
+    public override string GiveName()
+    {
+        return "Time Card";
+    }
+
+    public override string GiveDescription()
+    {
+        return "Receive an increase to ALL STATS at 5:00.";
+    }
+}
+
+public class SensitiveFiles : Item
+{
+    public override string GiveName()
+    {
+        return "Sensitive Files";
+    }
+
+    public override string GiveDescription()
+    {
+        return "Your critical damage is DOUBLED.";
+    }
+}
+
+public class PinkSlip : Item
+{
+    public override string GiveName()
+    {
+        return "Pink Slip";
+    }
+
+    public override string GiveDescription()
+    {
+        return "Gain a small chance to INSTANTLY KILL any non-boss enemy.";
+    }
+}
+
+public class PrizeGavel : Item
+{
+    public override string GiveName()
+    {
+        return "Prize Gavel";
+    }
+
+    public override string GiveDescription()
+    {
+        return "Increases the strength of all knockback effects.";
+    }
+    public override void OnPickup(PlayerStats player, int stacks)
+    {
+
+        // Apply the damage increase to the player's damage
+        player.knockbackForce = 10 + (2 * stacks);
+    }
+}
+
+public class FavoriteTie : Item
+{
+    public override string GiveName()
+    {
+        return "Favorite Tie";
+    }
+
+    public override string GiveDescription()
+    {
+        return "Oh, I feel GREAT.";
+    }
+
+    public override void OnPickup(PlayerStats player, int stacks)
+    {
+        float damageMultiplier = 1f + (1 * stacks);
+
+        // Apply the damage increase to the player's damage
+        player.damage *= damageMultiplier;
     }
 }
 

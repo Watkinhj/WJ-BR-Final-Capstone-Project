@@ -992,7 +992,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2069993177335164746, guid: fc900307dc577dd4dab1c065a6b9f942, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2685810388524534059, guid: fc900307dc577dd4dab1c065a6b9f942, type: 3}
       propertyPath: m_IsActive
@@ -1241,6 +1241,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 209137095}
   m_CullTransparentMesh: 1
+--- !u!1001 &273852395
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5484634794010439960, guid: 99078f5ca1ffdd240a2c5fcff7a449ca, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.825756
+      objectReference: {fileID: 0}
+    - target: {fileID: 5484634794010439960, guid: 99078f5ca1ffdd240a2c5fcff7a449ca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.3990554
+      objectReference: {fileID: 0}
+    - target: {fileID: 5484634794010439960, guid: 99078f5ca1ffdd240a2c5fcff7a449ca, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5484634794010439960, guid: 99078f5ca1ffdd240a2c5fcff7a449ca, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5484634794010439960, guid: 99078f5ca1ffdd240a2c5fcff7a449ca, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5484634794010439960, guid: 99078f5ca1ffdd240a2c5fcff7a449ca, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5484634794010439960, guid: 99078f5ca1ffdd240a2c5fcff7a449ca, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5484634794010439960, guid: 99078f5ca1ffdd240a2c5fcff7a449ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5484634794010439960, guid: 99078f5ca1ffdd240a2c5fcff7a449ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5484634794010439960, guid: 99078f5ca1ffdd240a2c5fcff7a449ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7205785286684592644, guid: 99078f5ca1ffdd240a2c5fcff7a449ca, type: 3}
+      propertyPath: m_Name
+      value: Prize Gavel
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 99078f5ca1ffdd240a2c5fcff7a449ca, type: 3}
 --- !u!1 &274876505
 GameObject:
   m_ObjectHideFlags: 0
@@ -66206,6 +66263,10 @@ PrefabInstance:
       propertyPath: currencyValue
       value: 
       objectReference: {fileID: 1411448057}
+    - target: {fileID: 8674274880933790255, guid: d48963fe761c03f42bf699df5d51b74b, type: 3}
+      propertyPath: knockbackForce
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -66271,6 +66332,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 179557247}
+    - target: {fileID: 7249301703659754054, guid: 480204d9f3409954287d1deba26b0f8a, type: 3}
+      propertyPath: knockbackForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7249301703659754054, guid: 480204d9f3409954287d1deba26b0f8a, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 1875073822}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -66653,3 +66722,4 @@ SceneRoots:
   - {fileID: 630360124}
   - {fileID: 351137759}
   - {fileID: 680297672}
+  - {fileID: 273852395}

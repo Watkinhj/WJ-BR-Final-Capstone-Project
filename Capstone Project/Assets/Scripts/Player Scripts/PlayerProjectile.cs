@@ -52,6 +52,18 @@ public class PlayerProjectile : MonoBehaviour
         RefillAmmoIfNeeded();
     }
 
+    public void FireAdditionalProjectile(float minDamage, float maxDamage, float projectileForce)
+    {
+        GameObject staple = Instantiate(projectile, transform.position, Quaternion.identity);
+        Rigidbody2D rb = staple.GetComponent<Rigidbody2D>();
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 myPos = transform.position;
+        Vector2 direction = (mousePos - myPos).normalized;
+        rb.velocity = direction * projectileForce;
+        staple.GetComponent<Staple>().damage = Random.Range(minDamage, maxDamage);
+    }
+
+
     IEnumerator RefillAmmo()
     {
         PlayerStats player = gm.GetComponent<PlayerStats>();

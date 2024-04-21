@@ -34,6 +34,17 @@ public class PlayerStats : MonoBehaviour
     public float burnMultiplier = 1;
     public bool isBurnSpreadable;
 
+    //thing that makes bubble wrap work
+    public float damageReductionPercentage = 0f;
+
+    //thing that makes the lightweight coat work
+    private const float baseDodgeChance = 0.1f;
+    private const float additionalDodgePerStack = 0.1f;
+    private bool hasLightweightCoat = false;
+
+    //thing that makes the prive gavel work
+    public float knockbackForce = 10;
+
     private void Awake()
     {
         if (playerStats != null)
@@ -113,7 +124,22 @@ public class PlayerStats : MonoBehaviour
 
     public void DealDamage(float damage)
     {
-        health -= damage;
+        if (hasLightweightCoat)
+        {
+            // Calculate dodge chance based on Lightweight Coat stacks
+            float dodgeChance = baseDodgeChance + (additionalDodgePerStack * GetLightweightCoatStacks());
+
+            // Check if the player dodges the damage
+            if (Random.value <= dodgeChance)
+            {
+                Debug.Log("Player dodges the incoming damage!");
+                return; // Exit the method without taking damage
+            }
+        }
+
+        // Player takes damage if not dodged
+        float fullDamage = damage * (1 - damageReductionPercentage);
+        health -= fullDamage;
         CheckDeath();
         SetHealthUI();
     }
@@ -177,9 +203,33 @@ public class PlayerStats : MonoBehaviour
 
     public void AddCurrency(CurrencyPickup currency)
     {
+        float baseCreditIncreasePercentage = 1.0f; 
+        float additionalCreditIncreasePercentage = 0.10f; 
+
+        float totalCreditIncreasePercentage = baseCreditIncreasePercentage; 
+
+        bool firstSavingsJarStack = true; // Flag to track the first SavingsJar stack
+        foreach (ItemList item in items)
+        {
+            if (item.item.GetType() == typeof(SavingsJar))
+            {
+                if (firstSavingsJarStack)
+                {
+                    totalCreditIncreasePercentage += 0.15f;
+                    firstSavingsJarStack = false; 
+                }
+                else
+                {
+                    totalCreditIncreasePercentage += additionalCreditIncreasePercentage;
+                }
+            }
+        }
+
         if (currency.currentObject == CurrencyPickup.PickupObject.COIN)
         {
-            credits += currency.pickupQuantity;
+            // Apply credit increase percentage to the received credits
+            int increasedCredits = Mathf.RoundToInt(currency.pickupQuantity * totalCreditIncreasePercentage);
+            credits += increasedCredits;
             currencyValue.text = "Credits: " + credits.ToString();
         }
     }
@@ -201,4 +251,23 @@ public class PlayerStats : MonoBehaviour
     {
         animator.SetFloat("attackSpeed", meleeSpeed);
     }
+
+    private int GetLightweightCoatStacks()
+    {
+        int coatStacks = 0;
+        foreach (ItemList item in items)
+        {
+            if (item.item.GetType() == typeof(LightweightCoat))
+            {
+                coatStacks += item.stacks;
+            }
+        }
+        return coatStacks;
+    }
+
+    public void UpdateLightweightCoatStatus()
+    {
+        hasLightweightCoat = true;
+    }
+
 }

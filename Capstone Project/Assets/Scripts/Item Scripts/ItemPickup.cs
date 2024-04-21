@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor.Search;
 using UnityEngine;
 using static MicrowaveSoup;
@@ -94,6 +95,36 @@ public class ItemPickup : MonoBehaviour
                 return new CupOfCoffee();
             case Items.MarksChiliPowder:
                 return new MarksChiliPowder();
+            case Items.DoubleSidedTape:
+                return new DoubleSidedTape();
+            case Items.BubbleWrap:
+                return new BubbleWrap();
+            case Items.FaultyHardDrive:
+                return new FaultyHardDrive();
+            case Items.PerformanceBoosters:
+                return new PerformanceBoosters();
+            case Items.SugaredSoda:
+                return new SugaredSoda();
+            case Items.LightweightCoat:
+                return new LightweightCoat();
+            case Items.SavingsJar:
+                 return new SavingsJar();
+            case Items.MakeshiftSlingshot:
+                return new MakeshiftSlingshot();
+            case Items.BigRedBinder:
+                return new BigRedBinder();
+            case Items.LuckyPen:
+                return new LuckyPen();
+            case Items.TimeCard:
+                return new TimeCard();
+            case Items.SensitiveFiles:
+                return new SensitiveFiles();
+            case Items.PinkSlip:
+                return new PinkSlip();
+            case Items.PrizeGavel:
+                return new PrizeGavel();
+            case Items.FavoriteTie:
+                return new FavoriteTie();
             default:
                 return new GreenDrink();
 
@@ -113,4 +144,19 @@ public enum Items
     BrandNewStapler,
     CupOfCoffee,
     MarksChiliPowder,
+    DoubleSidedTape,
+    BubbleWrap,
+    FaultyHardDrive,
+    PerformanceBoosters,
+    SugaredSoda,
+    LightweightCoat,
+    SavingsJar,
+    MakeshiftSlingshot,
+    BigRedBinder,
+    LuckyPen,
+    TimeCard,
+    SensitiveFiles,
+    PinkSlip,
+    PrizeGavel,
+    FavoriteTie,
 }
