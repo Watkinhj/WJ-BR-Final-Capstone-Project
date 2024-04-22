@@ -13,7 +13,7 @@ public class PlayerStats : MonoBehaviour
     public GameObject player;
     public TMP_Text healthText;
     public Slider healthSlider;
-    public Slider dashSlider; // Assign this in the Unity Editor
+    public Slider dashSlider; 
     public float health;
     public float maxHealth;
     public int credits;
@@ -44,6 +44,10 @@ public class PlayerStats : MonoBehaviour
 
     //thing that makes the prive gavel work
     public float knockbackForce = 10;
+
+    //thing that makes the time card work
+    public bool is5PM;
+    public bool hasTimeCard;
 
     private void Awake()
     {
@@ -268,6 +272,57 @@ public class PlayerStats : MonoBehaviour
     public void UpdateLightweightCoatStatus()
     {
         hasLightweightCoat = true;
+    }
+
+    public void UpdateTimeCard()
+    {
+        hasTimeCard = true;
+    }
+
+    public void TimeCardCheck()
+    {
+        if (hasTimeCard)
+        {
+            moveSpeed = moveSpeed * 1.5f;
+            maxHealth = maxHealth * 1.5f;
+            damage = damage * 1.5f;
+            meleeSpeed = meleeSpeed * 1.5f;
+            maxAmmo = maxAmmo * 2;
+            rangedCooldown = rangedCooldown / 1.5f;
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    // This method checks for the Lucky Pen and calculates the chance
+    public bool CheckChanceWithLuckyPen(float baseChance)
+    {
+        int luckyPenStacks = 0;
+        foreach (ItemList item in items)
+        {
+            if (item.item.GetType() == typeof(LuckyPen))
+            {
+                luckyPenStacks += item.stacks;
+            }
+        }
+
+        // If the player does not have any Lucky Pen, return the base chance result
+        if (luckyPenStacks == 0)
+        {
+            
+            return Random.value <= baseChance;
+        }
+
+        // If the player has Lucky Pen, allow additional rolls for each stack
+        for (int i = 0; i <= luckyPenStacks; i++)
+        {
+            
+            if (Random.value <= baseChance)
+                return true;
+        }
+        return false;
     }
 
 }

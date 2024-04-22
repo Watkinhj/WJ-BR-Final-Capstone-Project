@@ -36,6 +36,20 @@ public class ItemUIPopup : MonoBehaviour
     {
         itemName = item.GiveName();
         itemDesc = item.GiveDescription();
+
+        //setting color based on rarity
+        switch (item.rarity)
+        {
+            case ItemRarity.Common:
+                itemNameText.color = Color.white; // Color for common items
+                break;
+            case ItemRarity.Uncommon:
+                itemNameText.color = Color.green; // Color for uncommon items
+                break;
+            case ItemRarity.Legendary:
+                itemNameText.color = Color.red; // Color for legendary items
+                break;
+        }
     }
 
     public void SetSprite(Sprite sprite)

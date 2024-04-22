@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5757995452817284879}
   - component: {fileID: 7784183684364946015}
   m_Layer: 0
-  m_Name: Brand New Stapler
+  m_Name: Time Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3cfbd1d90661b7d428fa87b751c8494b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 34de1e530ea49c34c9191ac2f903d488, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283a81948e3595c4e9fef5854c8613be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemDrop: 7
+  itemDrop: 20
   gm: {fileID: 0}
   itemUI: {fileID: 0}
   inventoryUI: {fileID: 0}

@@ -13,6 +13,8 @@ public class TimerController : MonoBehaviour
 
     private bool timerStopped = false;
 
+    public PlayerStats playerStats;
+
     void Start()
     {
         // Set initial time to 9:00 AM
@@ -50,6 +52,8 @@ public class TimerController : MonoBehaviour
                 if (hours == 17 && minutes == 0)
                 {
                     timerStopped = true;
+                    playerStats.is5PM = true;
+                    playerStats.TimeCardCheck();
                     Debug.Log("Timer stopped at 5:00 PM.");
                 }
             }

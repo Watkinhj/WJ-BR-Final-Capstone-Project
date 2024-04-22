@@ -5,8 +5,16 @@ using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 [System.Serializable]
+
+public enum ItemRarity
+{
+    Common,
+    Uncommon,
+    Legendary
+}
 public abstract class Item
 {
+    public ItemRarity rarity;
     public abstract string GiveName();
 
     public abstract string GiveDescription();
@@ -28,6 +36,10 @@ public abstract class Item
 
 public class GreenDrink : Item
 {
+    public GreenDrink()
+    {
+        rarity = ItemRarity.Common; 
+    }
     public override string GiveName()
     {
         return "Green Drink";
@@ -49,6 +61,10 @@ public class MicrowaveSoup : Item
 {
     private float burnChance;
 
+    public MicrowaveSoup()
+    {
+        rarity = ItemRarity.Uncommon;
+    }
     public override string GiveName()
     {
         return "Microwave Soup";
@@ -62,7 +78,7 @@ public class MicrowaveSoup : Item
     public override void OnHit(PlayerStats player, EnemyReceiveDamage enemy, int stacks)
     {
         burnChance = (0.1f + (0.1f * stacks));
-        if (Random.value <= burnChance) // Check if the burn chance is activated
+        if (player.CheckChanceWithLuckyPen(burnChance)) // Check if the burn chance is activated
         {
             Debug.Log("burn proc! Multiplier: " + player.burnMultiplier);
             enemy.isBurning = true;
@@ -119,6 +135,10 @@ public class SackLunch : Item
 {
     private const int maxHealthIncreasePerStack = 20; // Fixed amount of maximum health increase per stack
 
+    public SackLunch()
+    {
+        rarity = ItemRarity.Common;
+    }
     public override string GiveName()
     {
         return "Sack Lunch";
@@ -140,6 +160,11 @@ public class SackLunch : Item
 public class PackOfStaples : Item
 {
     private const float speedIncreasePerStack = 0.075f;
+
+    public PackOfStaples()
+    {
+        rarity = ItemRarity.Common;
+    }
     public override string GiveName()
     {
         return "Pack of Staples";
@@ -161,6 +186,11 @@ public class PackOfStaples : Item
 public class ShinedShoes : Item
 {
     private const float moveSpeedIncrease = 0.5f;
+
+    public ShinedShoes()
+    {
+        rarity = ItemRarity.Common;
+    }
     public override string GiveName()
     {
         return "Shined Shoes";
@@ -182,6 +212,11 @@ public class ShinedShoes : Item
 public class ReadingGlasses : Item
 {
     private float critChance;
+
+    public ReadingGlasses()
+    {
+        rarity = ItemRarity.Common;
+    }
     public override string GiveName()
     {
         return "Reading Glasses";
@@ -195,10 +230,31 @@ public class ReadingGlasses : Item
     public override void OnHit(PlayerStats player, EnemyReceiveDamage enemy, int stacks)
     {
         critChance = 0.1f + (0.1f * (stacks - 1)); // 10% chance plus an extra 10% for every stack
-        if (Random.value <= critChance) 
+        if (player.CheckChanceWithLuckyPen(critChance))
         {
             Debug.Log("crit proc! " + critChance);
-            enemy.DealDamage(player.damage);
+            bool hasSensitiveFiles = false;
+            int sensitiveFilesStacks = 0;
+            int critMultiplier = 0;
+            foreach (ItemList item in player.items)
+            {
+                if (item.item.GetType() == typeof(SensitiveFiles))
+                {
+                    hasSensitiveFiles = true;
+                    sensitiveFilesStacks += item.stacks;
+                    critMultiplier += item.stacks * 2;
+                }
+            }
+            if (hasSensitiveFiles)
+            {
+                Debug.Log("Sensitive files proc!");
+                enemy.DealDamage(player.damage); //2nd hit of 2x hit
+                enemy.DealDamage(player.damage * critMultiplier); //remaining hits on critmultiplier
+            }
+            else
+            {
+                enemy.DealDamage(player.damage); //2X damage hit
+            }
 
             // Check if the player has SugaredSoda for additional healing
             bool hasSugaredSoda = false;
@@ -223,6 +279,11 @@ public class ReadingGlasses : Item
 public class PaperCutter: Item
 {
     private float bleedChance;
+
+    public PaperCutter()
+    {
+        rarity = ItemRarity.Common;
+    }
     public override string GiveName()
     {
         return "Paper Cutter";
@@ -236,7 +297,7 @@ public class PaperCutter: Item
     public override void OnHit(PlayerStats player, EnemyReceiveDamage enemy, int stacks)
     {
         bleedChance = 0.1f + (0.1f * stacks);
-        if (Random.value <= bleedChance) // Check if the burn chance is activated
+        if (player.CheckChanceWithLuckyPen(bleedChance)) // Check if the burn chance is activated
         {
             Debug.Log("bleed proc!");
             player.StartCoroutine(BleedEnemy(enemy, player, stacks));
@@ -261,6 +322,10 @@ public class PaperCutter: Item
 
 public class BrandNewStapler : Item
 {
+    public BrandNewStapler()
+    {
+        rarity = ItemRarity.Common;
+    }
     public override string GiveName()
     {
         return "Brand New Stapler";
@@ -282,6 +347,10 @@ public class BrandNewStapler : Item
 
 public class CupOfCoffee : Item
 {
+    public CupOfCoffee()
+    {
+        rarity = ItemRarity.Common;
+    }
     public override string GiveName()
     {
         return "Cup of Coffee";
@@ -301,7 +370,10 @@ public class CupOfCoffee : Item
 
 public class MarksChiliPowder : Item
 {
-    
+    public MarksChiliPowder()
+    {
+        rarity = ItemRarity.Legendary;
+    }
     public override string GiveName()
     {
         return "Mark's Chili Powder";
@@ -324,6 +396,11 @@ public class DoubleSidedTape : Item
 {
     private float slowChance;
     private float originalSpeed;
+
+    public DoubleSidedTape()
+    {
+        rarity = ItemRarity.Common;
+    }
     public override string GiveName()
     {
         return "Double Sided Tape";
@@ -346,7 +423,7 @@ public class DoubleSidedTape : Item
                 originalSpeed = enemyBehavior.moveSpeed;
             }
 
-            if (Random.value <= slowChance)
+            if (player.CheckChanceWithLuckyPen(slowChance))
             {
                 player.StartCoroutine(SlowEnemy(player, enemyBehavior, stacks));
             }
@@ -375,6 +452,11 @@ private IEnumerator SlowEnemy(PlayerStats player, EnemyBehavior enemy, int stack
 public class BubbleWrap : Item
 {
     private float damageReductionPercentage = 0.05f;
+
+    public BubbleWrap()
+    {
+        rarity = ItemRarity.Common;
+    }
     public override string GiveName()
     {
         return "Bubble Wrap";
@@ -396,6 +478,11 @@ public class FaultyHardDrive : Item
 {
     private float shockChance;
     private const float shockDamagePercentage = 0.6f;
+
+    public FaultyHardDrive()
+    {
+        rarity = ItemRarity.Uncommon;
+    }
     public override string GiveName()
     {
         return "Faulty Hard Drive";
@@ -408,7 +495,7 @@ public class FaultyHardDrive : Item
     public override void OnHit(PlayerStats player, EnemyReceiveDamage enemy, int stacks)
     {
         shockChance = (0.1f + (0.1f * stacks));
-        if (Random.value <= shockChance) // Check if the shock chance is activated
+        if (player.CheckChanceWithLuckyPen(shockChance)) // Check if the shock chance is activated
         {
             Debug.Log("shock proc!");
             //shock the enemy for 60% of base damage
@@ -429,6 +516,10 @@ public class FaultyHardDrive : Item
 
 public class PerformanceBoosters : Item
 {
+    public PerformanceBoosters()
+    {
+        rarity = ItemRarity.Uncommon;
+    }
     public override string GiveName()
     {
         return "Performance Boosters";
@@ -447,6 +538,10 @@ public class PerformanceBoosters : Item
 
 public class SugaredSoda : Item
 {
+    public SugaredSoda()
+    {
+        rarity = ItemRarity.Uncommon;
+    }
     public override string GiveName()
     {
         return "Sugared Soda";
@@ -462,6 +557,10 @@ public class SugaredSoda : Item
 
 public class LightweightCoat : Item
 {
+    public LightweightCoat()
+    {
+        rarity = ItemRarity.Uncommon;
+    }
     public override string GiveName()
     {
         return "Lightweight Coat";
@@ -480,6 +579,10 @@ public class LightweightCoat : Item
 
 public class SavingsJar : Item
 {
+    public SavingsJar()
+    {
+        rarity = ItemRarity.Uncommon;
+    }
     public override string GiveName()
     {
         return "Savings Jar";
@@ -496,6 +599,11 @@ public class SavingsJar : Item
 public class MakeshiftSlingshot : Item
 {
     private float additionalProjectileChance;
+
+    public MakeshiftSlingshot()
+    {
+        rarity = ItemRarity.Uncommon;
+    }
     public override string GiveName()
     {
         return "Makeshift Slingshot";
@@ -509,8 +617,8 @@ public class MakeshiftSlingshot : Item
     public override void OnHit(PlayerStats player, EnemyReceiveDamage enemy, int stacks)
     {
         additionalProjectileChance = 0.1f + (0.05f * stacks);
-        if (Random.value <= additionalProjectileChance)
-        {
+        if (player.CheckChanceWithLuckyPen(additionalProjectileChance))
+            {
             // Find the player GameObject
             GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
             if (playerObject != null)
@@ -550,6 +658,10 @@ public class BigRedBinder : Item
 
 public class LuckyPen : Item
 {
+    public LuckyPen()
+    {
+        rarity = ItemRarity.Legendary;
+    }
     public override string GiveName()
     {
         return "Lucky Pen";
@@ -559,10 +671,16 @@ public class LuckyPen : Item
     {
         return "You feel very lucky.";
     }
+
+    //functionality is stored in playerstats
 }
 
 public class TimeCard : Item
 {
+    public TimeCard()
+    {
+        rarity = ItemRarity.Legendary;
+    }
     public override string GiveName()
     {
         return "Time Card";
@@ -572,10 +690,19 @@ public class TimeCard : Item
     {
         return "Receive an increase to ALL STATS at 5:00.";
     }
+
+    public override void OnPickup(PlayerStats player, int stacks)
+    {
+        player.UpdateTimeCard();
+    }
 }
 
 public class SensitiveFiles : Item
 {
+    public SensitiveFiles()
+    {
+        rarity = ItemRarity.Legendary;
+    }
     public override string GiveName()
     {
         return "Sensitive Files";
@@ -585,10 +712,18 @@ public class SensitiveFiles : Item
     {
         return "Your critical damage is DOUBLED.";
     }
+
+    //functionality is stored in reading glasses item
 }
 
 public class PinkSlip : Item
 {
+    private float oneShotChance;
+
+    public PinkSlip()
+    {
+        rarity = ItemRarity.Legendary;
+    }
     public override string GiveName()
     {
         return "Pink Slip";
@@ -598,10 +733,28 @@ public class PinkSlip : Item
     {
         return "Gain a small chance to INSTANTLY KILL any non-boss enemy.";
     }
+
+    public override void OnHit(PlayerStats player, EnemyReceiveDamage enemy, int stacks)
+    {
+        oneShotChance = 0.05f * stacks;
+        if (player.CheckChanceWithLuckyPen(oneShotChance))
+        {
+            if (!enemy.isBossEnemy)
+            {
+                Debug.Log("YOU'RE FIRED!");
+                enemy.DealDamage(999999);
+            }
+        }
+
+    }
 }
 
 public class PrizeGavel : Item
 {
+    public PrizeGavel()
+    {
+        rarity = ItemRarity.Legendary;
+    }
     public override string GiveName()
     {
         return "Prize Gavel";
@@ -621,6 +774,10 @@ public class PrizeGavel : Item
 
 public class FavoriteTie : Item
 {
+    public FavoriteTie()
+    {
+        rarity = ItemRarity.Legendary;
+    }
     public override string GiveName()
     {
         return "Favorite Tie";

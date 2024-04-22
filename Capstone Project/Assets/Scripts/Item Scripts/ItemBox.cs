@@ -6,7 +6,9 @@ using TMPro;
 
 public class ItemBox : MonoBehaviour
 {
-    public List<GameObject> Items = new List<GameObject>();
+    public List<GameObject> commonItems = new List<GameObject>();
+    public List<GameObject> uncommonItems = new List<GameObject>();
+    public List<GameObject> legendaryItems = new List<GameObject>();
     public Canvas ItemBoxPopup;
     public TMP_Text ItemBoxText;
     public int ItemBoxCost;
@@ -61,18 +63,28 @@ public class ItemBox : MonoBehaviour
 
     private void SpawnRandomItem()
     {
-        // Check if there are items in the list
-        if (Items.Count > 0)
-        {
-            // Choose a random item from the list
-            GameObject itemToSpawn = Items[Random.Range(0, Items.Count)];
+        float roll = Random.Range(0f, 100f);
+        List<GameObject> selectedList;
 
+        // Choose the list based on rarity probability
+        if (roll < 63f) // 63% chance for Common items
+            selectedList = commonItems;
+        else if (roll < 99f) // 36% chance for Uncommon items
+            selectedList = uncommonItems;
+        else // 1% chance for Legendary items
+            selectedList = legendaryItems;
+
+        // Check if there are items in the selected list
+        if (selectedList.Count > 0)
+        {
+            // Choose a random item from the selected list
+            GameObject itemToSpawn = selectedList[Random.Range(0, selectedList.Count)];
             // Spawn the chosen item at the player's position
             Instantiate(itemToSpawn, transform.position, Quaternion.identity);
         }
         else
         {
-            Debug.LogWarning("Items list is empty. Cannot spawn any items.");
+            Debug.LogWarning("Selected rarity list is empty. Cannot spawn any items.");
         }
     }
 }

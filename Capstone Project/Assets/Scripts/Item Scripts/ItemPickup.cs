@@ -111,8 +111,6 @@ public class ItemPickup : MonoBehaviour
                  return new SavingsJar();
             case Items.MakeshiftSlingshot:
                 return new MakeshiftSlingshot();
-            case Items.BigRedBinder:
-                return new BigRedBinder();
             case Items.LuckyPen:
                 return new LuckyPen();
             case Items.TimeCard:
@@ -152,7 +150,6 @@ public enum Items
     LightweightCoat,
     SavingsJar,
     MakeshiftSlingshot,
-    BigRedBinder,
     LuckyPen,
     TimeCard,
     SensitiveFiles,

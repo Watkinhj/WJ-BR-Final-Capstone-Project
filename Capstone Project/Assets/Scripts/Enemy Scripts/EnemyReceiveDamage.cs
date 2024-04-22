@@ -22,6 +22,8 @@ public class EnemyReceiveDamage : MonoBehaviour
 
     private bool isDamaged = false;
 
+    public bool isBossEnemy;
+
     public bool IsDamaged()
     {
         return isDamaged;
