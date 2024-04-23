@@ -23,7 +23,8 @@ public class LoadingScreen : MonoBehaviour
         "Text 8",
         "Text 9",
         "Text 10",
-        "Text 11"
+        "Text 11",
+        "Text 12"
     };
 
     void Start()

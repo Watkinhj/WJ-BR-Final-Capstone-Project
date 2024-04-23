@@ -878,14 +878,18 @@ MonoBehaviour:
   - Your stapler has a limited staple supply. Once you run out, it will automatically
     reload.
   - Your stapler is efficient, but don't be afraid to use your hands for stronger
-    results
+    results.
   - Our stronger employees are on the upper floors. More work means more strength
     is needed!
   - Speed is key! The faster you work, the easier your work will be!
   - Stacking items makes their effects stronger! Don't be afraid to double up!
   - If you come across anyone neglecting their work, persuade them to return to their
     desk immediately.
-  - Company credits can be spent on vending machines for items.
+  - Vending machines are not the only thing you can spend your credits on! Save your
+    cash to spend them in other spots.
+  - 'Items have rarities! White is common, green is rare, and red is legendary. Be
+    on the lookout for them! '
+  - Mr. Bigearner is a very "hands-on" worker. Don't let him get too close.
 --- !u!1 &1639138693
 GameObject:
   m_ObjectHideFlags: 0

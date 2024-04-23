@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283a81948e3595c4e9fef5854c8613be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemDrop: 21
+  itemDrop: 20
   gm: {fileID: 0}
   itemUI: {fileID: 0}
   inventoryUI: {fileID: 0}
