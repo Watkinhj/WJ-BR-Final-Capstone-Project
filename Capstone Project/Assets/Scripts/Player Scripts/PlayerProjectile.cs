@@ -42,6 +42,10 @@ public class PlayerProjectile : MonoBehaviour
         Vector2 myPos = transform.position;
         Vector2 direction = (mousePos - myPos).normalized;
         rb.velocity = direction * projectileForce;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        staple.transform.rotation = Quaternion.Euler(0, 0, angle);
+
         staple.GetComponent<Staple>().damage = Random.Range(minDamage, maxDamage);
         canFire = false;
         currentAmmo--;

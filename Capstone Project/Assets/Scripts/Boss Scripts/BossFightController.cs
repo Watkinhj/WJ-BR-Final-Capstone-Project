@@ -8,11 +8,14 @@ public class BossFightController : MonoBehaviour
     public GameObject Boss;
     public GameObject BossHealthBar;
     public GameObject DoorLock;
+    public EnemyReceiveDamage BossStats;
+    public BossExitDoor ExitDoor;
 
     private void Start()
     {
         DoorLock.SetActive(false);
         BossHealthBar.SetActive(false);
+        ExitDoor = BossExitDoor.FindObjectOfType<BossExitDoor>();
     }
 
 
@@ -34,6 +37,7 @@ public class BossFightController : MonoBehaviour
         {
             BossHealthBar.SetActive(true);
             Instantiate(Boss, transform.position, Quaternion.identity);
+            BossStats = Boss.GetComponent<EnemyReceiveDamage>();
         }
         else
         {
@@ -59,6 +63,17 @@ public class BossFightController : MonoBehaviour
     {
         Debug.Log("Turning on the boss health bar");
         BossHealthBar.SetActive(true);
+    }
+
+    private void Update()
+    {
+        if (BossStats != null)
+        {
+            if (EnemyReceiveDamage.isDead)
+            {
+                ExitDoor.bossIsDead = true;
+            }
+        }
     }
 }
 

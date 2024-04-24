@@ -13,6 +13,7 @@ TagManager:
   - ItemBox
   - Wall
   - Decoration
+  - EnemyProjectile
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - Player
   - Decoration
   - effects
-  - 
+  - Projectiles
   - 
   - 
   - 
