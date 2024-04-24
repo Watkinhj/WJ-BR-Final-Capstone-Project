@@ -968,7 +968,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &680297671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33353,6 +33353,8 @@ MonoBehaviour:
   Boss: {fileID: 4690609361584939607, guid: 5258262a550d2e94289328a8b69181fe, type: 3}
   BossHealthBar: {fileID: 1226146408}
   DoorLock: {fileID: 1542671364}
+  BossStats: {fileID: 0}
+  ExitDoor: {fileID: 0}
 --- !u!61 &992621809
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -56456,7 +56458,7 @@ SpriteRenderer:
   m_Size: {x: 1.65625, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1974564305
