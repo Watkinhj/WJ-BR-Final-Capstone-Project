@@ -34,7 +34,7 @@ public class MainMenu : MonoBehaviour
 
     private IEnumerator GameStart()
     {
-        // Optionally, you can display a game start popup or other UI elements here
+        
         gameStartPopup.enabled = true;
 
         // Wait for a few seconds before fading out
