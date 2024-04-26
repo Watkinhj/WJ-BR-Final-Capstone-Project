@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class EnemyReceiveDamage : MonoBehaviour
@@ -24,6 +25,12 @@ public class EnemyReceiveDamage : MonoBehaviour
 
     public bool isBossEnemy;
 
+    private Animator animator;
+    private NavMeshAgent navMeshAgent;
+    private Rigidbody2D rb;
+    private RangedEnemyBehavior rangedEnemyBehavior;
+    
+
     public bool IsDamaged()
     {
         return isDamaged;
@@ -38,7 +45,15 @@ public class EnemyReceiveDamage : MonoBehaviour
     {
         health = maxHealth;
         enemyBehavior = GetComponent<EnemyBehavior>();
+        animator = GetComponent<Animator>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody2D>();
         isDead = false;
+
+        if (enemyBehavior.isRangedEnemy)
+        {
+            rangedEnemyBehavior = GetComponent<RangedEnemyBehavior>();
+        }
     }
 
     public void DealDamage(float damage)
@@ -72,7 +87,26 @@ public class EnemyReceiveDamage : MonoBehaviour
         if (health <= 0)
         {
             isDead = true;
-            Destroy(gameObject);
+            if (isDead)
+            {
+                animator.SetBool("isDead", true);
+                navMeshAgent.isStopped = true;
+                Destroy(healthBar);
+                if (rb != null)
+                {
+                    rb.velocity = Vector2.zero;
+                    rb.isKinematic = true;
+                }
+                
+                if (enemyBehavior.isRangedEnemy)
+                {
+                    Debug.Log("Stopping ranged enemy cooldown");
+                    Destroy(GetComponent<RangedEnemyBehavior>());
+                }
+                
+                StartCoroutine(DespawnEnemy());
+            }
+            //Destroy(gameObject);
             if (lootDrop != null) //If they can drop stuff
             {
                 Instantiate(lootDrop, transform.position, Quaternion.identity);
@@ -81,6 +115,7 @@ public class EnemyReceiveDamage : MonoBehaviour
                 {
                     Instantiate(healthDrop, transform.position, Quaternion.identity);
                 }
+                lootDrop = null;
             }
         }
     }
@@ -88,5 +123,11 @@ public class EnemyReceiveDamage : MonoBehaviour
     private float CalculateHealthPercentage()
     {
         return (health / maxHealth);
+    }
+
+    private IEnumerator DespawnEnemy()
+    {
+        yield return new WaitForSeconds(5);
+        Destroy(gameObject);
     }
 }

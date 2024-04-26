@@ -9,6 +9,7 @@ public class RangedEnemyBehavior : MonoBehaviour
     public float projectileForce;
     public float cooldown;
     private Animator animator;
+    private Coroutine shootingCoroutine;
 
     private bool canShoot = true; // Track if the enemy can shoot
 
@@ -17,6 +18,17 @@ public class RangedEnemyBehavior : MonoBehaviour
         //StartCoroutine(ShootCooldown());
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>(); // Get the Animator component
+        shootingCoroutine = StartCoroutine(ShootCooldown());
+
+    }
+
+    public void StopShooting()
+    {
+        if (shootingCoroutine != null)
+        {
+            StopCoroutine(ShootCooldown());
+            shootingCoroutine = null;
+        }
     }
 
     public IEnumerator ShootCooldown()

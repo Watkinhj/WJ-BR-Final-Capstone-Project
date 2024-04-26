@@ -24,6 +24,8 @@ public class EnemyBehavior : MonoBehaviour
 
     private RangedEnemyBehavior rangedEnemyBehavior; // Reference to RangedEnemyBehavior script
 
+    private EnemyReceiveDamage enemyStats;
+
 
     private void Start()
     {
@@ -31,6 +33,7 @@ public class EnemyBehavior : MonoBehaviour
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
         animator = GetComponent<Animator>(); // Get the Animator component
+        
 
         if (isRangedEnemy)
         {
@@ -66,6 +69,10 @@ public class EnemyBehavior : MonoBehaviour
                             if (rangedEnemyBehavior != null)
                             {
                                 StartCoroutine(rangedEnemyBehavior.ShootCooldown());
+                            }
+                            if (EnemyReceiveDamage.isDead == true)
+                            {
+                                StopCoroutine(rangedEnemyBehavior.ShootCooldown());
                             }
                         }
                     }

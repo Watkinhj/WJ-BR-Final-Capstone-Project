@@ -18,6 +18,8 @@ public class BossAI : MonoBehaviour
     private bool isGroundSlamming = false; // Flag to track if boss is performing ground slam
     //private bool isMeleeAttacking = false; // Flag to track if boss is performing melee attack
     private Vector2 chargeDirection; // Direction to charge
+    private Animator animator;
+    private EnemyReceiveDamage bossStats;
 
     //PLACEHOLDER - REMOVE THIS LATER
     public TMP_Text BossTelegraphs;
@@ -27,7 +29,8 @@ public class BossAI : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
-
+        animator = GetComponent<Animator>(); // Get the Animator component
+        bossStats = GetComponent<EnemyReceiveDamage>();
         // Start the boss behavior cycle
         StartCoroutine(BossBehaviorCycle());
     }
@@ -36,6 +39,13 @@ public class BossAI : MonoBehaviour
     {
         while (true)
         {
+            animator.ResetTrigger("chargePrep");
+            animator.ResetTrigger("charging");
+            animator.ResetTrigger("stunned");
+            animator.ResetTrigger("slamWindup");
+            animator.ResetTrigger("slamming");
+            animator.ResetTrigger("isPunching");
+            animator.SetTrigger("idle");
             BossTelegraphs.text = "Idle State".ToString();
             yield return new WaitForSeconds(3f); // Wait for 5 seconds in idle state
 
@@ -43,24 +53,29 @@ public class BossAI : MonoBehaviour
             int attackChoice = Random.Range(0, 3); // Randomly choose between charge attack, ground slam, and melee attack
             if (attackChoice == 0)
             {
+                animator.ResetTrigger("idle");
                 // Charge attack
-                BossTelegraphs.text = "Preparing Charge...".ToString();
+                //BossTelegraphs.text = "Preparing Charge...".ToString();
+                animator.SetTrigger("chargePrep");
                 Debug.Log("Boss decides to do a charge.");
                 StopMovement();
                 yield return new WaitForSeconds(1f);
-                BossTelegraphs.text = "Charging!".ToString();
+                //BossTelegraphs.text = "Charging!".ToString();
                 StartChargeAttack();
                 yield return new WaitForSeconds(3f);
                 StopChargeAttack();
             }
             else if (attackChoice == 1)
             {
+                animator.ResetTrigger("idle");
                 // Ground slam attack
-                BossTelegraphs.text = "Preparing Slam...".ToString();
+                //BossTelegraphs.text = "Preparing Slam...".ToString();
                 Debug.Log("Boss decides to do a ground slam.");
                 StartGroundSlamAttack();
-                yield return new WaitForSeconds(1.3f); // Wait for telegraphing duration
-                BossTelegraphs.text = "Slamming!".ToString();
+                yield return new WaitForSeconds(1.1f); // Wait for telegraphing duration
+                //BossTelegraphs.text = "Slamming!".ToString();
+                animator.SetTrigger("slamming");
+                yield return new WaitForSeconds(0.2f);
                 if (isGroundSlamming) // Check if ground slam attack is still ongoing
                 {
                     PerformGroundSlamAttack(); // Perform ground slam attack if player is inside AOE
@@ -69,6 +84,7 @@ public class BossAI : MonoBehaviour
             }
             else
             {
+                animator.ResetTrigger("idle");
                 // Melee attack
                 Debug.Log("Boss decides to do a melee attack.");
                 StartMeleeAttack();
@@ -86,6 +102,12 @@ public class BossAI : MonoBehaviour
         {
             MoveTowardsPlayer();
         }
+        if (EnemyReceiveDamage.isDead)
+        {
+            StopAllCoroutines();
+            navMeshAgent.isStopped = true;
+            animator.SetBool("isDead", true);
+        }
     }
 
     private void MoveTowardsPlayer()
@@ -97,19 +119,28 @@ public class BossAI : MonoBehaviour
             navMeshAgent.SetDestination(playerPosition);
 
             navMeshAgent.speed = moveSpeed;
+
+            // Update the animator with the movement direction
+            Vector2 velocity = new Vector2(navMeshAgent.velocity.x, navMeshAgent.velocity.y);
+            animator.SetFloat("xDir", velocity.x);
+            animator.SetFloat("yDir", velocity.y);
         }
     }
 
     private void StartChargeAttack()
     {
-        StopMovement(); // Stop moving towards the player
+        StopMovement();
         isCharging = true;
 
         // Face the player
         Vector2 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
         chargeDirection = (playerPosition - (Vector2)transform.position).normalized;
 
-        // Start charging coroutine
+        // Reset the animator parameters for charging if needed
+        animator.SetFloat("xDir", chargeDirection.x);
+        animator.SetFloat("yDir", chargeDirection.y);
+        animator.SetTrigger("charging");
+
         StartCoroutine(ChargeCoroutine());
     }
 
@@ -135,6 +166,7 @@ public class BossAI : MonoBehaviour
     private void StopChargeAttack()
     {
         isCharging = false;
+        animator.SetTrigger("stunned");
         rb.velocity = Vector2.zero;
         StartCoroutine(ChargeReset());
     }
@@ -182,6 +214,7 @@ public class BossAI : MonoBehaviour
     {
         StopMovement();
         isGroundSlamming = true;
+        animator.SetTrigger("slamWindup");
         // Instantiate the ground slam circle prefab
         GameObject groundSlamCircle = Instantiate(groundSlamCirclePrefab, transform.position, Quaternion.identity);
         Destroy(groundSlamCircle, 1.3f); // Destroy the circle after 3 seconds (telegraphing duration)
@@ -201,6 +234,7 @@ public class BossAI : MonoBehaviour
     private void StopGroundSlamAttack()
     {
         ResumeMovement();
+        animator.SetTrigger("idle");
         isGroundSlamming = false;
 
     }
@@ -223,6 +257,13 @@ public class BossAI : MonoBehaviour
 
             // Set the Rigidbody's velocity to move towards the player
             rb.velocity = direction * moveSpeed * 5; // Dash towards the player
+
+            // Set animator
+            animator.SetTrigger("isPunching");
+            animator.SetFloat("xDir", direction.x);
+            animator.SetFloat("yDir", direction.y);
+            animator.SetInteger("Punch", i);
+
             PerformMeleeAttack();
             yield return new WaitForSeconds(0.35f); // Adjust delay between each dash
             rb.velocity = Vector2.zero; // Reset velocity after each dash
@@ -246,6 +287,8 @@ public class BossAI : MonoBehaviour
 
     private void StopMeleeAttack()
     {
+        animator.ResetTrigger("isPunching");
+        animator.SetTrigger("idle");
         ResumeMovement();
         //isMeleeAttacking = false;
     }

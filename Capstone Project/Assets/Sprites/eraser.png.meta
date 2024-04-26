@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream
 guid: 4993de83091de054bbd3ae49442e8634
-=======
-guid: 28e212c29016fa54e96062caf1180983
->>>>>>> Stashed changes
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -38,33 +34,21 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-<<<<<<< Updated upstream
-    filterMode: 1
-=======
     filterMode: 0
->>>>>>> Stashed changes
     aniso: 1
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-<<<<<<< Updated upstream
-  spriteMode: 1
-=======
   spriteMode: 2
->>>>>>> Stashed changes
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-<<<<<<< Updated upstream
-  spritePixelsToUnits: 100
-=======
-  spritePixelsToUnits: 32
->>>>>>> Stashed changes
+  spritePixelsToUnits: 24
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -79,16 +63,16 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 0
+  applyGammaDecoding: 1
   swizzle: 50462976
-  cookieLightType: 0
+  cookieLightType: 2
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -97,13 +81,11 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-<<<<<<< Updated upstream
-=======
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -112,12 +94,11 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
->>>>>>> Stashed changes
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -130,7 +111,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -140,9 +121,6 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-<<<<<<< Updated upstream
-    sprites: []
-=======
     sprites:
     - serializedVersion: 2
       name: eraser_0
@@ -159,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ead02cebfc6e6864fa10fc43961350d4
-      internalID: -250520053
+      spriteID: 72b7216a6f72aeb478156ab6a339c32e
+      internalID: 395944300
       vertices: []
       indices: 
       edges: []
@@ -180,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba9c47a2e760912458c13331d26992d4
-      internalID: -1075229675
+      spriteID: d6f8bb5dc8b30c745bcb4158be5a34e7
+      internalID: 1473158799
       vertices: []
       indices: 
       edges: []
@@ -201,8 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24556395e388e134ea4bb545c60def88
-      internalID: 125796894
+      spriteID: 7784eb7781cdf854b82e5e203ee886aa
+      internalID: -1298143313
       vertices: []
       indices: 
       edges: []
@@ -222,8 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0365d67bb53d7d428561a302242865e
-      internalID: -581190631
+      spriteID: bd5feec79422a9f45b6314263f0e2d3f
+      internalID: -1407268836
       vertices: []
       indices: 
       edges: []
@@ -243,8 +221,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b8e9a01d7c175524489e544554aac277
-      internalID: 344044665
+      spriteID: 8b11eb487d4cb444a9b1aec73327b219
+      internalID: 1299722294
       vertices: []
       indices: 
       edges: []
@@ -264,8 +242,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40b2ba1ee6e62bd478e7c8121f64e3d9
-      internalID: 99820128
+      spriteID: 140aae12ae55c174a935bd3c6e8062fb
+      internalID: 2007225867
       vertices: []
       indices: 
       edges: []
@@ -285,8 +263,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00c4e3d4667503b41a5c7cd4fd762dc9
-      internalID: 486195740
+      spriteID: 1a4a3eaa725fe1f46a9b3420f485028d
+      internalID: -111382245
       vertices: []
       indices: 
       edges: []
@@ -306,13 +284,12 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 277af6f2aeb815a4c9768ddfdb851142
-      internalID: -1019231311
+      spriteID: 3f1a27964ce586e4ab132db67aefbe49
+      internalID: -2060830642
       vertices: []
       indices: 
       edges: []
       weights: []
->>>>>>> Stashed changes
     outline: []
     physicsShape: []
     bones: []
@@ -323,19 +300,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-<<<<<<< Updated upstream
-    nameFileIdTable: {}
-=======
     nameFileIdTable:
-      eraser_0: -250520053
-      eraser_1: -1075229675
-      eraser_2: 125796894
-      eraser_3: -581190631
-      eraser_4: 344044665
-      eraser_5: 99820128
-      eraser_6: 486195740
-      eraser_7: -1019231311
->>>>>>> Stashed changes
+      eraser_0: 395944300
+      eraser_1: 1473158799
+      eraser_2: -1298143313
+      eraser_3: -1407268836
+      eraser_4: 1299722294
+      eraser_5: 2007225867
+      eraser_6: -111382245
+      eraser_7: -2060830642
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

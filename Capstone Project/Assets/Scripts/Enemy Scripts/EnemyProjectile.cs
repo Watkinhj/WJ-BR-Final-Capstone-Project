@@ -14,7 +14,6 @@ public class EnemyProjectile : MonoBehaviour
         {
             int animationIndex = Random.Range(0, 3); // Randomly pick an animation index
             animator.SetInteger("AnimationIndex", animationIndex); // Set the animation index
-            Debug.Log(animationIndex);
         }
     }
 
