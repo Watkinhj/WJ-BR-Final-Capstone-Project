@@ -18,6 +18,13 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         walkableBounds = walkableTilemap.cellBounds;
+        // Delay the first spawn by a few seconds
+        StartCoroutine(DelayInitialSpawn(1f)); // Delay for 1 second
+    }
+
+    IEnumerator DelayInitialSpawn(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         StartCoroutine(SpawnEnemy());
     }
 

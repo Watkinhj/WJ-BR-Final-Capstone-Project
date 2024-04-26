@@ -311,6 +311,7 @@ MonoBehaviour:
   healthDrop: {fileID: 0}
   isBurning: 0
   isBossEnemy: 0
+  isBoss2: 1
 --- !u!114 &1130298179225203016
 MonoBehaviour:
   m_ObjectHideFlags: 0

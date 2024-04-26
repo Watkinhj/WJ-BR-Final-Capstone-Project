@@ -79,6 +79,16 @@ public class PlayerStats : MonoBehaviour
     //COMMENT OUT SetHealthUI IN UPDATE BY DEFAULT, USE ONLY FOR TESTING PURPOSES. FIGURE OUT A WAY TO MAKE IT UPDATE ON ITEM USE LATER
     void Update()
     {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+                animator = player.GetComponent<Animator>();
+        }
+
+        if (animator == null && player != null)
+            animator = player.GetComponent<Animator>();
+
         SetHealthUI();
         CheckOverheal();
         SetDashUI();
@@ -88,6 +98,7 @@ public class PlayerStats : MonoBehaviour
         //CallItemStatsUpdate();
 
     }
+
     //Making sure that items actually WORK
     IEnumerator CallTimedItemUpdate()
     {

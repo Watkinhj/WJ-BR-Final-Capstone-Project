@@ -29,6 +29,7 @@ public class EnemyReceiveDamage : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     private Rigidbody2D rb;
     private RangedEnemyBehavior rangedEnemyBehavior;
+    public bool isBoss2;
     
 
     public bool IsDamaged()
@@ -102,6 +103,12 @@ public class EnemyReceiveDamage : MonoBehaviour
                 {
                     Debug.Log("Stopping ranged enemy cooldown");
                     Destroy(GetComponent<RangedEnemyBehavior>());
+                }
+
+                if (isBoss2)
+                {
+                    //placeholder
+                    Destroy(gameObject);
                 }
                 
                 StartCoroutine(DespawnEnemy());
