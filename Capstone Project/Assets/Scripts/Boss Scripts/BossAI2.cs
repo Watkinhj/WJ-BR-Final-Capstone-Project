@@ -22,7 +22,18 @@ public class BossAI2 : MonoBehaviour
 
     private void Start()
     {
+        LoadDashPositions();
         StartCoroutine(BossBehaviorCycle());
+    }
+
+    private void LoadDashPositions()
+    {
+        GameObject[] dashObjects = GameObject.FindGameObjectsWithTag("DashTransform");
+        dashPositions = new Transform[dashObjects.Length];
+        for (int i = 0; i < dashObjects.Length; i++)
+        {
+            dashPositions[i] = dashObjects[i].transform;
+        }
     }
 
     private IEnumerator BossBehaviorCycle()
