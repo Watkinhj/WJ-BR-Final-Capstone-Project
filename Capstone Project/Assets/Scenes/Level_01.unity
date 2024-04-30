@@ -85256,7 +85256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6716873416367197067, guid: 3ac792d3dd62e8340bcb9da52f2cab1d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -85334,7 +85334,7 @@ PrefabInstance:
       objectReference: {fileID: 1875073822}
     - target: {fileID: 1666291142941599669, guid: 84d04dc503799ea41a700e61a0ad32ff, type: 3}
       propertyPath: spawnRate
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1666291142941599669, guid: 84d04dc503799ea41a700e61a0ad32ff, type: 3}
       propertyPath: spawnRadius
@@ -86690,7 +86690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2069993177335164746, guid: fc900307dc577dd4dab1c065a6b9f942, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2685810388524534059, guid: fc900307dc577dd4dab1c065a6b9f942, type: 3}
       propertyPath: m_IsActive
@@ -86891,6 +86891,10 @@ PrefabInstance:
       propertyPath: DoorLock
       value: 
       objectReference: {fileID: 1542671364}
+    - target: {fileID: 3420575098678788123, guid: d6ae0ac58d849eb468c2a30791fb23b0, type: 3}
+      propertyPath: BossPrefab
+      value: 
+      objectReference: {fileID: 4690609361584939607, guid: 5258262a550d2e94289328a8b69181fe, type: 3}
     - target: {fileID: 3420575098678788123, guid: d6ae0ac58d849eb468c2a30791fb23b0, type: 3}
       propertyPath: BossHealthBar
       value: 

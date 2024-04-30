@@ -102,7 +102,7 @@ public class BossAI : MonoBehaviour
         {
             MoveTowardsPlayer();
         }
-        if (EnemyReceiveDamage.isDead)
+        if (bossStats.isDead)
         {
             StopAllCoroutines();
             navMeshAgent.isStopped = true;

@@ -74,6 +74,7 @@ public class PlayerStats : MonoBehaviour
 
         //Begins the item shenanigans
         StartCoroutine(CallTimedItemUpdate());
+        StartCoroutine(passiveHealthRegen());
     }
 
     //COMMENT OUT SetHealthUI IN UPDATE BY DEFAULT, USE ONLY FOR TESTING PURPOSES. FIGURE OUT A WAY TO MAKE IT UPDATE ON ITEM USE LATER
@@ -336,4 +337,13 @@ public class PlayerStats : MonoBehaviour
         return false;
     }
 
+    private IEnumerator passiveHealthRegen()
+    {
+        while (true) 
+        {
+            yield return new WaitForSeconds(3);
+            health = health += 2;
+        }
+
+    }
 }

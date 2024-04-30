@@ -67,9 +67,9 @@ public class ItemBox : MonoBehaviour
         List<GameObject> selectedList;
 
         // Choose the list based on rarity probability
-        if (roll < 63f) // 63% chance for Common items
+        if (roll < 60f) // 63% chance for Common items
             selectedList = commonItems;
-        else if (roll < 99f) // 36% chance for Uncommon items
+        else if (roll < 90f) // 36% chance for Uncommon items
             selectedList = uncommonItems;
         else // 1% chance for Legendary items
             selectedList = legendaryItems;

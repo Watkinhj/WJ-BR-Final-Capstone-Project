@@ -303,8 +303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7cd772b750f9e4b82e992eeec51178, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2500
-  maxHealth: 2500
+  health: 2000
+  maxHealth: 2000
   healthBar: {fileID: 7924541224305957333}
   healthBarSlider: {fileID: 2316857636892571870}
   lootDrop: {fileID: 0}
@@ -350,8 +350,8 @@ MonoBehaviour:
   dashSpeed: 20
   shootingDuration: 5
   waitTime: 1
-  projectileForce: 20
-  damage: 20
+  projectileForce: 10
+  damage: 7
 --- !u!1 &5701876911520493087
 GameObject:
   m_ObjectHideFlags: 0

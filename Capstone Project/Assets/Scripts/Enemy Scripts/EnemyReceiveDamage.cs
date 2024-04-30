@@ -14,7 +14,7 @@ public class EnemyReceiveDamage : MonoBehaviour
 
     private EnemyBehavior enemyBehavior;
 
-    public static bool isDead;
+    public bool isDead;
 
     public GameObject lootDrop;
     public GameObject healthDrop;
@@ -30,7 +30,11 @@ public class EnemyReceiveDamage : MonoBehaviour
     private Rigidbody2D rb;
     private RangedEnemyBehavior rangedEnemyBehavior;
     public bool isBoss2;
-    
+
+    //stuff for boss death
+    public delegate void DeathAction();
+    public event DeathAction OnDeath;
+
 
     public bool IsDamaged()
     {
@@ -93,6 +97,7 @@ public class EnemyReceiveDamage : MonoBehaviour
                 animator.SetBool("isDead", true);
                 navMeshAgent.isStopped = true;
                 Destroy(healthBar);
+                Destroy(GetComponent<EnemyBehavior>());
                 if (rb != null)
                 {
                     rb.velocity = Vector2.zero;
@@ -110,7 +115,7 @@ public class EnemyReceiveDamage : MonoBehaviour
                     //placeholder
                     Destroy(gameObject);
                 }
-                
+                OnDeath?.Invoke();
                 StartCoroutine(DespawnEnemy());
             }
             //Destroy(gameObject);

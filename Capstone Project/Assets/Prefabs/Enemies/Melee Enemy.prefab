@@ -285,6 +285,8 @@ MonoBehaviour:
   lootDrop: {fileID: 6987884735487663896, guid: 0f8604155f011144980347573d4df5cb, type: 3}
   healthDrop: {fileID: 6987884735487663896, guid: 0f8494a74c7e4a14da0a24cbf9bb4599, type: 3}
   isBurning: 0
+  isBossEnemy: 0
+  isBoss2: 0
 --- !u!50 &8182515765665517167
 Rigidbody2D:
   serializedVersion: 4
@@ -310,7 +312,7 @@ Rigidbody2D:
     m_Bits: 256
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &5241432168774098048
 MonoBehaviour:

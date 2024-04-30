@@ -17,9 +17,10 @@ public class MeleeHitbox : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             EnemyReceiveDamage enemy = collision.GetComponent<EnemyReceiveDamage>();
+            EnemyBehavior enemyBehavior = collision.GetComponent<EnemyBehavior>();
 
             // Check if the enemy has already been damaged in this attack
-            if (enemy != null && !damagedEnemies.Contains(enemy))
+            if (enemy != null && enemyBehavior != null && !damagedEnemies.Contains(enemy))
             {
                 enemy.DealDamage(damage);
                 damagedEnemies.Add(enemy);

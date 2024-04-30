@@ -33,6 +33,7 @@ public class EnemyBehavior : MonoBehaviour
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
         animator = GetComponent<Animator>(); // Get the Animator component
+        enemyStats = GetComponent<EnemyReceiveDamage>();
         
 
         if (isRangedEnemy)
@@ -70,7 +71,7 @@ public class EnemyBehavior : MonoBehaviour
                             {
                                 StartCoroutine(rangedEnemyBehavior.ShootCooldown());
                             }
-                            if (EnemyReceiveDamage.isDead == true)
+                            if (enemyStats.isDead == true)
                             {
                                 StopCoroutine(rangedEnemyBehavior.ShootCooldown());
                             }
@@ -181,7 +182,7 @@ public class EnemyBehavior : MonoBehaviour
         }
 
         moveSpeed = currentMoveSpeed;
-        if (!EnemyReceiveDamage.isDead)
+        if (!enemyStats.isDead)
         {
             if (navMeshAgent != null && navMeshAgent.isActiveAndEnabled && navMeshAgent.isOnNavMesh)
             {
