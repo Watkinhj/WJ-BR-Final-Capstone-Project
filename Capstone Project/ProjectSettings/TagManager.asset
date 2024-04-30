@@ -15,6 +15,8 @@ TagManager:
   - Decoration
   - EnemyProjectile
   - DashTransform
+  - ResetHandler
+  - Transferable
   layers:
   - Default
   - TransparentFX

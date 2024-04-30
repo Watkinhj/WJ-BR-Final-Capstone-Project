@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     public static float dashCooldown = 1f;
     public static float dashStartTime;
     public MeleeHitbox meleeHitbox;
+    public bool isDead;
 
 
 

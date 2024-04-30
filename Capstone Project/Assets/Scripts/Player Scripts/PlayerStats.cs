@@ -49,6 +49,12 @@ public class PlayerStats : MonoBehaviour
     public bool is5PM;
     public bool hasTimeCard;
 
+    //instanced player movement
+    private PlayerMovement playerMovement;
+
+    //reset handler
+    public ResetHandler resetHandler;
+
     private void Awake()
     {
         if (playerStats != null)
@@ -208,7 +214,15 @@ public class PlayerStats : MonoBehaviour
         if (health <= 0)
         {
             health = 0;
-            Destroy(player);
+            //kill the player
+            animator.SetBool("isDead", true);
+            playerMovement = player.GetComponent<PlayerMovement>();
+            Destroy(playerMovement);
+
+            //reset the game
+            resetHandler = FindObjectOfType<ResetHandler>();
+            resetHandler.ResetGame();
+
         }
     }
 
