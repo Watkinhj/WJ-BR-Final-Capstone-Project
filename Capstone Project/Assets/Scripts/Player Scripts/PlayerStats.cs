@@ -113,7 +113,7 @@ public class PlayerStats : MonoBehaviour
         {
             i.item.Update(this, i.stacks);
         }
-        yield return new WaitForSeconds(3); //One second per item update. We may need to change this, maybe 0.1f?
+        yield return new WaitForSeconds(3); 
         StartCoroutine(CallTimedItemUpdate());
 
     }

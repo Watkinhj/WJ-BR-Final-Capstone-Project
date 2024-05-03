@@ -30,8 +30,11 @@ public class EnemyBehavior : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        navMeshAgent.updateRotation = false;
-        navMeshAgent.updateUpAxis = false;
+        if (navMeshAgent != null)
+        {
+            navMeshAgent.updateRotation = false;
+            navMeshAgent.updateUpAxis = false;
+        }
         animator = GetComponent<Animator>(); // Get the Animator component
         enemyStats = GetComponent<EnemyReceiveDamage>();
         
@@ -98,8 +101,9 @@ public class EnemyBehavior : MonoBehaviour
                     {
                         animator.SetBool("isAttacking", true);
                     }
+                    yield return new WaitForSeconds(0.25f); //wait to deal damage for animation
                     PlayerStats.playerStats.DealDamage(damage);
-                    yield return new WaitForSeconds(0.25f);
+                    //yield return new WaitForSeconds(0.25f);
                     if (animator != null)
                     {
                         animator.SetBool("isAttacking", false);

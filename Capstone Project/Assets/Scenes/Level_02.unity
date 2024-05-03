@@ -58403,6 +58403,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 559677081}
     - target: {fileID: 3420575098678788123, guid: d6ae0ac58d849eb468c2a30791fb23b0, type: 3}
+      propertyPath: BossPrefab
+      value: 
+      objectReference: {fileID: 4690609361584939607, guid: 5f0c0eabf8e82a246a4d8554d5203d2e, type: 3}
+    - target: {fileID: 3420575098678788123, guid: d6ae0ac58d849eb468c2a30791fb23b0, type: 3}
       propertyPath: BossHealthBar
       value: 
       objectReference: {fileID: 1076001798}
@@ -58420,7 +58424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8046304495116233253, guid: d6ae0ac58d849eb468c2a30791fb23b0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.52
+      value: 8.2
       objectReference: {fileID: 0}
     - target: {fileID: 8046304495116233253, guid: d6ae0ac58d849eb468c2a30791fb23b0, type: 3}
       propertyPath: m_LocalPosition.y

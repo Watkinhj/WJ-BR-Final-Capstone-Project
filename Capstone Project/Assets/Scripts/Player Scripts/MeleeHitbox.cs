@@ -9,6 +9,22 @@ public class MeleeHitbox : MonoBehaviour
     public float damage;
     //public float knockbackForce = 1;
 
+    private void Update()
+    {
+        if (player == null)
+        {
+            GameObject gameManager = GameObject.Find("GameManager");
+            if (gameManager != null)
+            {
+                player = gameManager.GetComponent<PlayerStats>();
+            }
+        }
+        if (playerTransform == null)
+        {
+            playerTransform = GameObject.FindGameObjectWithTag("Player");
+        }
+    }
+
     // List to keep track of enemies already damaged in the current attack
     private List<EnemyReceiveDamage> damagedEnemies = new List<EnemyReceiveDamage>();
 
@@ -30,9 +46,11 @@ public class MeleeHitbox : MonoBehaviour
                 Rigidbody2D enemyRigidbody = collision.GetComponent<Rigidbody2D>();
                 if (enemyRigidbody != null)
                 {
-                    
-                    Vector2 knockbackDirection = (collision.transform.position - playerTransform.transform.position).normalized;
-                    enemyRigidbody.AddForce(knockbackDirection * player.knockbackForce, ForceMode2D.Impulse);
+                    if (!enemy.isBoss)
+                    {
+                        Vector2 knockbackDirection = (collision.transform.position - playerTransform.transform.position).normalized;
+                        enemyRigidbody.AddForce(knockbackDirection * player.knockbackForce, ForceMode2D.Impulse);
+                    }
                 }
 
                 BossAI bossBehavior = collision.GetComponent<BossAI>();

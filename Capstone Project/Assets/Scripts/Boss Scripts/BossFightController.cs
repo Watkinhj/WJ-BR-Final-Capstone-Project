@@ -35,6 +35,7 @@ public class BossFightController : MonoBehaviour
         if (BossPrefab != null)
         {
             BossHealthBar.SetActive(true);
+            Debug.Log("Spawning Boss...");
             GameObject bossInstance = Instantiate(BossPrefab, transform.position, Quaternion.identity);
             BossStats = bossInstance.GetComponent<EnemyReceiveDamage>();
             if (BossStats != null)

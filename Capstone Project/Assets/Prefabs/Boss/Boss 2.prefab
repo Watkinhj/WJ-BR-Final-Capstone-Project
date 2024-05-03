@@ -307,11 +307,12 @@ MonoBehaviour:
   maxHealth: 2000
   healthBar: {fileID: 7924541224305957333}
   healthBarSlider: {fileID: 2316857636892571870}
+  isDead: 0
   lootDrop: {fileID: 0}
   healthDrop: {fileID: 0}
   isBurning: 0
   isBossEnemy: 0
-  isBoss2: 1
+  isBoss: 1
 --- !u!114 &1130298179225203016
 MonoBehaviour:
   m_ObjectHideFlags: 0
