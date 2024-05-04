@@ -96,6 +96,7 @@ public class PlayerStats : MonoBehaviour
         if (animator == null && player != null)
             animator = player.GetComponent<Animator>();
 
+
         SetHealthUI();
         CheckOverheal();
         SetDashUI();
@@ -216,8 +217,11 @@ public class PlayerStats : MonoBehaviour
             health = 0;
             //kill the player
             animator.SetBool("isDead", true);
+            moveSpeed = 0;
             playerMovement = player.GetComponent<PlayerMovement>();
-            Destroy(playerMovement);
+            playerMovement.isDead = true;
+
+            
 
             //reset the game
             resetHandler = FindObjectOfType<ResetHandler>();

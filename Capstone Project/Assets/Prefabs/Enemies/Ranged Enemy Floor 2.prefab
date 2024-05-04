@@ -733,11 +733,12 @@ MonoBehaviour:
   maxHealth: 150
   healthBar: {fileID: 278164749631339742}
   healthBarSlider: {fileID: 8603243075248238720}
+  isDead: 0
   lootDrop: {fileID: 6987884735487663896, guid: 0f8604155f011144980347573d4df5cb, type: 3}
   healthDrop: {fileID: 6987884735487663896, guid: 0f8494a74c7e4a14da0a24cbf9bb4599, type: 3}
   isBurning: 0
   isBossEnemy: 0
-  isBoss2: 0
+  isBoss: 0
 --- !u!50 &8698891439226236796
 Rigidbody2D:
   serializedVersion: 4
@@ -785,6 +786,8 @@ MonoBehaviour:
   moveStopDuration: 1
   inHitStun: 0
   navMeshAgent: {fileID: 7950770263228880360}
+  baseDamage: 18
+  baseMoveSpeed: 3
 --- !u!114 &1755441893251802785
 MonoBehaviour:
   m_ObjectHideFlags: 0

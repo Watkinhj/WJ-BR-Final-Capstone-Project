@@ -1,11 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class FinalBossAI : MonoBehaviour
 {
     public enum BossState { Melee, Ranged }
     private BossState currentState;
-
+    public float projectileDamage = 15;
     public float speed = 5f;
     public Rigidbody2D rb;
     public GameObject projectilePrefab;
@@ -22,7 +23,27 @@ public class FinalBossAI : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         StartCoroutine(BossBehaviorCycle());
+        if (GameState.IsAfterFivePM)
+        {
+            speed *= 2;
+            projectileDamage *= 2;
+        }
+
+        GameState.OnAfterFivePM += UpdateStatsForFivePM;
     }
+
+    void OnDestroy()
+    {
+        // Unsubscribe to prevent memory leaks
+        GameState.OnAfterFivePM -= UpdateStatsForFivePM;
+    }
+
+    private void UpdateStatsForFivePM()
+    {
+        speed *= 2;
+        projectileDamage *= 2;
+    }
+
 
     IEnumerator BossBehaviorCycle()
     {

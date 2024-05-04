@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum AttackPattern
 {
@@ -24,6 +25,26 @@ public class BossAI2 : MonoBehaviour
     {
         LoadDashPositions();
         StartCoroutine(BossBehaviorCycle());
+        
+        if (GameState.IsAfterFivePM)
+        {
+            dashSpeed *= 2;
+            damage *= 2;
+        }
+
+        GameState.OnAfterFivePM += UpdateStatsForFivePM;
+    }
+
+    void OnDestroy()
+    {
+        // Unsubscribe to prevent memory leaks
+        GameState.OnAfterFivePM -= UpdateStatsForFivePM;
+    }
+
+    private void UpdateStatsForFivePM()
+    {
+        dashSpeed *= 2;
+        damage *= 2;
     }
 
     private void LoadDashPositions()

@@ -35,7 +35,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        speed = gm.moveSpeed;
+        if(isDead)
+        {
+            speed = 0;
+        }
+        else
+        {
+            speed = gm.moveSpeed;
+        }
 
         if (isDashing)
         {
@@ -51,18 +58,8 @@ public class PlayerMovement : MonoBehaviour
 
         TakeInput();
         SetAnimatorMovement(direction);
-        /*
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(Dash());
-        }
-        */
     }
 
-    private void FixedUpdate()
-    {
-        //put stuff in here to optimize for release
-    }
 
     private void TakeInput()
     {

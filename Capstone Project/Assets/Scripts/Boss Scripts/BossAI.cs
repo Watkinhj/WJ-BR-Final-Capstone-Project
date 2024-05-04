@@ -33,8 +33,27 @@ public class BossAI : MonoBehaviour
         bossStats = GetComponent<EnemyReceiveDamage>();
         // Start the boss behavior cycle
         StartCoroutine(BossBehaviorCycle());
+        
+        if (GameState.IsAfterFivePM)
+        {
+            moveSpeed *= 2;
+            damage *= 2;
+        }
+
+        GameState.OnAfterFivePM += UpdateStatsForFivePM;
     }
 
+    void OnDestroy()
+    {
+        // Unsubscribe to prevent memory leaks
+        GameState.OnAfterFivePM -= UpdateStatsForFivePM;
+    }
+
+    private void UpdateStatsForFivePM()
+    {
+        moveSpeed *= 2;
+        damage *= 2;
+    }
     private IEnumerator BossBehaviorCycle()
     {
         while (true)

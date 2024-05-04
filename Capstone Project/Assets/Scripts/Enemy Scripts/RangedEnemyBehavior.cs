@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RangedEnemyBehavior : MonoBehaviour
 {
@@ -20,6 +21,23 @@ public class RangedEnemyBehavior : MonoBehaviour
         animator = GetComponent<Animator>(); // Get the Animator component
         shootingCoroutine = StartCoroutine(ShootCooldown());
 
+        if (GameState.IsAfterFivePM)
+        {
+            damage *= 2;
+        }
+
+        GameState.OnAfterFivePM += UpdateStatsForFivePM;
+    }
+
+    void OnDestroy()
+    {
+        // Unsubscribe to prevent memory leaks
+        GameState.OnAfterFivePM -= UpdateStatsForFivePM;
+    }
+
+    private void UpdateStatsForFivePM()
+    {
+        damage *= 2;
     }
 
     public void StopShooting()
@@ -30,6 +48,7 @@ public class RangedEnemyBehavior : MonoBehaviour
             shootingCoroutine = null;
         }
     }
+
 
     public IEnumerator ShootCooldown()
     {

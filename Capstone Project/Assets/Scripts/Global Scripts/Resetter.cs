@@ -23,6 +23,8 @@ public class Resetter : MonoBehaviour
             Destroy(transferables.gameObject);
         }
 
+        GameState.ResetGameTime();
+
         StartCoroutine(GoHome());
     }
 

@@ -43,6 +43,26 @@ public class EnemyBehavior : MonoBehaviour
         {
             rangedEnemyBehavior = GetComponent<RangedEnemyBehavior>(); // Get RangedEnemyBehavior component
         }
+
+        if (GameState.IsAfterFivePM)
+        {
+            moveSpeed *= 2;
+            damage *= 2;
+        }
+
+        GameState.OnAfterFivePM += UpdateStatsForFivePM;
+    }
+
+    void OnDestroy()
+    {
+        // Unsubscribe to prevent memory leaks
+        GameState.OnAfterFivePM -= UpdateStatsForFivePM;
+    }
+
+    private void UpdateStatsForFivePM()
+    {
+        moveSpeed *= 2;
+        damage *= 2;
     }
 
     private void FixedUpdate()

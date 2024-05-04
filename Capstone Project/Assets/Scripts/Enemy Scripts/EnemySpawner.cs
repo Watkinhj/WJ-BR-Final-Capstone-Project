@@ -7,19 +7,25 @@ public class EnemySpawner : MonoBehaviour
 {
     public List<GameObject> Enemies = new List<GameObject>();
     public float spawnRate;
-    public Tilemap walkableTilemap; // Assign your walkable tilemap here
-    public int maxEnemies = 10; // Maximum number of enemies allowed on the map
-    public GameObject player; // Reference to the player GameObject
-    public float spawnRadius = 5f; // Radius within which enemies can spawn around the player
+    public Tilemap walkableTilemap;
+    public int maxEnemies = 10;
+    public GameObject player;
+    public float spawnRadius = 5f;
 
     private BoundsInt walkableBounds;
     private int currentEnemyCount = 0;
 
-    private void Start()
+    void Start()
     {
         walkableBounds = walkableTilemap.cellBounds;
-        // Delay the first spawn by a few seconds
-        StartCoroutine(DelayInitialSpawn(1f)); // Delay for 1 second
+        StartCoroutine(DelayInitialSpawn(1f));
+        FindObjectOfType<TimerController>().OnHourChanged += HandleHourlyUpdate; // Subscribe to the hour change event
+    }
+
+    void HandleHourlyUpdate(int hour)
+    {
+        maxEnemies += 2;
+        spawnRate = Mathf.Max(spawnRate - 1f, 0.1f); // Ensures spawn rate does not go below 0.1
     }
 
     IEnumerator DelayInitialSpawn(float delay)
@@ -30,19 +36,17 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnEnemy()
     {
-        if (currentEnemyCount < maxEnemies)
+        while (true) // Changed to loop continuously
         {
-            Vector3 spawnPos = GetRandomSpawnPositionAroundPlayer();
-
-            int randomEnemyIndex = Random.Range(0, Enemies.Count); // Randomly select an index from 0 to the count of enemies
-            GameObject enemyPrefab = Enemies[randomEnemyIndex]; // Get the enemy GameObject corresponding to the random index
-
-            Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
-            currentEnemyCount++;
+            if (currentEnemyCount < maxEnemies)
+            {
+                Vector3 spawnPos = GetRandomSpawnPositionAroundPlayer();
+                GameObject enemyPrefab = Enemies[Random.Range(0, Enemies.Count)];
+                Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+                currentEnemyCount++;
+            }
+            yield return new WaitForSeconds(spawnRate);
         }
-
-        yield return new WaitForSeconds(spawnRate);
-        StartCoroutine(SpawnEnemy());
     }
 
     Vector3 GetRandomSpawnPositionAroundPlayer()

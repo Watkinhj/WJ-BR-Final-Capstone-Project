@@ -83083,7 +83083,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7758395843521262724, guid: d48963fe761c03f42bf699df5d51b74b, type: 3}
       propertyPath: interval
-      value: 1.5
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 7758395843521262724, guid: d48963fe761c03f42bf699df5d51b74b, type: 3}
       propertyPath: timerText
