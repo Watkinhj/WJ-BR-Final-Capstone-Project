@@ -83095,7 +83095,7 @@ PrefabInstance:
       objectReference: {fileID: 179557247}
     - target: {fileID: 8674274880933790255, guid: d48963fe761c03f42bf699df5d51b74b, type: 3}
       propertyPath: damage
-      value: 20
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 8674274880933790255, guid: d48963fe761c03f42bf699df5d51b74b, type: 3}
       propertyPath: health
@@ -83521,6 +83521,10 @@ PrefabInstance:
     - target: {fileID: 3226188402568986731, guid: 0cb5a57ea674ae64ea879bf3cc40efac, type: 3}
       propertyPath: m_Name
       value: BossLockDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8869919946448474466, guid: 0cb5a57ea674ae64ea879bf3cc40efac, type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

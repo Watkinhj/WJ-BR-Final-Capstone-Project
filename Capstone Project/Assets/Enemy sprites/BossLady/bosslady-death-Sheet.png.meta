@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 51604b52a7b569a48bf4572184e25dad
+guid: 6865e333604039a46b1c86344cf48aa2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,85 +123,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bosslady-throw-W-Sheet_0
+      name: bosslady-death-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 53
-        height: 47
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b7e2689887770744b2d2afa8373246f
-      internalID: 854841633
+      spriteID: 423ac9c7c2ece3442863e51116bf8f0b
+      internalID: 1816579379
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bosslady-throw-W-Sheet_1
+      name: bosslady-death-Sheet_1
       rect:
         serializedVersion: 2
-        x: 53
+        x: 64
         y: 0
-        width: 53
-        height: 47
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e25c4cfb44f2704ba0eaa36b161dab7
-      internalID: -501090662
+      spriteID: 820f43c7e25d1a54884499ea67c62c0e
+      internalID: -1307960488
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bosslady-throw-W-Sheet_2
+      name: bosslady-death-Sheet_2
       rect:
         serializedVersion: 2
-        x: 106
+        x: 128
         y: 0
-        width: 53
-        height: 47
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 69638b6da77270d4fa6a1730bd7bac88
-      internalID: -1050594140
+      spriteID: 08139c533f5b0024786ac07f73938cb9
+      internalID: 1711495591
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bosslady-throw-W-Sheet_3
+      name: bosslady-death-Sheet_3
       rect:
         serializedVersion: 2
-        x: 159
+        x: 192
         y: 0
-        width: 53
-        height: 47
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d2eddcb8771f6748852cc0878e027b7
-      internalID: -261557049
+      spriteID: b5f9701bcafeba04ca791d4e2d596ba5
+      internalID: 237669293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bosslady-death-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc3bb4f93b6961948ba2179eb208c234
+      internalID: -716690557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bosslady-death-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 862c09320c896f1499e00bc549881b3c
+      internalID: -451898711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bosslady-death-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d8d29fd088c8f94885d6860a1d3a75a
+      internalID: 150483623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bosslady-death-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: beb07a0e2de34b940be7808bf6d22d7a
+      internalID: 140268410
       vertices: []
       indices: 
       edges: []
@@ -217,10 +301,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bosslady-throw-W-Sheet_0: 854841633
-      bosslady-throw-W-Sheet_1: -501090662
-      bosslady-throw-W-Sheet_2: -1050594140
-      bosslady-throw-W-Sheet_3: -261557049
+      bosslady-death-Sheet_0: 1816579379
+      bosslady-death-Sheet_1: -1307960488
+      bosslady-death-Sheet_2: 1711495591
+      bosslady-death-Sheet_3: 237669293
+      bosslady-death-Sheet_4: -716690557
+      bosslady-death-Sheet_5: -451898711
+      bosslady-death-Sheet_6: 150483623
+      bosslady-death-Sheet_7: 140268410
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

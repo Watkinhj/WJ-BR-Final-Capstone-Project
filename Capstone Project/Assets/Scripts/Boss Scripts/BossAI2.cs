@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
 public enum AttackPattern
 {
@@ -8,6 +7,7 @@ public enum AttackPattern
     SnipingShot,
     WavePattern
 }
+
 public class BossAI2 : MonoBehaviour
 {
     public Transform[] dashPositions;
@@ -18,14 +18,20 @@ public class BossAI2 : MonoBehaviour
     public float waitTime = 1f;
     public float projectileForce = 20f; // Force to apply to projectiles
     public float damage = 1f; // Damage each projectile deals
-
+    private Animator animator;
     private int currentPosIndex = -1;
+    private EnemyReceiveDamage bossStats;
+    private Vector3 lastPosition; // To calculate movement direction for xDir
+    private GameObject activeLineObject;
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
+        bossStats = GetComponent<EnemyReceiveDamage>();
+        lastPosition = transform.position;
         LoadDashPositions();
         StartCoroutine(BossBehaviorCycle());
-        
+
         if (GameState.IsAfterFivePM)
         {
             dashSpeed *= 2;
@@ -57,20 +63,42 @@ public class BossAI2 : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (bossStats.isDead)
+        {
+            StopAllCoroutines();
+            animator.SetBool("isDead", true);
+            if (lineRendererPrefab != null)
+            {
+                Destroy(activeLineObject);
+            }
+        }
+        else
+        {
+            Vector3 movementDirection = (transform.position - lastPosition).normalized;
+            animator.SetFloat("xDir", movementDirection.x);
+            lastPosition = transform.position;
+        }
+    }
+
     private IEnumerator BossBehaviorCycle()
     {
-        while (true)
+        while (!bossStats.isDead)
         {
             yield return StartCoroutine(DashToPosition());
             yield return new WaitForSeconds(waitTime);
             AttackPattern chosenPattern = (AttackPattern)Random.Range(0, 3);
             StartCoroutine(ShootProjectiles(shootingDuration, chosenPattern));
             yield return new WaitForSeconds(shootingDuration + waitTime);
+            animator.SetBool("isAttacking", false);
         }
     }
 
     private IEnumerator DashToPosition()
     {
+        animator.SetBool("isDashing", true);
+
         int newPosIndex;
         do
         {
@@ -85,30 +113,35 @@ public class BossAI2 : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, targetPos.position, dashSpeed * Time.deltaTime);
             yield return null;
         }
+
+        animator.SetBool("isDashing", false);
     }
 
     private IEnumerator ShootProjectiles(float duration, AttackPattern pattern)
     {
+        
         float startTime = Time.time;
         switch (pattern)
         {
             case AttackPattern.FocusedFire:
                 while (Time.time - startTime < duration)
                 {
+                    animator.SetBool("isAttacking", true);
                     ShootFocusedFire();
                     yield return new WaitForSeconds(0.2f);
+                    animator.SetBool("isAttacking", false);
                 }
                 break;
-
             case AttackPattern.SnipingShot:
                 yield return StartCoroutine(AimAndShoot());
                 break;
-
             case AttackPattern.WavePattern:
                 while (Time.time - startTime < duration)
                 {
+                    animator.SetBool("isAttacking", true);
                     ShootWavePattern();
-                    yield return new WaitForSeconds(0.2f); // Slower fire rate for wave pattern
+                    yield return new WaitForSeconds(0.2f);
+                    animator.SetBool("isAttacking", false);
                 }
                 break;
         }
@@ -125,8 +158,8 @@ public class BossAI2 : MonoBehaviour
         GameObject player = GetPlayer();
         if (player != null)
         {
-            var lineObject = Instantiate(lineRendererPrefab, Vector3.zero, Quaternion.identity);
-            LineRenderer line = lineObject.GetComponent<LineRenderer>();
+            activeLineObject = Instantiate(lineRendererPrefab, Vector3.zero, Quaternion.identity);
+            LineRenderer line = activeLineObject.GetComponent<LineRenderer>();
             line.SetPosition(0, transform.position);
 
             float aimDuration = 1.5f;
@@ -141,8 +174,12 @@ public class BossAI2 : MonoBehaviour
                 }
             }
 
-            Destroy(lineObject); // Remove aim line
+            Destroy(activeLineObject); // Remove aim line after use
+            activeLineObject = null; // Clear the reference
             ShootProjectile(GetPlayerDirection() * 3); // Increased velocity for the sniping shot
+            animator.SetBool("isAttacking", true);
+            yield return new WaitForSeconds(0.2f);
+            animator.SetBool("isAttacking", false);
         }
     }
 

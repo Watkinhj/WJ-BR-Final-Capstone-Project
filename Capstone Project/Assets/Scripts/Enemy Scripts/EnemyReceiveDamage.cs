@@ -95,7 +95,10 @@ public class EnemyReceiveDamage : MonoBehaviour
             if (isDead)
             {
                 animator.SetBool("isDead", true);
-                navMeshAgent.isStopped = true;
+                if (navMeshAgent != null)
+                {
+                    navMeshAgent.isStopped = true;
+                }
                 Destroy(healthBar);
                 Destroy(GetComponent<EnemyBehavior>());
                 if (rb != null)

@@ -23,6 +23,16 @@ public class TimerController : MonoBehaviour
 
     void Update()
     {
+        if (enemySpawner == null)
+        {
+            enemySpawner = FindObjectOfType<EnemySpawner>();
+            if (enemySpawner == null)
+            {
+                Debug.LogWarning("No EnemySpawner found in the scene!");
+                return; // Exit Update if no EnemySpawner is available
+            }
+        }
+
         if (!timerStopped)
         {
             elapsedTime += Time.deltaTime;

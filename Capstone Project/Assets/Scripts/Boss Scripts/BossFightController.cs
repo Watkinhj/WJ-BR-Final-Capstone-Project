@@ -10,6 +10,7 @@ public class BossFightController : MonoBehaviour
     public GameObject DoorLock;
     private EnemyReceiveDamage BossStats;
     public BossExitDoor ExitDoor;
+    public GameObject Decoration; //ASSIGN THIS IF WE WANT TO DESTROY SOMETHING WHEN THE BOSS DIES
 
     private void Start()
     {
@@ -53,6 +54,10 @@ public class BossFightController : MonoBehaviour
     {
         Debug.Log("Boss has died.");
         ExitDoor.bossIsDead = true;
+        if (Decoration != null)
+        {
+            Destroy(Decoration);
+        }
         if (BossStats != null)
         {
             BossStats.OnDeath -= HandleBossDeath; // Unsubscribe to avoid memory leaks
