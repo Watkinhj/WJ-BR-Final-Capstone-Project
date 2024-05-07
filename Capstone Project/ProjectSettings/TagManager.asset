@@ -17,6 +17,7 @@ TagManager:
   - DashTransform
   - ResetHandler
   - Transferable
+  - Goop
   layers:
   - Default
   - TransparentFX

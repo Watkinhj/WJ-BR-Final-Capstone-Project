@@ -7,6 +7,7 @@ public class FinalBossAI : MonoBehaviour
     public enum BossState { Melee, Ranged, Transforming, MeleeAttack, RangedAttack, AOEAttack }
     private BossState currentState;
     public float projectileDamage = 15;
+    public float groundSlamDamage = 45;
     public float speed = 5f;
     public Rigidbody2D rb;
     public GameObject projectilePrefab;
@@ -20,16 +21,19 @@ public class FinalBossAI : MonoBehaviour
     private float lastProjectileTime = float.MinValue;
     public bool inPhase1;
     public bool inPhase2;
+    
 
     private Transform player;
     private Animator animator;
     private EnemyReceiveDamage healthScript;
+    private EnemyBehavior enemyBehavior;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>();
         healthScript = GetComponent<EnemyReceiveDamage>();
+        enemyBehavior = GetComponent<EnemyBehavior>();
         inPhase1 = true;
         inPhase2 = false;
         StartCoroutine(BossBehaviorCycle());
@@ -93,7 +97,7 @@ public class FinalBossAI : MonoBehaviour
                         PerformMeleeAttackP2();
                     break;
                 case BossState.RangedAttack:
-                    FireProjectile();
+                    FireProjectileP2();
                     break;
                 case BossState.AOEAttack:
                     PerformAOEAttack();
@@ -153,6 +157,7 @@ public class FinalBossAI : MonoBehaviour
                 moveDirection = (desiredPosition - (Vector2)transform.position).normalized;
             }
             rb.velocity = moveDirection * speed;
+            animator.SetFloat("xDir", moveDirection.x);
         }
     }
 
@@ -176,6 +181,7 @@ public class FinalBossAI : MonoBehaviour
         GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         Vector2 direction = (player.position - transform.position).normalized;
         projectile.GetComponent<Rigidbody2D>().velocity = direction * 10;
+        projectile.GetComponent<EnemyProjectile>().damage = projectileDamage;
     }
 
     void PerformMeleeAttack()
@@ -209,6 +215,7 @@ public class FinalBossAI : MonoBehaviour
     {
         Vector2 moveDirection = (player.position - transform.position).normalized;
         rb.velocity = moveDirection * speed;
+        animator.SetFloat("xDir", moveDirection.x);
     }
 
     void PerformMeleeAttackP2()
@@ -221,11 +228,55 @@ public class FinalBossAI : MonoBehaviour
         GameObject projectile = Instantiate(projectileP2Prefab, transform.position, Quaternion.identity);
         Vector2 direction = (player.position - transform.position).normalized;
         projectile.GetComponent<Rigidbody2D>().velocity = direction * 10;
+        projectile.GetComponent<EnemyProjectile>().damage = projectileDamage;
     }
 
     void PerformAOEAttack()
     {
-        Instantiate(aoePrefab, player.position, Quaternion.identity);  // Spawn AOE at player's position
-        // Additional logic for the AOE attack
+        // Stop movement temporarily and play windup animation
+        StopMovement();
+        animator.SetTrigger("tentaclePlant");
+
+        // Instantiate the ground slam circle prefab at the boss's position
+        GameObject groundSlamCircle = Instantiate(aoePrefab, transform.position, Quaternion.identity);
+        Destroy(groundSlamCircle, 1.3f); // Destroy the circle after 1.3 seconds, which is the telegraphing duration
+
+        // Wait for windup to complete before executing the slam
+        StartCoroutine(GroundSlamCoroutine());
+    }
+
+    IEnumerator GroundSlamCoroutine()
+    {
+        yield return new WaitForSeconds(1.1f); // Wait for telegraphing duration
+
+        // Perform the slam if the boss is still in the AOE Attack state
+        if (currentState == BossState.AOEAttack)
+        {
+            PerformGroundSlam();
+        }
+
+        // Resume movement and return to idle state or another appropriate state
+        ResumeMovement();
+        animator.SetTrigger("idle");
+    }
+
+    void PerformGroundSlam()
+    {
+        // Check if the player is within the AOE radius
+        if (Vector2.Distance(player.position, transform.position) <= 7f) // Adjust 7f as necessary for the AOE radius
+        {
+            // Player is inside the AOE, deal damage
+            PlayerStats.playerStats.DealDamage(groundSlamDamage);
+        }
+    }
+    void StopMovement()
+    {
+        rb.velocity = Vector2.zero; // Immediately stop any movement by setting velocity to zero
+        rb.isKinematic = true; // Optionally make the Rigidbody kinematic to ignore forces
+    }
+
+    void ResumeMovement()
+    {
+        rb.isKinematic = false; // Return Rigidbody to dynamic to allow movement again
     }
 }
