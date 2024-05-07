@@ -218,7 +218,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 75ada1da8608bc5418d375556f9ab32e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc8de7ee54fa7214d98139c05063f1e1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -345,6 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eb6c34ba09a3ac49b4277acc12fbee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileDamage: 15
   speed: 5
   rb: {fileID: 4797909616904029500}
   projectilePrefab: {fileID: 4641638254457677641, guid: 6636dc7229b1f164ba8d9f469c2a05a5, type: 3}

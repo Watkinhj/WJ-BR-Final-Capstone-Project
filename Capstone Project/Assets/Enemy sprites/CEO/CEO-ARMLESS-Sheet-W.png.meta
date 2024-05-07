@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bc100d1912bab504fbc2abf898c4575a
+guid: eb9b9f104ba291c44b9e2f93bea04aa1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,76 +123,34 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CEO_Melee_Right_0
+      name: CEO-ARMLESS-Sheet-W_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 44
-        height: 48
+        width: 64
+        height: 64
       alignment: 9
-      pivot: {x: 0.31, y: 0.5}
+      pivot: {x: 0.6, y: 0.5026497}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec870a3132456da45a5126cf8f4288bb
-      internalID: 1354121756
+      spriteID: 50de59ab9070c5249940e8480b23b928
+      internalID: -310804019
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CEO_Melee_Right_1
+      name: CEO-ARMLESS-Sheet-W_1
       rect:
         serializedVersion: 2
-        x: 44
+        x: 64
         y: 0
-        width: 44
-        height: 48
-      alignment: 9
-      pivot: {x: 0.46, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 007817cdbd5de2c4a866972fd3bdf8bd
-      internalID: 1814632620
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CEO_Melee_Right_2
-      rect:
-        serializedVersion: 2
-        x: 88
-        y: 0
-        width: 44
-        height: 48
-      alignment: 9
-      pivot: {x: 0.62, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1aa1d98ad2db31649963970d6e7c112f
-      internalID: -463784157
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CEO_Melee_Right_3
-      rect:
-        serializedVersion: 2
-        x: 132
-        y: 0
-        width: 44
-        height: 48
+        width: 64
+        height: 64
       alignment: 9
       pivot: {x: 0.6, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,8 +158,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a6ce877ed9e87947979c78a9f777b52
-      internalID: -239069858
+      spriteID: 03498ebfea70692469874cb88ca80fd8
+      internalID: -1292748456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CEO-ARMLESS-Sheet-W_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.6, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d354263df628774cbd4cc6a4e08ae39
+      internalID: -690282399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CEO-ARMLESS-Sheet-W_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.6, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27a40824750cfff4a9fd75802b0dd43a
+      internalID: 792513205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CEO-ARMLESS-Sheet-W_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.6, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f360250d9349a504ea1ff9aa1bbc8a67
+      internalID: 1551734029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CEO-ARMLESS-Sheet-W_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.6, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4166ba6f602e72a4584feb4c72990290
+      internalID: -1035535948
       vertices: []
       indices: 
       edges: []
@@ -217,10 +259,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      CEO_Melee_Right_0: 1354121756
-      CEO_Melee_Right_1: 1814632620
-      CEO_Melee_Right_2: -463784157
-      CEO_Melee_Right_3: -239069858
+      CEO-ARMLESS-Sheet-W_0: -310804019
+      CEO-ARMLESS-Sheet-W_1: -1292748456
+      CEO-ARMLESS-Sheet-W_2: -690282399
+      CEO-ARMLESS-Sheet-W_3: 792513205
+      CEO-ARMLESS-Sheet-W_4: 1551734029
+      CEO-ARMLESS-Sheet-W_5: -1035535948
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

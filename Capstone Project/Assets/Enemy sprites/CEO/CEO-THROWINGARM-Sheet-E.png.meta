@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bc100d1912bab504fbc2abf898c4575a
+guid: 9b7e1d8406832544bbd317caa9be97e9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,85 +123,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CEO_Melee_Right_0
+      name: CEO-THROWINGARM-Sheet-E_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 44
-        height: 48
-      alignment: 9
-      pivot: {x: 0.31, y: 0.5}
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec870a3132456da45a5126cf8f4288bb
-      internalID: 1354121756
+      spriteID: 57dbd9473a3beac48941188ccca987fb
+      internalID: 1348556102
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CEO_Melee_Right_1
+      name: CEO-THROWINGARM-Sheet-E_1
       rect:
         serializedVersion: 2
-        x: 44
+        x: 64
         y: 0
-        width: 44
-        height: 48
-      alignment: 9
-      pivot: {x: 0.46, y: 0.5}
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 007817cdbd5de2c4a866972fd3bdf8bd
-      internalID: 1814632620
+      spriteID: 338855db90ccb7d4b95cc6269dab7de6
+      internalID: -1468068320
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CEO_Melee_Right_2
+      name: CEO-THROWINGARM-Sheet-E_2
       rect:
         serializedVersion: 2
-        x: 88
+        x: 128
         y: 0
-        width: 44
-        height: 48
-      alignment: 9
-      pivot: {x: 0.62, y: 0.5}
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1aa1d98ad2db31649963970d6e7c112f
-      internalID: -463784157
+      spriteID: 0ad17bcd533d12b4cb328b5c1978f1fb
+      internalID: 655420760
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CEO_Melee_Right_3
+      name: CEO-THROWINGARM-Sheet-E_3
       rect:
         serializedVersion: 2
-        x: 132
+        x: 192
         y: 0
-        width: 44
-        height: 48
-      alignment: 9
-      pivot: {x: 0.6, y: 0.5}
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a6ce877ed9e87947979c78a9f777b52
-      internalID: -239069858
+      spriteID: 34e91ffa6e1b4514c932aeba0113d3e8
+      internalID: -1806180019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CEO-THROWINGARM-Sheet-E_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07c5a65a73edb244abe0aab12345b663
+      internalID: 457655007
       vertices: []
       indices: 
       edges: []
@@ -217,10 +238,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      CEO_Melee_Right_0: 1354121756
-      CEO_Melee_Right_1: 1814632620
-      CEO_Melee_Right_2: -463784157
-      CEO_Melee_Right_3: -239069858
+      CEO-THROWINGARM-Sheet-E_0: 1348556102
+      CEO-THROWINGARM-Sheet-E_1: -1468068320
+      CEO-THROWINGARM-Sheet-E_2: 655420760
+      CEO-THROWINGARM-Sheet-E_3: -1806180019
+      CEO-THROWINGARM-Sheet-E_4: 457655007
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

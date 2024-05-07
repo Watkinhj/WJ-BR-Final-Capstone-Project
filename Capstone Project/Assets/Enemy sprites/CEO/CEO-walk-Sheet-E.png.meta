@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bc100d1912bab504fbc2abf898c4575a
+guid: a1579439be4c0fd458732cd38df0b146
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,85 +123,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CEO_Melee_Right_0
+      name: CEO-walk-Sheet-E_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 44
-        height: 48
+        width: 64
+        height: 64
       alignment: 9
-      pivot: {x: 0.31, y: 0.5}
+      pivot: {x: 0.4, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec870a3132456da45a5126cf8f4288bb
-      internalID: 1354121756
+      spriteID: b0cb5623c87d0bf499b7676340a0d792
+      internalID: 1607904930
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CEO_Melee_Right_1
+      name: CEO-walk-Sheet-E_1
       rect:
         serializedVersion: 2
-        x: 44
+        x: 64
         y: 0
-        width: 44
-        height: 48
+        width: 64
+        height: 64
       alignment: 9
-      pivot: {x: 0.46, y: 0.5}
+      pivot: {x: 0.4, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 007817cdbd5de2c4a866972fd3bdf8bd
-      internalID: 1814632620
+      spriteID: f3182011ccba71941a3a99a2ca084e0a
+      internalID: 1496558982
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CEO_Melee_Right_2
+      name: CEO-walk-Sheet-E_2
       rect:
         serializedVersion: 2
-        x: 88
+        x: 128
         y: 0
-        width: 44
-        height: 48
+        width: 64
+        height: 64
       alignment: 9
-      pivot: {x: 0.62, y: 0.5}
+      pivot: {x: 0.4, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1aa1d98ad2db31649963970d6e7c112f
-      internalID: -463784157
+      spriteID: 3ab55807a6ed7ea48b8158910a30c3c6
+      internalID: -1222146787
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CEO_Melee_Right_3
+      name: CEO-walk-Sheet-E_3
       rect:
         serializedVersion: 2
-        x: 132
+        x: 192
         y: 0
-        width: 44
-        height: 48
+        width: 64
+        height: 64
       alignment: 9
-      pivot: {x: 0.6, y: 0.5}
+      pivot: {x: 0.4, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a6ce877ed9e87947979c78a9f777b52
-      internalID: -239069858
+      spriteID: ed874980802f3fb4688bc94df181102c
+      internalID: -2122623057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CEO-walk-Sheet-E_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.4, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e68b8a76c387cde4698f81fc325750d1
+      internalID: 1777789063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CEO-walk-Sheet-E_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.4, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 918937b613cc9604e878154d1e2be10e
+      internalID: -591084797
       vertices: []
       indices: 
       edges: []
@@ -217,10 +259,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      CEO_Melee_Right_0: 1354121756
-      CEO_Melee_Right_1: 1814632620
-      CEO_Melee_Right_2: -463784157
-      CEO_Melee_Right_3: -239069858
+      CEO-walk-Sheet-E_0: 1607904930
+      CEO-walk-Sheet-E_1: 1496558982
+      CEO-walk-Sheet-E_2: -1222146787
+      CEO-walk-Sheet-E_3: -2122623057
+      CEO-walk-Sheet-E_4: 1777789063
+      CEO-walk-Sheet-E_5: -591084797
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
