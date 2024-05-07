@@ -288,6 +288,9 @@ MonoBehaviour:
   isBurning: 0
   isBossEnemy: 0
   isBoss: 0
+  critHitEffectPrefab: {fileID: 8193116386243815339, guid: 31bd0ba5297a2594782d69ed4cfcdcb3, type: 3}
+  burnEffectPrefab: {fileID: 3531522669896603358, guid: 7e3d49d032c7c1641bf18f44d1ea065a, type: 3}
+  shockEffectPrefab: {fileID: 2849055087353257820, guid: 95cc14455b2366540be0f539f03eecda, type: 3}
 --- !u!50 &8182515765665517167
 Rigidbody2D:
   serializedVersion: 4
@@ -335,8 +338,6 @@ MonoBehaviour:
   moveStopDuration: 1
   inHitStun: 0
   navMeshAgent: {fileID: 9171880117793731306}
-  baseMoveSpeed: 4
-  baseDamage: 10
 --- !u!61 &436450300402914852
 BoxCollider2D:
   m_ObjectHideFlags: 0

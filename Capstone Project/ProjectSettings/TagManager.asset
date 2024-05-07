@@ -18,6 +18,7 @@ TagManager:
   - ResetHandler
   - Transferable
   - Goop
+  - CEOTentacle
   layers:
   - Default
   - TransparentFX

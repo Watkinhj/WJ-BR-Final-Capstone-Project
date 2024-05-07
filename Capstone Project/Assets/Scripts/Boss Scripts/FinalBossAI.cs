@@ -25,6 +25,8 @@ public class FinalBossAI : MonoBehaviour
 
     private Transform player;
     private Animator animator;
+    public Animator goopAnimator;
+    public Animator ceoTentacle;
     private EnemyReceiveDamage healthScript;
     private EnemyBehavior enemyBehavior;
 
@@ -34,6 +36,14 @@ public class FinalBossAI : MonoBehaviour
         animator = GetComponent<Animator>();
         healthScript = GetComponent<EnemyReceiveDamage>();
         enemyBehavior = GetComponent<EnemyBehavior>();
+
+        GameObject goop = GameObject.FindGameObjectWithTag("Goop");
+        goopAnimator = goop.GetComponent<Animator>();
+
+        GameObject tentacle = GameObject.FindGameObjectWithTag("CEOTentacle");
+        ceoTentacle = tentacle.GetComponent<Animator>();
+        animator.SetBool("Transition", false);
+
         inPhase1 = true;
         inPhase2 = false;
         StartCoroutine(BossBehaviorCycle());
@@ -84,7 +94,10 @@ public class FinalBossAI : MonoBehaviour
 
     IEnumerator Phase2BehaviorCycle()
     {
-        yield return new WaitForSeconds(3.0f); // Wait for transformation to complete
+        yield return new WaitForSeconds(1.0f);
+        goopAnimator.SetTrigger("GoopTime");
+        yield return new WaitForSeconds(2.0f); // Wait for transformation to complete
+        animator.SetBool("Transition", true);
         inPhase2 = true;
 
         while (inPhase2)
@@ -98,12 +111,17 @@ public class FinalBossAI : MonoBehaviour
                     break;
                 case BossState.RangedAttack:
                     FireProjectileP2();
+                    yield return new WaitForSeconds(0.25f);
+                    ceoTentacle.SetBool("isShooting", false);
+                    animator.SetBool("isShooting", false);
                     break;
                 case BossState.AOEAttack:
                     PerformAOEAttack();
                     break;
             }
             yield return new WaitForSeconds(2f);  // Wait before choosing another action
+            animator.ResetTrigger("tentaclePlant");
+            animator.SetTrigger("isIdle");
         }
     }
 
@@ -178,10 +196,15 @@ public class FinalBossAI : MonoBehaviour
 
     void FireProjectile()
     {
+        animator.SetBool("isShooting", true);
+        ceoTentacle.SetBool("isShooting", true);
         GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         Vector2 direction = (player.position - transform.position).normalized;
         projectile.GetComponent<Rigidbody2D>().velocity = direction * 10;
         projectile.GetComponent<EnemyProjectile>().damage = projectileDamage;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        projectile.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     void PerformMeleeAttack()
@@ -229,6 +252,9 @@ public class FinalBossAI : MonoBehaviour
         Vector2 direction = (player.position - transform.position).normalized;
         projectile.GetComponent<Rigidbody2D>().velocity = direction * 10;
         projectile.GetComponent<EnemyProjectile>().damage = projectileDamage;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        projectile.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     void PerformAOEAttack()
@@ -263,7 +289,7 @@ public class FinalBossAI : MonoBehaviour
     void PerformGroundSlam()
     {
         // Check if the player is within the AOE radius
-        if (Vector2.Distance(player.position, transform.position) <= 7f) // Adjust 7f as necessary for the AOE radius
+        if (Vector2.Distance(player.position, transform.position) <= 3f) // Adjust 7f as necessary for the AOE radius
         {
             // Player is inside the AOE, deal damage
             PlayerStats.playerStats.DealDamage(groundSlamDamage);
@@ -271,6 +297,7 @@ public class FinalBossAI : MonoBehaviour
     }
     void StopMovement()
     {
+        speed = 0;
         rb.velocity = Vector2.zero; // Immediately stop any movement by setting velocity to zero
         rb.isKinematic = true; // Optionally make the Rigidbody kinematic to ignore forces
     }
@@ -278,5 +305,6 @@ public class FinalBossAI : MonoBehaviour
     void ResumeMovement()
     {
         rb.isKinematic = false; // Return Rigidbody to dynamic to allow movement again
+        speed = 5;
     }
 }

@@ -35,6 +35,10 @@ public class EnemyReceiveDamage : MonoBehaviour
     public delegate void DeathAction();
     public event DeathAction OnDeath;
 
+    public GameObject critHitEffectPrefab;
+    public GameObject burnEffectPrefab;
+    public GameObject shockEffectPrefab;
+
 
     public bool IsDamaged()
     {
@@ -138,5 +142,23 @@ public class EnemyReceiveDamage : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         Destroy(gameObject);
+    }
+
+    public void ShowEffect(GameObject effectPrefab)
+    {
+        if (effectPrefab != null)
+        {
+            GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity, transform);
+            Destroy(effect, 0.75f); // Adjust time based on how long you want the effect to show
+        }
+    }
+
+    public void BurnEffect(GameObject effectPrefab)
+    {
+        if (effectPrefab != null)
+        {
+            GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity, transform);
+            Destroy(effect, 5.0f); // Adjust time based on how long you want the effect to show
+        }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
+//using static UnityEditor.Experimental.GraphView.GraphView;
 
 [System.Serializable]
 
@@ -83,6 +83,7 @@ public class MicrowaveSoup : Item
             Debug.Log("burn proc! Multiplier: " + player.burnMultiplier);
             enemy.isBurning = true;
             player.StartCoroutine(BurnUtility.BurnEnemy(enemy, player, stacks));
+            
         }
     }
 }
@@ -98,6 +99,8 @@ public static class BurnUtility
 
         while (hits > 0 && initialEnemy != null)
         {
+            initialEnemy.BurnEffect(initialEnemy.burnEffectPrefab);
+
             if (initialEnemy.isBurning && player.isBurnSpreadable)
             {
                 SpreadBurn(initialEnemy.transform.position, 2.0f, player, stacks);
@@ -126,6 +129,7 @@ public static class BurnUtility
             {
                 nearbyEnemy.isBurning = true;
                 player.StartCoroutine(BurnEnemy(nearbyEnemy, player, stacks)); // Spread the burn effect to nearby enemies
+                nearbyEnemy.BurnEffect(nearbyEnemy.burnEffectPrefab);
             }
         }
     }
@@ -233,6 +237,7 @@ public class ReadingGlasses : Item
         if (player.CheckChanceWithLuckyPen(critChance))
         {
             Debug.Log("crit proc! " + critChance);
+            enemy.ShowEffect(enemy.critHitEffectPrefab);
             bool hasSensitiveFiles = false;
             int sensitiveFilesStacks = 0;
             int critMultiplier = 0;
@@ -499,6 +504,7 @@ public class FaultyHardDrive : Item
         {
             Debug.Log("shock proc!");
             //shock the enemy for 60% of base damage
+            enemy.ShowEffect(enemy.shockEffectPrefab);
             enemy.DealDamage(player.damage * shockDamagePercentage);
             //Find nearby enemies to the enemy
             Collider2D[] nearbyEnemies = Physics2D.OverlapCircleAll(enemy.transform.position, 5f); // Adjust radius as needed
