@@ -15,6 +15,7 @@ public class PlayerProjectile : MonoBehaviour
 
     private bool canFire = true;
     public static int currentAmmo;
+    public static bool isReloading = false;
 
     void Start()
     {
@@ -49,6 +50,7 @@ public class PlayerProjectile : MonoBehaviour
         staple.GetComponent<Staple>().damage = Random.Range(minDamage, maxDamage);
         canFire = false;
         currentAmmo--;
+        UpdateAmmoText();
 
         yield return new WaitForSeconds(player.rangedCooldown);
 
@@ -68,18 +70,45 @@ public class PlayerProjectile : MonoBehaviour
     }
 
 
-    IEnumerator RefillAmmo()
+    void UpdateAmmoText()
     {
-        PlayerStats player = gm.GetComponent<PlayerStats>();
-        yield return new WaitForSeconds(refillTime);
-        currentAmmo = player.maxAmmo;
+        if (!isReloading)  // Only update if not currently reloading
+        {
+            if (currentAmmo > 0)
+            {
+                gm.ammoText.text = "Ammo: " + currentAmmo + "/" + gm.maxAmmo;
+            }
+            else
+            {
+                gm.ammoText.text = "Reloading!";
+            }
+        }
     }
 
     void RefillAmmoIfNeeded()
     {
         if (currentAmmo <= 0)
         {
+            UpdateAmmoText(); // Update text to "Reloading!"
             StartCoroutine(RefillAmmo());
         }
+    }
+
+    IEnumerator RefillAmmo()
+    {
+        PlayerStats player = gm.GetComponent<PlayerStats>();
+        isReloading = true;  // Start reloading
+        int countdown = Mathf.CeilToInt(refillTime);
+
+        while (countdown > 0)
+        {
+            gm.ammoText.text = "Reloading... " + countdown;
+            yield return new WaitForSeconds(1);
+            countdown--;
+        }
+
+        currentAmmo = player.maxAmmo;
+        isReloading = false;  // End reloading
+        UpdateAmmoText();
     }
 }

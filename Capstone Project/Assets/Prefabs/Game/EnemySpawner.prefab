@@ -47,6 +47,8 @@ MonoBehaviour:
   Enemies:
   - {fileID: 2069993177335164746, guid: fc900307dc577dd4dab1c065a6b9f942, type: 3}
   - {fileID: 6716873416367197067, guid: 3ac792d3dd62e8340bcb9da52f2cab1d, type: 3}
-  spawnRate: 5
+  spawnRate: 10
   walkableTilemap: {fileID: 0}
   maxEnemies: 20
+  player: {fileID: 0}
+  spawnRadius: 10

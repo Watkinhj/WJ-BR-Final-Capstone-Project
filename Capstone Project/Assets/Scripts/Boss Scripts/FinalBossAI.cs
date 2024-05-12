@@ -21,7 +21,7 @@ public class FinalBossAI : MonoBehaviour
     private float lastProjectileTime = float.MinValue;
     public bool inPhase1;
     public bool inPhase2;
-    
+    private float originalSpeed;
 
     private Transform player;
     private Animator animator;
@@ -43,6 +43,8 @@ public class FinalBossAI : MonoBehaviour
         GameObject tentacle = GameObject.FindGameObjectWithTag("CEOTentacle");
         ceoTentacle = tentacle.GetComponent<Animator>();
         animator.SetBool("Transition", false);
+
+        originalSpeed = speed;
 
         inPhase1 = true;
         inPhase2 = false;
@@ -120,8 +122,7 @@ public class FinalBossAI : MonoBehaviour
                     break;
             }
             yield return new WaitForSeconds(2f);  // Wait before choosing another action
-            animator.ResetTrigger("tentaclePlant");
-            animator.SetTrigger("isIdle");
+            animator.SetBool("tentaclePlant", false);
         }
     }
 
@@ -152,6 +153,12 @@ public class FinalBossAI : MonoBehaviour
         if (inPhase2)
         {
             ApproachPlayer();
+        }
+
+        if (healthScript.isDead)
+        {
+            StopAllCoroutines();
+            speed = 0;
         }
     }
 
@@ -261,7 +268,7 @@ public class FinalBossAI : MonoBehaviour
     {
         // Stop movement temporarily and play windup animation
         StopMovement();
-        animator.SetTrigger("tentaclePlant");
+        animator.SetBool("tentaclePlant", true);
 
         // Instantiate the ground slam circle prefab at the boss's position
         GameObject groundSlamCircle = Instantiate(aoePrefab, transform.position, Quaternion.identity);
@@ -282,6 +289,7 @@ public class FinalBossAI : MonoBehaviour
         }
 
         // Resume movement and return to idle state or another appropriate state
+        animator.SetBool("tentaclePlant", false);
         ResumeMovement();
         animator.SetTrigger("idle");
     }
@@ -305,6 +313,6 @@ public class FinalBossAI : MonoBehaviour
     void ResumeMovement()
     {
         rb.isKinematic = false; // Return Rigidbody to dynamic to allow movement again
-        speed = 5;
+        speed = originalSpeed;
     }
 }

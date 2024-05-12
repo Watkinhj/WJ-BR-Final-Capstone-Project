@@ -58,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
         TakeInput();
         SetAnimatorMovement(direction);
+        HandleAttacks();
     }
 
 
@@ -146,21 +147,26 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(Dash());
             animator.SetBool("isIdle", false);
         }
+        //attack method moved below
+    }
 
+    private void HandleAttacks()
+    {
+        // Check if the attack button (mouse button) is being pressed or released
         if (Input.GetMouseButton(0))
         {
             animator.SetBool("isAttacking", true); // Start attacking
         }
-
-        if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0) || !Input.GetMouseButton(0))
         {
-            animator.SetBool("isAttacking", false); // Stop attacking
+            animator.SetBool("isAttacking", false); // Ensure attacking stops when button is released or not pressed
         }
     }
 
     public void EndAttack()
     {
         meleeHitbox.ResetDamagedEnemies();
+        animator.SetBool("isAttacking", false); // Ensure animation stops when attack ends
     }
 
     private void SetAnimatorMovement(Vector2 direction)
@@ -175,17 +181,11 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         dashStartTime = Time.time;
 
-        //can phase through decoration
-        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Decoration"), true);
-
-        rb.velocity = new Vector2(direction.x * dashSpeed, direction.y * dashSpeed);
+        rb.velocity = direction * dashSpeed;
         yield return new WaitForSeconds(dashDuration);
 
-        //can't phase through decoration
-        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Decoration"), false);
-
         isDashing = false;
-        
+
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }

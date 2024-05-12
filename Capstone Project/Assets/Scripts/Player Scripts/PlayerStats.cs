@@ -275,9 +275,16 @@ public class PlayerStats : MonoBehaviour
 
     private void SetAmmoUI()
     {
-        if (ammoText != null)
+        if (ammoText != null && !PlayerProjectile.isReloading)
         {
-            ammoText.text = "Ammo: " + PlayerProjectile.currentAmmo + "/" + maxAmmo;
+            if (PlayerProjectile.currentAmmo > 0)
+            {
+                ammoText.text = "Ammo: " + PlayerProjectile.currentAmmo + "/" + maxAmmo;
+            }
+            else
+            {
+                ammoText.text = "Reloading!";
+            }
         }
     }
 

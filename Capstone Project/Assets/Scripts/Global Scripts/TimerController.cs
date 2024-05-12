@@ -12,7 +12,7 @@ public class TimerController : MonoBehaviour
     public PlayerStats playerStats;
     public bool isFivePM = false;
     public EnemySpawner enemySpawner;
-
+    public Animator FivePMFade;
     public delegate void HourlyUpdateHandler(int hour);
     public event HourlyUpdateHandler OnHourChanged;
 
@@ -64,6 +64,7 @@ public class TimerController : MonoBehaviour
                     timerStopped = true;
                     playerStats.is5PM = true;
                     isFivePM = true;
+                    FivePMFade.SetTrigger("FadeIn");
                     playerStats.TimeCardCheck();
                     Debug.Log("Timer stopped at 5:00 PM.");
                 }

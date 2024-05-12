@@ -13,14 +13,17 @@ EditorBuildSettings:
     guid: 9c7370c7feefc314c9be23313ab7b4de
   - enabled: 1
     path: Assets/Scenes/Level_01.unity
-    guid: bee9e44b6e74cad41a3bf22e0a9b8394
+    guid: d39d8c606ac9b524ca3c4d5dbdf1f2a6
   - enabled: 1
     path: Assets/Scenes/Level_02.unity
-    guid: 31cd991df1d9c854ea74dbae1a9861c5
+    guid: 9323a7a19b330f34fa34ef258520072d
   - enabled: 1
     path: Assets/Scenes/Level_03.unity
     guid: b0d66406a0014154f9f3c480e7b81b8a
   - enabled: 1
     path: Assets/Scenes/ResetLoading.unity
     guid: 5036ca3478f03534087d19b5a38c260f
+  - enabled: 1
+    path: Assets/Scenes/GameWinState.unity
+    guid: c89de6e6a0f7f674d80eeb8e5103309c
   m_configObjects: {}

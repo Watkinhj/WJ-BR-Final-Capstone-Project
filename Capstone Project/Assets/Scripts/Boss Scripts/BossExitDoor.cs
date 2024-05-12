@@ -81,8 +81,7 @@ public class BossExitDoor : MonoBehaviour
         }
         if (boss3)
         {
-            //implement later
-            yield break;
+            SceneManager.LoadScene(6);
         }
     }
 }

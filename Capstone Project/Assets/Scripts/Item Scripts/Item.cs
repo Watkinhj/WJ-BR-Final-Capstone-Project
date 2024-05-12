@@ -745,7 +745,7 @@ public class PinkSlip : Item
         oneShotChance = 0.05f * stacks;
         if (player.CheckChanceWithLuckyPen(oneShotChance))
         {
-            if (!enemy.isBossEnemy)
+            if (!enemy.isBoss)
             {
                 Debug.Log("YOU'RE FIRED!");
                 enemy.DealDamage(999999);

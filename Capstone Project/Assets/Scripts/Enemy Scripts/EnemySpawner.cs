@@ -14,12 +14,15 @@ public class EnemySpawner : MonoBehaviour
 
     private BoundsInt walkableBounds;
     private int currentEnemyCount = 0;
+    //public LineRenderer lineRenderer; Debug tool
+    private int maxSpawnAttempts = 10;
+
 
     void Start()
     {
         walkableBounds = walkableTilemap.cellBounds;
         StartCoroutine(DelayInitialSpawn(1f));
-        FindObjectOfType<TimerController>().OnHourChanged += HandleHourlyUpdate; // Subscribe to the hour change event
+        FindObjectOfType<TimerController>().OnHourChanged += HandleHourlyUpdate;
     }
 
     void HandleHourlyUpdate(int hour)
@@ -36,32 +39,36 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnEnemy()
     {
-        while (true) // Changed to loop continuously
+        while (true)
         {
             if (currentEnemyCount < maxEnemies)
             {
-                Vector3 spawnPos = GetRandomSpawnPositionAroundPlayer();
-                GameObject enemyPrefab = Enemies[Random.Range(0, Enemies.Count)];
-                Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
-                currentEnemyCount++;
+                Vector3? spawnPos = GetRandomSpawnPositionAroundPlayer();
+                if (spawnPos.HasValue)
+                {
+                    GameObject enemyPrefab = Enemies[Random.Range(0, Enemies.Count)];
+                    Instantiate(enemyPrefab, spawnPos.Value, Quaternion.identity);
+                    currentEnemyCount++;
+                }
             }
             yield return new WaitForSeconds(spawnRate);
         }
     }
 
-    Vector3 GetRandomSpawnPositionAroundPlayer()
+    Vector3? GetRandomSpawnPositionAroundPlayer()
     {
-        Vector2 randomDirection = Random.insideUnitCircle.normalized * spawnRadius;
-        Vector3 spawnPos = player.transform.position + new Vector3(randomDirection.x, randomDirection.y, 0);
-        Vector3Int cellPos = walkableTilemap.WorldToCell(spawnPos);
-
-        if (walkableTilemap.GetTile(cellPos) == null) // If the cell is not walkable, find the nearest walkable cell
+        for (int attempts = 0; attempts < maxSpawnAttempts; attempts++)
         {
-            cellPos = FindNearestWalkableCell(cellPos);
-            spawnPos = walkableTilemap.CellToWorld(cellPos) + new Vector3(0.5f, 0.5f, 0f); // Center of the cell
-        }
+            Vector2 randomDirection = Random.insideUnitCircle.normalized * spawnRadius;
+            Vector3 potentialSpawnPos = player.transform.position + new Vector3(randomDirection.x, randomDirection.y, 0);
+            Vector3Int cellPos = walkableTilemap.WorldToCell(potentialSpawnPos);
 
-        return spawnPos;
+            if (walkableTilemap.GetTile(cellPos) != null) // Check if the tile is walkable
+            {
+                return walkableTilemap.CellToWorld(cellPos) + new Vector3(0.5f, 0.5f, 0); // Center of the tile
+            }
+        }
+        return null; // No valid position found
     }
 
     Vector3Int FindNearestWalkableCell(Vector3Int startCell)
@@ -79,10 +86,10 @@ public class EnemySpawner : MonoBehaviour
             if (walkableTilemap.GetTile(currentCell) != null)
                 return currentCell;
 
-            // Explore neighbors
+            // Explore neighbors within bounds
             foreach (Vector3Int neighbor in GetNeighbors(currentCell))
             {
-                if (!visited.Contains(neighbor))
+                if (!visited.Contains(neighbor) && IsWithinBounds(neighbor))
                 {
                     queue.Enqueue(neighbor);
                     visited.Add(neighbor);
@@ -104,5 +111,11 @@ public class EnemySpawner : MonoBehaviour
         neighbors.Add(cell + new Vector3Int(0, -1, 0));
 
         return neighbors;
+    }
+
+    bool IsWithinBounds(Vector3Int cell)
+    {
+        return walkableBounds.xMin <= cell.x && cell.x <= walkableBounds.xMax &&
+               walkableBounds.yMin <= cell.y && cell.y <= walkableBounds.yMax;
     }
 }
