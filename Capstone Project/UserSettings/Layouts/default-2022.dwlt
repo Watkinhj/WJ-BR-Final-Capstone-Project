@@ -20,6 +20,7 @@ MonoBehaviour:
     width: 1706.6667
     height: 984
   m_ShowMode: 4
+<<<<<<< Updated upstream
   m_Title: Console
 =======
     y: 43.2
@@ -27,6 +28,9 @@ MonoBehaviour:
     height: 780.8
   m_ShowMode: 4
   m_Title: Tile Palette
+>>>>>>> Stashed changes
+=======
+  m_Title: Inspector
 >>>>>>> Stashed changes
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
@@ -141,6 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
+<<<<<<< Updated upstream
   controlID: 61
 =======
     width: 1536
@@ -149,6 +154,9 @@ MonoBehaviour:
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
   controlID: 102
+>>>>>>> Stashed changes
+=======
+  controlID: 20
 >>>>>>> Stashed changes
 --- !u!114 &6
 MonoBehaviour:
@@ -175,6 +183,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
+<<<<<<< Updated upstream
   controlID: 62
 =======
     width: 1536
@@ -183,6 +192,9 @@ MonoBehaviour:
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
   controlID: 103
+>>>>>>> Stashed changes
+=======
+  controlID: 21
 >>>>>>> Stashed changes
 --- !u!114 &7
 MonoBehaviour:
@@ -209,6 +221,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
+<<<<<<< Updated upstream
   controlID: 63
 =======
     width: 1128.8
@@ -217,6 +230,9 @@ MonoBehaviour:
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
   controlID: 56
+>>>>>>> Stashed changes
+=======
+  controlID: 22
 >>>>>>> Stashed changes
 --- !u!114 &8
 MonoBehaviour:
@@ -247,7 +263,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 64
+  controlID: 23
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -559,6 +575,7 @@ MonoBehaviour:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       m_SelectedIDs: 
       m_LastClickedID: 0
       m_ExpandedIDs: b0faffff
@@ -566,6 +583,11 @@ MonoBehaviour:
       m_SelectedIDs: 2e8f0000
       m_LastClickedID: 36654
       m_ExpandedIDs: ae99ffffba9dffff7cc5ffff7ec5ffff8ae6ffffe2e7ffff4aeeffff70810000ae81000004820000d4880000ec880000ee8e0000788f0000
+>>>>>>> Stashed changes
+=======
+      m_SelectedIDs: c0690000
+      m_LastClickedID: 27072
+      m_ExpandedIDs: fefaffff82690000
 >>>>>>> Stashed changes
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -983,7 +1005,7 @@ MonoBehaviour:
       sizeOverriden: 0
     m_OverlaysVisible: 1
   m_WindowGUID: cc27987af1a868c49b0894db9c0f5429
-  m_Gizmos: 0
+  m_Gizmos: 1
   m_OverrideSceneCullingMask: 6917529027641081856
   m_SceneIsLit: 1
   m_SceneLighting: 1
@@ -993,6 +1015,7 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_Position:
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     m_Target: {x: 0, y: 0, z: 0}
     speed: 2
     m_Value: {x: -15.991969, y: 1.2219124, z: -0.22072193}
@@ -1000,6 +1023,11 @@ MonoBehaviour:
     m_Target: {x: 1.5395685, y: -1.2299974, z: -7.7148046}
     speed: 2
     m_Value: {x: 1.5395685, y: -1.2299974, z: -7.7148046}
+>>>>>>> Stashed changes
+=======
+    m_Target: {x: 4.3979053, y: 1.0767926, z: -0.07721957}
+    speed: 2
+    m_Value: {x: 3.83178, y: 1.0718048, z: -0.069588}
 >>>>>>> Stashed changes
   m_RenderMode: 0
   m_CameraMode:
@@ -1051,6 +1079,7 @@ MonoBehaviour:
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     m_Target: 10
     speed: 2
     m_Value: 12.5348425
@@ -1058,6 +1087,11 @@ MonoBehaviour:
     m_Target: 2.549121
     speed: 2
     m_Value: 2.549121
+>>>>>>> Stashed changes
+=======
+    m_Target: 17.72196
+    speed: 2
+    m_Value: 16.958813
 >>>>>>> Stashed changes
   m_Ortho:
     m_Target: 1
@@ -1163,12 +1197,16 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 255}
     m_SelectedIDs: cc800000
     m_LastClickedID: 32972
+<<<<<<< Updated upstream
     m_ExpandedIDs: 00000000fa780000fc780000fe7800000079000002790000047900000679000008790000ca80000000ca9a3b
 =======
     scrollPos: {x: 0, y: 180}
     m_SelectedIDs: 02800000
     m_LastClickedID: 32770
     m_ExpandedIDs: 00000000d4770000f67f000000ca9a3b
+>>>>>>> Stashed changes
+=======
+    m_ExpandedIDs: 00000000ea790000ec790000ee790000f0790000f2790000f4790000f6790000f8790000
 >>>>>>> Stashed changes
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1198,9 +1236,13 @@ MonoBehaviour:
     m_SelectedIDs: 
     m_LastClickedID: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     m_ExpandedIDs: 00000000fa780000fc780000fe7800000079000002790000047900000679000008790000
 =======
     m_ExpandedIDs: 00000000d4770000
+>>>>>>> Stashed changes
+=======
+    m_ExpandedIDs: 00000000ea790000ec790000ee790000f0790000f2790000f4790000f6790000f8790000
 >>>>>>> Stashed changes
     m_RenameOverlay:
       m_UserAcceptedRename: 0
